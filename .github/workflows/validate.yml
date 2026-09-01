@@ -41,3 +41,11 @@ jobs:
 
       - name: Validate generated site
         run: python scripts/validate_site.py --site _site
+
+      - name: Upload validated preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-preview
+          path: _site
+          retention-days: 7
+          if-no-files-found: error
