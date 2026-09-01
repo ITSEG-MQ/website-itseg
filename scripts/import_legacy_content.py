@@ -707,7 +707,7 @@ def write_url_map(news: list[dict], assets: list[dict]) -> None:
         for asset in canonical_asset_records(assets)
     )
     with destination.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(["legacy_url", "new_url", "content_type", "status", "notes"])
         writer.writerows(rows)
 
