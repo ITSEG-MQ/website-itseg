@@ -1,0 +1,48 @@
+name: Package to zip
+on:
+  push:
+    branches: ["main"]          # change if you deploy from another branch
+  workflow_dispatch:
+
+permissions:
+  contents: write               # create/update releases
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Replace _config.yml with the prod config only for this workflow run
+      - name: Use production config
+        run: |
+          test -f _config_prod.yml || { echo "::error ::_config_prod.yml not found"; exit 1; }
+          cp _config_prod.yml _config.yml
+          echo "Using _config_prod.yml as _config.yml for this build"
+
+      # Build using GitHub Pages' preinstalled Jekyll toolchain
+      - name: Build with Jekyll (Pages deps)
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+        env:
+          JEKYLL_ENV: production
+
+      - name: Zip site
+        run: |
+          cd _site
+          zip -rq ../site.zip .
+          cd ..
+
+      - name: Create/Update single 'prod' release and upload site.zip
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: prod                   # single rolling tag
+          name: Production Build           # release name
+          draft: false
+          prerelease: false
+          make_latest: true                # mark as latest
+          replace_assets: true             # overwrite existing site.zip
+          files: site.zip
