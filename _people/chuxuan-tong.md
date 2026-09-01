@@ -1,9 +1,9 @@
 ---
 managed_by: "legacy-import"
 title: "Chuxuan Tong"
-role: "Ph.D. Candidate"
-category: "industry-engagement-officers"
-section: "Industry Engagement Officers"
+role: "Ph.D."
+category: "current-researchers"
+section: "Current Researchers"
 image: "/assets/pic/people/tong.jpg"
 affiliation: "School of Computing, Macquarie University, Australia"
 email: ""

@@ -1,9 +1,9 @@
 ---
 managed_by: "legacy-import"
 title: "Yupeng Jiang"
-role: "Ph.D. Candidate"
-category: "industry-engagement-officers"
-section: "Industry Engagement Officers"
+role: "Ph.D."
+category: "alumni-and-visit-scholars"
+section: "Alumni and Visit Scholar"
 image: "/assets/pic/people/YupengJiang.jpg"
 affiliation: "School of Computing, Macquarie University, Australia"
 email: ""

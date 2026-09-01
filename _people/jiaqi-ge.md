@@ -1,7 +1,7 @@
 ---
 managed_by: "legacy-import"
 title: "Jiaqi Ge"
-role: "Ph.D. Candidate"
+role: "Ph.D."
 category: "alumni-and-visit-scholars"
 section: "Alumni and Visit Scholar"
 image: "/assets/pic/people/JiaqiGe.jpg"
@@ -18,4 +18,4 @@ duplicate_person: true
 duplicate_key: "jiaqi-ge"
 ---
 
-<p>Jiaqi Ge received the B.S. and M.S. degree from the College of Computer Science and Technology, Jilin University, China, where she is currently pursuing a Ph.D. degree. Her main research interest is distributed computing, and now she's currently working on federated learning and blockchain.</p>
+<p>Jiaqi Ge received the Ph.D, M.S and B.S. degree from the College of Computer Science and Technology, Jilin University, China. Her main research interest is distributed computing, and now she's currently working on federated learning and blockchain.</p>

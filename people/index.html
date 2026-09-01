@@ -2,7 +2,7 @@
 layout: default
 title: People
 nav: people
-description: "Meet the researchers, advisers, industry partners, and alumni connected with the Intelligent Systems Engineering Group."
+description: "Meet the researchers and alumni connected with the Intelligent Systems Engineering Group."
 permalink: /people/
 ---
 <header class="page-intro container">
@@ -51,9 +51,9 @@ permalink: /people/
   </div>
 </section>
 
-{% assign group = site.people | where: 'category', 'industry-engagement-officers' | sort: 'order' %}
+{% assign group = site.people | where: 'category', 'current-researchers' | sort: 'order' %}
 <section class="people-section section container" aria-labelledby="engagement">
-  <h2 id="engagement">Industry Engagement Officers</h2>
+  <h2 id="engagement">Current Researchers</h2>
   <div class="card-grid card-grid-3">
     {% for item in group %}
       {% include person-card.html item=item %}
