@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Congratulations to Dr Xi Zheng for being a member of Program Committee of PerCom 2023!"
 date: "2022-06-27 02:40:22"
 legacy_id: "9"

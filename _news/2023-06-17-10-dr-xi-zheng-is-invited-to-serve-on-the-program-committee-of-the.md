@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Dr Xi Zheng is invited to serve on the Program Committee of the FSE 2024"
 date: "2023-06-17 04:06:04"
 legacy_id: "10"

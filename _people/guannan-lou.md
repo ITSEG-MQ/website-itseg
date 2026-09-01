@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Guannan Lou"
 role: "Research Assistant"
 category: "alumni-and-visit-scholars"

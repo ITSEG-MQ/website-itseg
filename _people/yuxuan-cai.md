@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Yuxuan Cai"
 role: "Visiting Student"
 category: "alumni-and-visit-scholars"

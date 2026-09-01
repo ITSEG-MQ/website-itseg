@@ -1,10 +1,10 @@
 <article class="card project-card">
-  <a class="card-media" href="{{ include.item.url | relative_url }}" tabindex="-1" aria-hidden="true">
-    <img src="{{ include.item.image | relative_url }}" alt="Project image for {{ include.item.title }}" width="800" height="500" loading="lazy">
+  <a class="card-media" href="{{ include.item.url | relative_url | escape }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ include.item.image | relative_url | escape }}" alt="Project image for {{ include.item.title | escape }}" width="800" height="500" loading="lazy">
   </a>
   <div class="card-body">
     <p class="eyebrow">{% if include.item.category == 'grants' %}National competitive grant{% else %}Other project{% endif %}</p>
-    <h3><a href="{{ include.item.url | relative_url }}">{{ include.item.title }}</a></h3>
-    <p>{{ include.item.content | strip_html | normalize_whitespace | truncatewords: 30 }}</p>
+    <h3><a href="{{ include.item.url | relative_url | escape }}">{{ include.item.title | escape }}</a></h3>
+    <p>{{ include.item.content | strip_html | normalize_whitespace | truncatewords: 30 | escape }}</p>
   </div>
 </article>

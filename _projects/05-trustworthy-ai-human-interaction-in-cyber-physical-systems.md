@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "\"Trustworthy AI-human interaction in cyber-physical systems\", Leader CI, Australian Data61/CSIRO CRP Project grant C020996. Awarded $130,440. 2019-2022."
 category: "grants"
 section: "Australia National Competitive Grants"

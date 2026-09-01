@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Congratulations to Dr. Zheng for becoming a program chair for CPSCom2021:"
 date: "2022-01-08 01:49:27"
 legacy_id: "6"

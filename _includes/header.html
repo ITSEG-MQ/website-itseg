@@ -1,7 +1,7 @@
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="{{ '/' | relative_url }}" aria-label="ITSEG home">
-      <img class="site-logo" src="{{ '/assets/pic/brand/logo.png' | relative_url }}" alt="ITSEG lighthouse logo" width="744" height="800">
+      <img class="site-logo" src="{{ '/assets/ui/itseg-logo.webp' | relative_url }}" alt="ITSEG lighthouse logo" width="296" height="320">
       <span class="wordmark"><strong>ITSEG</strong><small>Intelligent Systems Engineering Group</small></span>
     </a>
     <nav class="site-nav" aria-label="Primary navigation">
@@ -9,10 +9,10 @@
         {% for item in site.data.navigation %}
           <li>
             <a
-              href="{{ item.path | relative_url }}"
+              href="{{ item.path | relative_url | escape }}"
               {% if page.nav == item.nav %}aria-current="page"{% endif %}
             >
-              {{ item.label }}
+              {{ item.label | escape }}
             </a>
           </li>
         {% endfor %}

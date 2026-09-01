@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "\"Robust and Scalable Autonomous Landing for Drones\", CI, ARC Linkage Project grant LP210100337. Awarded $459,593. 2022-2025."
 category: "grants"
 section: "Australia National Competitive Grants"

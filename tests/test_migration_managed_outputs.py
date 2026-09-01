@@ -1,6 +1,8 @@
 import csv
 import copy
+import html
 import json
+import shutil
 import sys
 import tempfile
 import unittest
@@ -71,7 +73,7 @@ class ManagedOutputTests(unittest.TestCase):
         with self.assertRaisesRegex(SystemExit, "unsafe managed output roots"):
             importer.prepare_managed_roots()
 
-    def test_orphan_regular_file_and_symlink_are_unlinked_without_traversal(self):
+    def test_stale_manifested_outputs_are_unlinked_without_traversal(self):
         self.create_managed_roots()
         keep = self.repository / "_news/keep.md"
         keep.write_text("keep", encoding="utf-8")
@@ -82,12 +84,81 @@ class ManagedOutputTests(unittest.TestCase):
         orphan_link = self.repository / "assets/documents/orphan-link.pdf"
         orphan_link.symlink_to(outside)
 
-        importer.remove_unexpected_managed_files({"_news/keep.md"})
+        importer.remove_stale_legacy_outputs(
+            {"_news/keep.md", "_news/orphan.txt", "assets/documents/orphan-link.pdf"},
+            {"_news/keep.md"},
+        )
 
         self.assertTrue(keep.is_file())
         self.assertFalse(orphan.exists())
         self.assertFalse(orphan_link.is_symlink())
         self.assertEqual(outside.read_text(encoding="utf-8"), "outside")
+
+    def test_valid_editorial_record_survives_repeated_importer_cleanup(self):
+        self.create_managed_roots()
+        upload = self.repository / "assets/uploads/news/editorial-cover.jpg"
+        upload.parent.mkdir(parents=True)
+        upload.write_bytes(b"editorial image")
+        editorial = self.repository / "_news/editorial-update.md"
+        importer.write_markdown(
+            editorial,
+            {
+                "managed_by": "editorial",
+                "id": "editorial-update",
+                "title": "Editorial update",
+                "date": "2026-09-01",
+                "cover": "/assets/uploads/news/editorial-cover.jpg",
+                "permalink": "/news/editorial-update/",
+            },
+            "A valid editorial news item.",
+        )
+        stale = self.repository / "_news/stale-legacy.md"
+        stale.write_text("stale", encoding="utf-8")
+        previous = {"_news/stale-legacy.md", "_news/editorial-update.md"}
+
+        importer.remove_stale_legacy_outputs(previous, set())
+        importer.remove_stale_legacy_outputs(previous, set())
+
+        self.assertTrue(editorial.is_file())
+        self.assertFalse(stale.exists())
+        _, records, errors = validator.collection_errors(
+            "news",
+            ["title", "date", "legacy_id", "source_order", "cover", "permalink", "source_status"],
+        )
+        self.assertEqual(errors, [])
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0][1]["managed_by"], "editorial")
+
+    def test_unlisted_file_falsely_marked_legacy_import_is_rejected(self):
+        self.create_managed_roots()
+        cover = self.repository / "assets/pic/brand/imposter.jpg"
+        cover.write_bytes(b"imposter")
+        importer.write_markdown(
+            self.repository / "_news/imposter.md",
+            {
+                "managed_by": "legacy-import",
+                "title": "Unlisted legacy impostor",
+                "date": "2026-09-01",
+                "legacy_id": "999",
+                "source_order": 999,
+                "cover": "/assets/pic/brand/imposter.jpg",
+                "permalink": "/news/unlisted-legacy-impostor/",
+                "source_status": "legacy-public-export",
+            },
+            "This file is not in the immutable manifest.",
+        )
+        _, news, parse_errors = validator.collection_errors(
+            "news",
+            ["title", "date", "legacy_id", "source_order", "cover", "permalink", "source_status"],
+        )
+        self.assertEqual(parse_errors, [])
+
+        errors = validator.managed_output_errors(
+            self.empty_manifest(),
+            {"news": news, "people": [], "projects": []},
+        )
+
+        self.assertTrue(any("legacy-import files differ" in error and "imposter.md" in error for error in errors), errors)
 
     def test_validator_rejects_orphan_in_managed_directory(self):
         self.create_managed_roots()
@@ -95,7 +166,168 @@ class ManagedOutputTests(unittest.TestCase):
 
         errors = validator.managed_output_errors(self.empty_manifest())
 
-        self.assertTrue(any("extra=['orphan.bin']" in error for error in errors), errors)
+        self.assertTrue(any("unexpected non-Markdown" in error and "orphan.bin" in error for error in errors), errors)
+
+
+class EditorialPublicationTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.repository = Path(self.temporary.name)
+        (self.repository / "_data").mkdir()
+        self.old_root = validator.ROOT
+        self.old_importer_root = importer.ROOT
+        validator.ROOT = self.repository
+        importer.ROOT = self.repository
+
+    def tearDown(self):
+        validator.ROOT = self.old_root
+        importer.ROOT = self.old_importer_root
+        self.temporary.cleanup()
+
+    def write_publications(self, extra):
+        baseline = json.loads((PROJECT_ROOT / "_data/publications.yml").read_text(encoding="utf-8"))
+        (self.repository / "_data/publications.yml").write_text(
+            json.dumps([*baseline, *extra], indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+    def test_valid_editorial_publication_is_allowed(self):
+        self.write_publications(
+            [
+                {
+                    "managed_by": "editorial",
+                    "id": "publication-2026-editorial-example",
+                    "title": "Editorial example",
+                    "authors": "A. Author",
+                    "publisher": "Example Journal, 2026",
+                    "category": "Refereed Journal Articles",
+                }
+            ]
+        )
+
+        publications, errors = validator.publication_errors()
+
+        self.assertEqual(errors, [])
+        self.assertEqual(len(publications), 117)
+
+    def test_editorial_publication_survives_two_importer_reruns(self):
+        editorial = {
+            "managed_by": "editorial",
+            "id": "publication-2026-editorial-example",
+            "title": "Editorial example",
+            "authors": "A. Author",
+            "publisher": "Example Journal, 2026",
+            "category": "Refereed Journal Articles",
+        }
+        self.write_publications([editorial])
+
+        importer.import_publications()
+        importer.import_publications()
+        publications, errors = validator.publication_errors()
+
+        self.assertEqual(errors, [])
+        self.assertEqual(publications[-1], editorial)
+
+    def test_editorial_publication_id_collision_and_unknown_category_are_rejected(self):
+        self.write_publications(
+            [
+                {
+                    "managed_by": "editorial",
+                    "id": "publication-001",
+                    "title": "Collision",
+                    "authors": "A. Author",
+                    "publisher": "Example Journal, 2026",
+                    "category": "Unsupported Category",
+                }
+            ]
+        )
+
+        _, errors = validator.publication_errors()
+
+        self.assertTrue(any("ids are not unique" in error for error in errors), errors)
+        self.assertTrue(any("existing rendered publication categories" in error for error in errors), errors)
+
+
+class EditorialCollectionIntegrationTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.repository = Path(self.temporary.name)
+        for relative in ["_news", "_people", "_projects", "assets", "docs"]:
+            shutil.copytree(PROJECT_ROOT / relative, self.repository / relative)
+        self.old_root = validator.ROOT
+        self.old_importer_root = importer.ROOT
+        validator.ROOT = self.repository
+        importer.ROOT = self.repository
+
+    def tearDown(self):
+        validator.ROOT = self.old_root
+        importer.ROOT = self.old_importer_root
+        self.temporary.cleanup()
+
+    def add_editorial_record(self, kind, identifier, fields, body):
+        asset_field = "cover" if kind == "news" else "image"
+        asset = self.repository / fields[asset_field].lstrip("/")
+        asset.parent.mkdir(parents=True, exist_ok=True)
+        asset.write_bytes(b"editorial image")
+        importer.write_markdown(
+            self.repository / f"_{kind}/{identifier}.md",
+            {"managed_by": "editorial", "id": identifier, **fields},
+            body,
+        )
+
+    def test_all_valid_editorial_collection_types_pass_baseline_aware_validation(self):
+        self.add_editorial_record(
+            "news",
+            "editorial-news",
+            {
+                "title": "Editorial news",
+                "date": "2026-09-01",
+                "cover": "/assets/uploads/news/editorial-news.jpg",
+                "permalink": "/news/editorial-news/",
+            },
+            "Editorial news body.",
+        )
+        self.add_editorial_record(
+            "people",
+            "editorial-person",
+            {
+                "title": "Dr Editorial Person",
+                "role": "Research Fellow",
+                "category": "program-leaders",
+                "section": "Program Leaders",
+                "image": "/assets/uploads/people/editorial-person.jpg",
+                "order": 38,
+                "permalink": "/people/editorial-person/",
+            },
+            "Editorial biography.",
+        )
+        self.add_editorial_record(
+            "projects",
+            "editorial-project",
+            {
+                "title": "Editorial Project",
+                "category": "other",
+                "section": "Other Projects",
+                "image": "/assets/uploads/projects/editorial-project.jpg",
+                "order": 9,
+                "permalink": "/projects/editorial-project/",
+            },
+            "Editorial project description.",
+        )
+        specifications = {
+            "news": ["title", "date", "legacy_id", "source_order", "cover", "permalink", "source_status"],
+            "people": ["title", "role", "category", "section", "image", "order", "permalink", "source_status", "source_records"],
+            "projects": ["title", "category", "image", "order", "permalink", "source_status"],
+        }
+        records = {}
+        errors = []
+        for kind, required in specifications.items():
+            _, records[kind], found_errors = validator.collection_errors(kind, required)
+            errors.extend(found_errors)
+        errors.extend(validator.collection_semantic_errors(records))
+        errors.extend(validator.manifest_errors(records))
+
+        self.assertEqual(errors, [])
 
 
 class LegacyUrlMapTests(unittest.TestCase):
@@ -202,6 +434,126 @@ class LegacyUrlMapTests(unittest.TestCase):
 
                     self.assertTrue(manifest_errors, collection)
                     self.assertTrue(any("row order" in error for error in url_errors), url_errors)
+
+
+class SanitizedContentAndGeneratedHtmlTests(unittest.TestCase):
+    def test_internal_publications_link_uses_relative_url_liquid(self):
+        expected = "{{ '/publications/' | relative_url }}"
+        for source in [
+            "http://itseg.org/publications.php",
+            "https://www.itseg.org/publications.php#journals",
+            "/publications.php",
+        ]:
+            with self.subTest(source=source):
+                result = importer.sanitized_href(source)
+                self.assertEqual(
+                    result,
+                    expected + ("#journals" if source.endswith("#journals") else ""),
+                )
+
+        rendered = importer.sanitize_html_fragment(
+            '<p>Read <a href="http://itseg.org/publications.php">more</a>.</p>'
+        )
+        self.assertIn(f'<a href="{expected}">more</a>', rendered)
+        migrated_news = (
+            PROJECT_ROOT / "_news/2022-01-08-4-media-reports.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn(f'<a href="{expected}">More Publications</a>', migrated_news)
+        self.assertNotIn('<a href="/publications/">More Publications</a>', migrated_news)
+
+    def test_configured_baseurl_is_stripped_when_resolving_generated_links(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            site = root / "_site"
+            page = site / "news/item/index.html"
+            target = site / "publications/index.html"
+            page.parent.mkdir(parents=True)
+            target.parent.mkdir(parents=True)
+            page.write_text("", encoding="utf-8")
+            target.write_text("", encoding="utf-8")
+            config = root / "config.yml"
+            config.write_text('baseurl: "/preview-site"\n', encoding="utf-8")
+
+            baseurl = validator.configured_baseurl(config)
+            candidates = validator.candidate_targets(
+                site, page, "/preview-site/publications/", baseurl
+            )
+
+            self.assertEqual(baseurl, "/preview-site")
+            self.assertIn(target, candidates)
+
+    def test_quoted_malicious_metadata_remains_one_escaped_attribute(self):
+        fixture = {
+            "title": 'Dr "Quoted" <img src=x onerror=alert(1)> & Co',
+            "role": 'Lead "Researcher" <script>alert(1)</script>',
+        }
+        rendered = (
+            '<article><img src="/portrait.jpg" alt="Portrait of '
+            + html.escape(fixture["title"], quote=True)
+            + '" width="480" height="560" loading="lazy">'
+            + "<p>"
+            + html.escape(fixture["role"], quote=True)
+            + "</p></article>"
+        )
+        parser = validator.DocumentParser()
+        parser.feed(rendered)
+        parser.close()
+
+        self.assertEqual(parser.errors, [])
+        self.assertEqual(parser.images[0]["alt"], f'Portrait of {fixture["title"]}')
+        self.assertNotIn("script", parser.tags)
+
+    def test_generated_parser_rejects_malformed_attributes_and_unsafe_schemes(self):
+        malicious_fixture = (
+            '<a href="javascript:alert(1)" onfocus="alert(2)">bad</a>'
+            '<img src="/safe.jpg" alt alt="duplicate">'
+        )
+        parser = validator.DocumentParser()
+        parser.feed(malicious_fixture)
+        parser.close()
+
+        self.assertTrue(any("unsafe scheme" in error for error in parser.errors), parser.errors)
+        self.assertTrue(any("event-handler" in error for error in parser.errors), parser.errors)
+        self.assertTrue(any("duplicate attributes" in error for error in parser.errors), parser.errors)
+        self.assertTrue(any("has no value" in error for error in parser.errors), parser.errors)
+
+    def test_generated_validator_reports_unsafe_scheme_fixture(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            site = root / "site"
+            config = root / "config.yml"
+            config.write_text('baseurl: ""\nenvironment: "staging"\n', encoding="utf-8")
+            document = """<!doctype html>
+<html><head><title>Fixture</title>
+<meta name="viewport" content="width=device-width">
+<meta name="description" content="Fixture">
+<meta name="theme-color" content="#fff">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="Fixture">
+<link rel="canonical" href="https://example.test/">
+</head><body><a href="#main-content">Skip</a><main id="main-content">
+<a href="javascript:alert(1)">Unsafe fixture</a>
+</main></body></html>"""
+            for relative in validator.REQUIRED_PAGES:
+                path = site / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(document, encoding="utf-8")
+            (site / "robots.txt").write_text("User-agent: *\n", encoding="utf-8")
+            (site / "sitemap.xml").write_text("<urlset/>\n", encoding="utf-8")
+
+            errors = validator.generated_errors(site, {}, config)
+
+            self.assertEqual(len(errors), len(validator.REQUIRED_PAGES), errors)
+            self.assertTrue(all("unsafe scheme 'javascript'" in error for error in errors))
+
+    def test_sanitizer_unwraps_unsafe_link_but_preserves_safe_body_markup(self):
+        fragment = (
+            '<p>Hello <strong>team</strong> '
+            '<a href="jav&#x61;script:alert(1)" onclick="bad()">link</a>.</p>'
+        )
+        sanitized = importer.sanitize_html_fragment(fragment)
+
+        self.assertEqual(sanitized, "<p>Hello <strong>team</strong> link.</p>")
 
 
 if __name__ == "__main__":

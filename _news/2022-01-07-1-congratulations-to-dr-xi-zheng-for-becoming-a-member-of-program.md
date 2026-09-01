@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Congratulations to Dr Xi Zheng for becoming a member of Program Committee of ESEC/FSE 2022!"
 date: "2022-01-07 11:40:51"
 legacy_id: "1"

@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Dr Robert Abbas"
 role: "Industry Engagement Officer"
 category: "industry-engagement-officers"

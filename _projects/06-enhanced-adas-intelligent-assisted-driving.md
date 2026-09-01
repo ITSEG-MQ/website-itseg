@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Enhanced ADAS intelligent assisted driving"
 category: "other"
 section: "Other Projects"

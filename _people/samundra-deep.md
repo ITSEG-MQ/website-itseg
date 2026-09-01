@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Samundra Deep"
 role: "Ph.D."
 category: "alumni-and-visit-scholars"

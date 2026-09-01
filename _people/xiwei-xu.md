@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Dr Xiwei Xu"
 role: "Program Leader: Blockchain"
 category: "program-leaders"

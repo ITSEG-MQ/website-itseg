@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
 
@@ -31,8 +31,14 @@ jobs:
           python scripts/validate_site.py
           python -m unittest discover -s tests -v
 
-      - name: Build staging site
-        uses: actions/jekyll-build-pages@v1
+      - name: Use production config
+        run: |
+          test -f _config_prod.yml || { echo "::error ::_config_prod.yml not found"; exit 1; }
+          cp _config_prod.yml _config.yml
+          echo "Using _config_prod.yml as _config.yml for this build"
+
+      - name: Build beta production site
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
         with:
           source: ./
           destination: ./_site
@@ -43,7 +49,7 @@ jobs:
         run: python scripts/validate_site.py --site _site
 
       - name: Upload validated preview
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: site-preview
           path: _site

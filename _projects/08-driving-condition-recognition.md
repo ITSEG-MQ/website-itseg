@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Driving Condition Recognition"
 category: "other"
 section: "Other Projects"

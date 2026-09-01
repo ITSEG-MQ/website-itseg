@@ -31,7 +31,7 @@ description: "ITSEG at Macquarie University researches trustworthy intelligent a
 </div></section>
 {% assign recent_news = site.news | sort: 'date' | reverse %}
 <section class="section container" aria-labelledby="latest-news-title">
-  <div class="section-heading"><div><p class="eyebrow">Group updates</p><h2 id="latest-news-title">Latest news</h2></div><a href="{{ '/news/' | relative_url }}">View all 14 news items →</a></div>
+  <div class="section-heading"><div><p class="eyebrow">Group updates</p><h2 id="latest-news-title">Latest news</h2></div><a href="{{ '/news/' | relative_url }}">View all {{ site.news | size }} news items →</a></div>
   <div class="card-grid card-grid-2">{% for item in recent_news limit: 4 %}{% include news-card.html item=item %}{% endfor %}</div>
 </section>
 {% assign selected_projects = site.projects | sort: 'order' %}

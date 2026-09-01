@@ -4,10 +4,10 @@ permalink: /sitemap.xml
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% assign public_pages = 'index.html,news/index.html,people/index.html,projects/index.html,publications/index.html,contact/index.html' | split: ',' %}
-  {% for page_path in public_pages %}{% assign item = site.pages | where: 'path', page_path | first %}
+  {% assign standalone_pages = site.pages | sort: 'url' %}
+  {% for item in standalone_pages %}{% assign asset_prefix = item.url | slice: 0, 8 %}{% if item.layout and item.sitemap != false and item.published != false %}{% unless item.url == '/404.html' or item.url == '/robots.txt' or item.url == '/sitemap.xml' or asset_prefix == '/assets/' %}
   <url><loc>{{ item.url | absolute_url | escape }}</loc></url>
-  {% endfor %}
+  {% endunless %}{% endif %}{% endfor %}
   {% assign news_items = site.news | sort: 'date' | reverse %}{% for item in news_items %}
   <url><loc>{{ item.url | absolute_url | escape }}</loc><lastmod>{{ item.date | date_to_xmlschema }}</lastmod></url>
   {% endfor %}

@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "A/Prof. James Xi Zheng"
 role: "Trustworthy AI and Autonomous Systems Researcher | ARC Future Fellowship Awardee (2024) | IEEE Senior Member | Research.com Rising Star in Computer Science (2025) | IEEE TSE Best Paper Award (2025)"
 category: "director"

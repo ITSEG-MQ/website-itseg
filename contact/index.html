@@ -14,22 +14,22 @@ permalink: /contact/
 <section class="section container contact-grid" aria-labelledby="office-title">
   <div>
     <p class="eyebrow">Location</p>
-    <h2 id="office-title">{{ site.contact.office }}</h2>
+    <h2 id="office-title">{{ site.contact.office | escape }}</h2>
   </div>
   <div class="contact-card">
     <h3>Address</h3>
     <address>
-      {{ site.contact.organisation }}<br>
-      {{ site.contact.room }}<br>
-      {{ site.contact.street }}<br>
-      {{ site.contact.locality }}
+      {{ site.contact.organisation | escape }}<br>
+      {{ site.contact.room | escape }}<br>
+      {{ site.contact.street | escape }}<br>
+      {{ site.contact.locality | escape }}
     </address>
   </div>
   <div class="contact-card">
     <h3>Phone &amp; email</h3>
     <p>
-      <a href="tel:{{ site.contact.phone_href }}">{{ site.contact.phone }}</a><br>
-      <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+      <a href="tel:{{ site.contact.phone_href | escape }}">{{ site.contact.phone | escape }}</a><br>
+      <a href="mailto:{{ site.contact.email | escape }}">{{ site.contact.email | escape }}</a>
     </p>
   </div>
 </section>
@@ -39,6 +39,6 @@ permalink: /contact/
     <p class="eyebrow">Research degrees</p>
     <h2>PhD and MRes enquiries</h2>
     <p>ITSEG welcomes enquiries from highly motivated and self-disciplined PhD and MRes applicants. Applicants need 6.5 out of 7 for a master’s degree in the Macquarie University GPA rating system to be considered for a PhD scholarship. An exception may be made for strong applicants who have worked with the director or collaborators on top journals (Q1) or conferences (CORE A or above), or who have extensive research and industry experience; two referees are required.</p>
-    <p>An interview is mandatory for all applicants. Email <a href="mailto:{{ site.contact.email }}?subject=apply%20for%20ITSEG%20PhD%20or%20MRes">{{ site.contact.email }}</a> with <strong>apply for ITSEG PhD or MRes</strong> in the subject line.</p>
+    <p>An interview is mandatory for all applicants. Email <a href="mailto:{{ site.contact.email | escape }}?subject=apply%20for%20ITSEG%20PhD%20or%20MRes">{{ site.contact.email | escape }}</a> with <strong>apply for ITSEG PhD or MRes</strong> in the subject line.</p>
   </div>
 </section>

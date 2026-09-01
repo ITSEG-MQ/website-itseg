@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Congratulations to Dr Xi Zheng for being an editor of Journal of Reliable Intelligent Environments!"
 date: "2024-02-08 08:00:00"
 legacy_id: "12"

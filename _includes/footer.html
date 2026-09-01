@@ -2,12 +2,12 @@
   <div class="container footer-grid">
     <div>
       <p class="footer-title">ITSEG</p>
-      <p>Intelligent Systems Engineering Group<br>{{ site.contact.organisation }}</p>
+      <p>Intelligent Systems Engineering Group<br>{{ site.contact.organisation | escape }}</p>
     </div>
     <div>
       <p>
-        <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a><br>
-        <a href="tel:{{ site.contact.phone_href }}">{{ site.contact.phone }}</a>
+        <a href="mailto:{{ site.contact.email | escape }}">{{ site.contact.email | escape }}</a><br>
+        <a href="tel:{{ site.contact.phone_href | escape }}">{{ site.contact.phone | escape }}</a>
       </p>
     </div>
     <div>

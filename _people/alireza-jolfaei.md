@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Dr Alireza Jolfaei"
 role: "Program Leader: Cyber-Physical Systems Security"
 category: "program-leaders"

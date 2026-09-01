@@ -1,5 +1,6 @@
 [
   {
+    "managed_by": "legacy-import",
     "id": "publication-001",
     "title": "Real-time simulation support for runtime verification of cyber-physical systems",
     "authors": "Zheng, Xi, Julien, Christine, Chen, Hongxu, Podorozhny, Rodion & Cassez, Franck 2017",
@@ -11,6 +12,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-002",
     "title": "An analysis of adversarial attacks and defenses on autonomous driving models",
     "authors": "Deng, Yao, Zheng, Xi, Zhang, Tianyi, Chen, Chen & Lou, Guannan et al. 2020,",
@@ -22,6 +24,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-003",
     "title": "Opportunistic Federated Learning: An Exploration of Egocentric Collaboration for Pervasive Computing Applications",
     "authors": "Lee, Sangsu, Zheng, Xi, Hua, Jie, Vikalo, Haris & Julien, Christine 2021,",
@@ -33,6 +36,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-004",
     "title": "Braceassertion: Runtime verification of cyberphysical systems",
     "authors": "Zheng, Xi, Julien, Christine, Podorozhny, Rodion & Cassez, Franck 2015",
@@ -44,6 +48,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-005",
     "title": "Generalized Centered 2-D Principal Component Analysis",
     "authors": "Zhou, Gongyu, Xu, Guangquan, Hao, Jianye, Chen, Shizhan & Xu, Junfeng & Zheng, Xi. 2021",
@@ -55,6 +60,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-006",
     "title": "DAliM: Machine Learning Based Intelligent Lucky Money Determination for Large-Scale E-Commerce Businesses",
     "authors": "Fu, Min, Wong, Chi Man, Zhu, Hai, Huang, Yanjun & Li, Yuanping & Zheng,Xi. 2018",
@@ -66,6 +72,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-007",
     "title": "DynaComm: Accelerating Distributed CNN Training between Edges and Clouds through Dynamic Communication Scheduling",
     "authors": "Cai, Shangming, Wang, Dongsheng, Wang, Haixia, Lyu, Yongqiang & Xu, Guangquan & Zheng,Xi. 2021",
@@ -77,6 +84,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-008",
     "title": "OFEI: A Semi-black-box Android Adversarial Sample Attack Framework Against DLaaS",
     "authors": "Xu, Guangquan, Xin, GuoHua, Jiao, Litao, Liu, Jian & Liu, Shaoying & Zheng, Xi 2021",
@@ -88,6 +96,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-009",
     "title": "A Hybrid Method Combining Markov Prediction and Fuzzy Classification for Driving Condition Recognition",
     "authors": "Xie, Haiming, Tian, Guangyu, Du, Guangqian, Huang, Yong & Chen, Hongxu & Zheng,Xi 2018",
@@ -99,6 +108,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-010",
     "title": "Real-time simulation support for real-time systems",
     "authors": "Zheng, X 2020",
@@ -110,6 +120,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-011",
     "title": "An Improved Genetic Algorithm to Construct Weightwise (Almost) Perfectly Balanced Boolean Functions with High Weightwise Nonlinearity",
     "authors": "Yan,Lili;Cui,Jingyi;Liu, Jian; Xu,Guangquan; Han, Lidong; Jolfaei, Alireza; Zheng,Xi. 2023",
@@ -121,6 +132,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-012",
     "title": "Scenario-based Test Reduction and Prioritization for Multi-Module Autonomous Driving Systems",
     "authors": "Yao Deng, Xi Zheng, MengShi Zhang, Guannan Lou, Tianyi Zhang 2022",
@@ -132,6 +144,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-013",
     "title": "Testing of Autonomous Driving Systems: Where are we and where should we go?",
     "authors": "Guannan Lou, Yao Deng, Xi Zheng, Mengshi Zhang, Tianyi Zhang 2022",
@@ -143,6 +156,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-014",
     "title": "Prototyping Opportunistic Learning in Resource Constrained Mobile Devices",
     "authors": "H Yu, HY Chen, S Lee, X Zheng, C Julien 2022",
@@ -154,6 +168,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-015",
     "title": "Facilitating Decentralized and Opportunistic Learning in Pervasive Computing",
     "authors": "S Lee, C Julien, X Zheng 2022",
@@ -165,6 +180,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-016",
     "title": "Swarm: Playground for Large-scale Decentralized Learning Simulations",
     "authors": "S Lee, H Yu, X Zheng, C Julien 2022",
@@ -176,6 +192,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-017",
     "title": "STFL: A Temporal-Spatial Federated Learning Framework for Graph Neural Networks",
     "authors": "Guannan Lou, Yuze Liu, Tiehua Zhang, Xi Zheng 2021",
@@ -187,6 +204,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-018",
     "title": "MFF-AMD: multivariate feature fusion for Android malware detection",
     "authors": "Xu, G., Feng, M., Jiao, L., Liu, J., Dai, H.N., Wang, D., Panaousis, E. and Zheng, X., 2021",
@@ -198,6 +216,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-019",
     "title": "Robust Sensor Fusion Algorithms Against VoiceCommand Attacks in Autonomous Vehicles",
     "authors": "Guan, Jiwei, Zheng, Xi, Wang, Chen, Zhou, Yipeng & Jolfa, Alireza 2021",
@@ -209,6 +228,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-020",
     "title": "BMT: behavior driven development-based metamorphic testing for autonomous driving models",
     "authors": "Deng, Yao, Lou, Guannan, Zheng, Xi, Zhang, Tianyi & Kim, Miryung et al. 2021",
@@ -220,6 +240,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-021",
     "title": "Metamorphic Testing on Multi-module UAV Systems",
     "authors": "Li,Rui, Liu, Huai, Lou, Guannan, Zheng, Xi & Liu,Xiao et al. 2021",
@@ -231,6 +252,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-022",
     "title": "TDD4Fog: A Test-Driven Software Development Platform for Fog Computing Systems",
     "authors": "Li, Rui, Liu, Xiao, Zheng, Xi, Zhang, Chong & Liu, Huai 2020",
@@ -242,6 +264,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-023",
     "title": "Invited Talk: Software Engineering, AI and autonomous vehicles: Security assurance",
     "authors": "Zheng, Xi 2020",
@@ -253,6 +276,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-024",
     "title": "A democratically collaborative learning scheme for fog-enabled pervasive environments",
     "authors": "Zhang, Tiehua, Shen, Zhishu, Jin, Jiong & Zheng, Xi 2020",
@@ -264,6 +288,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-025",
     "title": "Fenghuolun: A federated learning based edge computing platform for cyber-physical systems",
     "authors": "Zhang, Chong, Liu, Xiao, Zheng, Xi, Li, Rui & Liu, Huai 2020",
@@ -275,6 +300,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-026",
     "title": "ICS-Assist: Intelligent Customer Inquiry Resolution Recommendation in Online Customer Service for Large E-Commerce Businesses",
     "authors": "Min Fu, Jiwei Guan, Xi Zheng, Jie Zhou, Jianchao Lu, Tianyi Zhang, Shoujie Zhuo, Lijun Zhan, Jian Yang 2020",
@@ -286,6 +312,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-027",
     "title": "Detection of Smoking Events from Confounding Activities of Daily Living",
     "authors": "Lu, Jianchao, Wang, Jiaxing, Zheng, Xi, Karmakar, Chandan & Rajasegarar, Sutharshan 2019",
@@ -297,6 +324,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-028",
     "title": "Hybrid model featuring CNN and LSTM architecture for human activity recognition on smartphone sensor data",
     "authors": "Deep, Samundra & Zheng, Xi 2019",
@@ -308,6 +336,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-029",
     "title": "Leveraging CNN and transfer learning for vision-based human activity recognition",
     "authors": "Deep, Samundra & Zheng, Xi 2019",
@@ -319,6 +348,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-030",
     "title": "SSL-STR: Semi-Supervised Learning for Sparse Trust Recommendation",
     "authors": "Hu, Zhengdi, Xu, Guangquan, Zheng, Xi, Liu, Jiang & Du, Xiaojiang 2019",
@@ -330,6 +360,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-031",
     "title": "Mfe-har: multiscale feature engineering for human activity recognition using wearable sensors",
     "authors": "Lu, Jianchao, Zheng, Xi, Sheng, Quan Z, Hussain, Zawar & Wang, Jiaxing et al. 2019",
@@ -341,6 +372,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-032",
     "title": "Verification of microservices using metamorphic testing",
     "authors": "Luo, Gang, Zheng, Xi, Liu, Huai, Xu, Rongbin & Nagumothu, Dinesh et al. 2019",
@@ -352,6 +384,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-033",
     "title": "ESDA: An energy-saving data analytics fog service platform",
     "authors": "Zhang, Tiehua, Shen, Zhishu, Jin, Jiong, Tagami, Atsushi & Zheng, Xi et al. 2019",
@@ -363,6 +396,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-034",
     "title": "Who Spread to Whom? Inferring Online Social Networks with User Features",
     "authors": "Wang, Derek, Zhou, Wanlei, Zheng, Xi, Wen, Sheng & Zhang, Jun et al. 2018",
@@ -374,6 +408,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-035",
     "title": "SoProtector: Securing Native C/C++ Libraries for Mobile Applications",
     "authors": "Zhang, Ning, Xu, Guangquan, Meng, Guozhu & Zheng, Xi 2018",
@@ -385,6 +420,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-036",
     "title": "Roundtable Gossip Algorithm: A Novel Sparse Trust Mining Method for Large-Scale Recommendation Systems",
     "authors": "Liu, Mengdi, Xu, Guangquan, Zhang, Jun, Shankaran, Rajan, Luo, Gang & Zheng, Xi . 2018",
@@ -396,6 +432,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-037",
     "title": "Non-invasive sensor based automated smoking activity detection",
     "authors": "Bhandari, Babin, Lu, JianChao, Zheng, Xi, Rajasegarar, Sutharshan & Karmakar, Chandan 2017",
@@ -407,6 +444,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-038",
     "title": "PaaS-black or white: an investigation into software development model for building retail industry SaaS",
     "authors": "Pham, Vu Viet Hoang, Liu, Xiao, Zheng, Xi, Fu, Min & Deshpande, Sahil Vikas et al. 2017",
@@ -418,6 +456,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-039",
     "title": "Service2vec: a vector representation for Web services",
     "authors": "Zhang, Yuqun, Zhang, Mengshi, Zheng, Xi & Perry, Dewayne E 2017",
@@ -429,6 +468,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-040",
     "title": "Security analysis of modern mission critical android mobile applications",
     "authors": "Zheng, Xi, Pan, Lei & Yilmaz, Erdem 2017",
@@ -440,6 +480,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-041",
     "title": "Smartvm: A multi-layer microservice-based platform for deploying saas",
     "authors": "Zheng, Xi, Jiang, Jiaojiao, Zhang, Yuqun, Deng, Yao & Fu, Min et al. 2017",
@@ -451,6 +492,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-042",
     "title": "A testbed for security analysis of modern vehicle systems",
     "authors": "Zheng, Xi, Pan, Lei, Chen, Hongxu, Di Pietro, Rick & Batten, Lynn 2017",
@@ -462,6 +504,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-043",
     "title": "Bigvm: A multi-layer-microservice-based platform for deploying saas",
     "authors": "Zheng, Tianlei, Zhang, Yuqun, Zheng, Xi, Fu, Min & Liu, Xiao 2017",
@@ -473,6 +516,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-044",
     "title": "Bullseye: structured passage retrieval and document highlighting for scholarly search",
     "authors": "Zheng, Xi, Bansal, Akanksha & Lease, Matthew 2017",
@@ -484,6 +528,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-045",
     "title": "Investigating security vulnerabilities in modern vehicle systems",
     "authors": "Zheng, Xi, Pan, Lei, Chen, Hongxu & Wang, Peiyin 2016",
@@ -495,6 +540,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-046",
     "title": "Verification and validation in cyber physical systems: research challenges and a way forward",
     "authors": "Zheng, Xi & Julien, Christine 2015",
@@ -506,6 +552,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-047",
     "title": "Physically informed assertions for cyber physical systems development and debugging",
     "authors": "Zheng, Xi 2014",
@@ -517,6 +564,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-048",
     "title": "WiP abstract: BraceForce: Software engineering support for sensing in CPS applications",
     "authors": "Zheng, Xi, Perry, Dewayne E & Julien, Christine 2014",
@@ -528,6 +576,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-049",
     "title": "Trustworthy sensor fusion against inaudible command attacks in advanced driver-assistance systems",
     "authors": "J. Guan, L. Pan, C. Wang, S. Yu, L. Gao, and X. Zheng. 2023",
@@ -539,6 +588,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-050",
     "title": "Real-time Diagnosis of Configuration Errors for Software of AI Server Infrastructure",
     "authors": "Ding, X.; Xu,G.Q.; Xu,S.H.; Ji,A.; Shao,Y.L.;Feng,S.C;Zheng,X. 2023",
@@ -550,6 +600,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-051",
     "title": "A Privacy-Preserving Medical Data Sharing Scheme Based on Blockchain",
     "authors": "Xu, Guangquan; Qi, Chen; Dong, Wenyu;Gong,lixiao;Liu,shaoying;Chen,Si;Liu,jian;Zheng,Xi. 2022",
@@ -561,6 +612,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-052",
     "title": "A Declarative Metamorphic Testing Framework for Autonomous Driving",
     "authors": "Yao Deng, Xi Zheng, Tianyi Zhang, Huai Liu, Guannan Lou, Miryung Kim, Tsong Yueh Chen. 2022",
@@ -572,6 +624,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-053",
     "title": "SPRNN: A Spatial-Temporal Recurrent Neural Network for Crowd Flow Prediction",
     "authors": "Gaozhong Tang, Bo Li, Hong-Ning Dai, Xi Zheng. 2022",
@@ -583,6 +636,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-054",
     "title": "Collaborative Three-Tier Architecture Noncontact Respiratory Rate Monitoring Using Target Tracking and False Peaks Eliminating Algorithms",
     "authors": "Mo,Haimiao, Ding, Shuai, Yang, Shanglin, Vasilakos, Athanasios, Zheng, Xi. 2022",
@@ -594,6 +648,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-055",
     "title": "ASQ-FastBM3D: An Adaptive Denoising Framework for Defending Adversarial Attacks in Machine Learning Enabled Systems",
     "authors": "G Xu, Z Han, L Gong, L Jiao, H Bai, S Liu, X Zheng 2022",
@@ -605,6 +660,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-056",
     "title": "Non-Contact Negative Mood State Detection Using Reliability-Focused Multi-Modal Fusion Model",
     "authors": "Rong,Qian;Ding,Shuai;Yue,Zijie;Wang,Yaping;Wang,Linjie;Zheng,Xi; Li,Yinghui. 2022",
@@ -616,6 +672,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-057",
     "title": "DeCoP:Deep Learning for COVID-19 Prediction of Survival",
     "authors": "Yao Deng, Shigang Liu, Alireza Jolfaei, Hongbing Cheng, Ziyuan Wang, Xi Zheng 2022",
@@ -627,6 +684,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-058",
     "title": "Optimizing Video Caching at the Edge: A Hybrid Multi-Point Process Approach",
     "authors": "Zhang, X., Zhou, Y., Wu, D., Hu, M., Zheng, X., Chen, M. and Guo, S., 2021",
@@ -638,6 +696,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-059",
     "title": "Guided activity prediction for minimally invasive surgery safety improvement in the internet of medical things",
     "authors": "Wang, H., Ding, S., Yang, S., Liu, C., Yu, S. and Zheng, X., 2021",
@@ -649,6 +708,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-060",
     "title": "SolGuard: Preventing external call issues in smart contract-based multi-agent robotic systems",
     "authors": "Praitheeshan, P., Pan, L., Zheng, X., Jolfaei, A. and Doss, R., 2021",
@@ -660,6 +720,7 @@
     "review_status": "duplicate-preserved"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-061",
     "title": "FNet: a two-stream model for detecting adversarial attacks against 5G-based deep learning services",
     "authors": "Xu, G., Feng, G., Jiao, L., Feng, M., Zheng, X. and Liu, J., 2021",
@@ -671,6 +732,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-062",
     "title": "An Energy-Efficient and Secure Data Inference Framework for Internet of Health Things: A Pilot Study",
     "authors": "Kang, James Jin, Dibaei, Mahdi, Luo, Gang, Yang, Wencheng & Haskell-Dowland, Paul & Zheng, Xi 2021",
@@ -682,6 +744,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-063",
     "title": "Can Steering Wheel Detect Your Driving Fatigue",
     "authors": "Lu, Jianchao, Zheng, Xi, Tang, Lihong, Zhang, Tianyi & Sheng, Quan Z et al. 2021",
@@ -693,6 +756,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-064",
     "title": "Sparse Trust Data Mining",
     "authors": "Nie, Pengli, Xu, Guangquan, Jiao, Litao, Liu, Shaoying & Liu, Jian & Zheng, Xi. 2021",
@@ -704,6 +768,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-065",
     "title": "SolGuard: Preventing external call issues in smart contract-based multi-agent robotic systems",
     "authors": "Praitheeshan, Purathani, Pan, Lei, Zheng, Xi, Jolfaei, Alireza & Doss, Robin 2021",
@@ -715,6 +780,7 @@
     "review_status": "duplicate-preserved"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-066",
     "title": "Edge-Based Communication Optimization for Distributed Federated Learning",
     "authors": "Wang, Tian, Liu, Yan, Zheng, Xi, Dai, Hong-Ning & Jia, Weijia et al. 2021",
@@ -726,6 +792,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-067",
     "title": "Mobile edge-enabled trust evaluation for the Internet of Things",
     "authors": "Wang, Tian, Wang, Pan, Cai, Shaobin, Zheng, Xi & Ma, Ying et al. 2021",
@@ -737,6 +804,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-068",
     "title": "Gain without Pain: Offsetting DP-injected Nosies Stealthily in Cross-device Federated Learning",
     "authors": "Yang, Wenzhuo, Zhou, Yipeng, Hu, Maio, Wu, Di & Zheng, Xi et al. 2021",
@@ -748,6 +816,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-069",
     "title": "EIHDP: Edge-Intelligent Hierarchical Dynamic Pricing Based on Cloud-Edge-Client Collaboration for IoT Systems",
     "authors": "Wang, T, Lu, YC, Wang, JH, Dai, HN & Zheng, X 2021",
@@ -759,6 +828,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-070",
     "title": "RICA-MD: A Refined ICA algorithm for Motion Detection",
     "authors": "Zhang, C, Lu, JC, Zheng, X, Yu, DJ & Sheng, QZ et al. 2021",
@@ -770,6 +840,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-071",
     "title": "Deep Learning-Based Autonomous Driving Systems: A Survey of Attacks and Defenses",
     "authors": "Deng, Yao, Zhang, Tiehua, Lou, Guannan, Zheng, Xi & Jin, Jiong et al. 2021",
@@ -781,6 +852,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-072",
     "title": "Resource Offload Consolidation Based on Deep-Reinforcement Learning Approach in Cyber-Physical Systems",
     "authors": "Mekala, MS, Jolfaei, Alireza, Srivastava, Gautam, Zheng, Xi & Anvari-Moghaddam, Amjad et al. 2021",
@@ -792,6 +864,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-073",
     "title": "Privacy-preserving time-series medical images analysis using a hybrid deep learning framework",
     "authors": "Yue, Zijie, Ding, Shuai, Zhao, Lei, Zhang, Youtao, Cao, Zehong & Zheng, Xi 2021",
@@ -803,6 +876,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-074",
     "title": "HUCDO: A Hybrid Usercentric Data Outsourcing Scheme",
     "authors": "Huang, Ke, Zhang, Xiaosong, Wang, Xiaofen, Mu, Yi, Rezaeibagha, Fatemeh & Zheng, Xi 2020",
@@ -814,6 +888,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-075",
     "title": "Security analysis of indistinguishable obfuscation for internet of medical things applications",
     "authors": "Jing, Zhengjun, Gu, Chunsheng, Li, Yong, Zhang, Mengshi & Xu, Guangquan & Zheng, Xi 2020",
@@ -825,6 +900,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-076",
     "title": "Fog-based Secure Service Discovery for Internet of Multimedia Things: A Cross-blockchain Approach",
     "authors": "Liang, Haoran, Wu, Jun, Zheng, Xi, Zhang, Mengshi & Li, Jianhua et al. 2020",
@@ -836,6 +912,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-077",
     "title": "Leveraging ICN with network sensing for intelligent transportation systems: a dynamic naming approach",
     "authors": "Wang, Chen, Wu, Jun, Zheng, Xi, Pei, Bei & Zhang, Xuyun et al. 2020",
@@ -847,6 +924,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-078",
     "title": "Cluster-Enabled Cooperative Scheduling Based on Reinforcement Learning for High-Mobility Vehicular Networks",
     "authors": "Xia, Youhua, Wu, Libing, Wang, Zhibo, Zheng, Xi & Jin, Jiong 2020",
@@ -858,6 +936,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-079",
     "title": "BAGKD: A batch authentication and group key distribution protocol for vanets",
     "authors": "Xu, Guangquan, Li, Xiaotong, Jiao, Litao, Wang, Weizhe, Liu, Ao & Zheng, Xi 2020",
@@ -869,6 +948,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-080",
     "title": "A Security-Enhanced Certificateless Aggregate Signature Authentication Protocol for InVANETs",
     "authors": "Xu, Guangquan, Zhou, Wenjuan, Sangaiah, Arun Kumar, Zhang, Yao & Zheng, Xi 2020",
@@ -880,6 +960,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-081",
     "title": "Trust2Privacy: A Novel Fuzzy Trustto-Privacy Mechanism for Mobile Social Networks",
     "authors": "Xu, Guangquan, Liu, Bingyan, Jiao, Litao, Li, Xiaotong, Feng, Meiqi & Zheng, Xi 2020",
@@ -891,6 +972,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-082",
     "title": "TT-SVD: an efficient sparse decision making model with two-way trust recommendation in the AI enabled IoT systems",
     "authors": "Xu, Guangquan, Zhao, Yuyang, Jiao, Litao, Feng, Meiqi, Ji, Zhong & Zheng, Xi 2020",
@@ -902,6 +984,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-083",
     "title": "A survey of security and privacy issues in the Internet of Things from the layered context",
     "authors": "Deep, Samundra, Zheng, Xi, Jolfaei, Alireza, Yu, Dongjin & Ostovari, Pouya et al. 2020",
@@ -913,6 +996,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-084",
     "title": "Dynamic clustering method for imbalanced learning based on AdaBoost",
     "authors": "Deng, Xiaoheng, Xu, Yuebin, Chen, Lingchi, Zhong, Weijian, Jolfaei, Alireza & Zheng, Xi. 2020",
@@ -924,6 +1008,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-085",
     "title": "Attacks and defences on intelligent connected vehicles: a survey",
     "authors": "Dibaei, Mahdi, Zheng, Xi, Jiang, Kun, Abbas, Robert & Liu, Shigang et al. 2020",
@@ -935,6 +1020,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-086",
     "title": "Investigating the prospect of leveraging blockchain and machine learning to secure vehicular networks: A survey",
     "authors": "Dibaei, M, Zheng, X, Xia, Y, Xu, X & Jolfaei, A et al. 2020",
@@ -946,6 +1032,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-087",
     "title": "SSL-SVD: semi-supervised learning–based sparse trust recommendation",
     "authors": "Hu, Zhengdi, Xu, Guangquan, Zheng, Xi, Liu, Jiang & Li, Zhangbing et al. 2020",
@@ -957,6 +1044,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-088",
     "title": "Privacy-Preserving Federated Learning Framework Based on Chained Secure Multiparty Computing",
     "authors": "Li, Yong, Zhou, Yipeng, Jolfaei, Alireza, Yu, Dongjin, Xu, Gaochao & Zheng, Xi. 2020",
@@ -968,6 +1056,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-089",
     "title": "Unsupervised-Learning-Based Continuous Depth and Motion Estimation With Monocular Endoscopy for Virtual Reality Minimally Invasive Surgery",
     "authors": "Li, Ling, Li, Xiaojian, Yang, Shanlin, Ding, Shuai, Jolfaei, Alireza & Zheng,Xi 2020",
@@ -979,6 +1068,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-090",
     "title": "Efficient human activity recognition using a single wearable sensor",
     "authors": "Lu, Jianchao, Zheng, Xi, Sheng, Michael, Jin, Jiong & Yu, Shui 2020",
@@ -990,6 +1080,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-091",
     "title": "Edge-based differential privacy computing for sensor–cloud systems",
     "authors": "Wang, Tian, Mei, Yaxin, Jia, Weijia, Zheng, Xi & Wang, Guojun et al. 2020",
@@ -1001,6 +1092,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-092",
     "title": "An intelligent dynamic offloading from cloud to edge for smart iot systems with big data",
     "authors": "Wang, Tian, Liang, Yuzhu, Zhang, Yilin, Zheng, Xi & Arif, Muhammad. 2020",
@@ -1012,6 +1104,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-093",
     "title": "Am I eclipsed? A smart detector of eclipse attacks for Ethereum",
     "authors": "Xu, Guangquan, Guo, Bingjiang, Su, Chunhua, Zheng, Xi & Liang, Kaitai et al. 2020",
@@ -1023,6 +1116,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-094",
     "title": "Efficient and Lightweight Data Streaming Authentication in Industrial Control and Automation Systems",
     "authors": "Xu, Jian, Meng, Qingyu, Wu, Jun, Zheng, Xi & Zhang, Xuyun et al. 2020",
@@ -1034,6 +1128,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-095",
     "title": "Achieving democracy in edge intelligence: A fog-based collaborative learning scheme",
     "authors": "Zhang, Tiehua, Shen, Zhishu, Jin, Jiong, Zheng, Xi & Tagami, Atsushi et al. 2020",
@@ -1045,6 +1140,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-096",
     "title": "Leveraging Energy Function Virtualization with Game Theory for Fault-Tolerant Smart Grid",
     "authors": "Wang, K, Wu, J, Zheng, X, Jolfaei, A & Li, J.H. et al. 2020",
@@ -1056,6 +1152,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-097",
     "title": "Driver Drowsiness Detection Using Multi-Channel Second Order Blind Identifications",
     "authors": "Zhang, Chao, Wu, Xiaopei, Zheng, Xi & Yu, Shui 2019",
@@ -1067,6 +1164,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-098",
     "title": "SmartVM: a SLA-aware microservice deployment framework",
     "authors": "Zheng, Tianlei, Zheng, Xi, Zhang, Yuqun, Deng, Yao & Dong, ErXi et al. 2019",
@@ -1078,6 +1176,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-099",
     "title": "When Road Information Meets Data Mining: Precision Detection for Heading and Width of Roads",
     "authors": "Xun Zhou, Xuelian Cai, Yuehang Bu, Zheng, Xi & Jiong Jin et al. 2019",
@@ -1089,6 +1188,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-100",
     "title": "Integrating NFV and ICN for advanced driverassistance systems",
     "authors": "Li, Jianan, Wu, Jun, Xu, Guangquan, Li, Jianhua & Zheng, Xi et al. 2019",
@@ -1100,6 +1200,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-101",
     "title": "Using sparse representation to detect anomalies in complex WSNs",
     "authors": "Li, Xiaoming, Xu, Guangquan, Zheng, Xi, Liang, Kaitai & Panaousis, Emmanouil et al. 2019",
@@ -1111,6 +1212,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-102",
     "title": "Big data cleaning based on mobile edge computing in industrial sensor-cloud",
     "authors": "Wang, Tian, Ke, Haoxiong, Zheng, Xi, Wang, Kun & Sangaiah, Arun Kumar et al. 2019",
@@ -1122,6 +1224,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-103",
     "title": "Crowdsourcing mechanism for trust evaluation in CPCS based on intelligent mobile edge computing",
     "authors": "Wang, Tian, Luo, Hao, Zheng, Xi & Xie, Mande 2019",
@@ -1133,6 +1236,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-104",
     "title": "When sensor-cloud meets mobile edge computing",
     "authors": "Wang, Tian, Lu, Yucheng, Cao, Zhihan, Shu, Lei & Zheng, Xi et al. 2019",
@@ -1144,6 +1248,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-105",
     "title": "CSP-E2: An abusefree contract signing protocol with low-storage TTP for energy-efficient electronic transaction ecosystems",
     "authors": "Xu, Guangquan, Zhang, Yao, Sangaiah, Arun Kumar, Li, Xiaohong, Castiglione, Aniello, Zheng, Xi 2019",
@@ -1155,6 +1260,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-106",
     "title": "SoProtector: safeguard privacy for native SO files in evolving mobile IoT applications",
     "authors": "Xu, Guangquan, Wang, Weizhe, Jiao, Litao, Li, Xiaotong, Liang, Kaitai, Zheng, Xi 2019",
@@ -1166,6 +1272,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-107",
     "title": "Rate-adaptive fog service platform for heterogeneous IoT applications",
     "authors": "Zhang, Tiehua, Jin, Jiong, Zheng, Xi & Yang, Yun 2019",
@@ -1177,6 +1284,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-108",
     "title": "Using AI to attack VA: a stealthy spyware against voice assistances in smart phones",
     "authors": "Zhang, Rongjunchen, Chen, Xiao, Wen, Sheng, Zheng, Xi & Ding, Yong 2019",
@@ -1188,6 +1296,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-109",
     "title": "A Survey on Anomalous Behavior Detection for Elderly Care using Densesensing Networks",
     "authors": "Deep, S, Zheng, X, Karmakar, C & Jin, J 2019",
@@ -1199,6 +1308,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-110",
     "title": "Object localisation through clustering unreliable ultrasonic range sensors",
     "authors": "Pan, Lei, Zheng, Xi, Kolar, Philip & Bangay, Shaun 2018",
@@ -1210,6 +1320,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-111",
     "title": "Practical overview of security issues in wireless sensor network applications",
     "authors": "Radhappa, Harish, Pan, Lei, Zheng, Xi & Wen, Sheng 2018",
@@ -1221,6 +1332,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-112",
     "title": "A survey on security issues in services communication of Microservicesenabled fog applications",
     "authors": "Yu, Dongjin, Jin, Yike, Zhang, Yuqun & Zheng, Xi 2018",
@@ -1232,6 +1344,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-113",
     "title": "E-AUA: An efficient anonymous user authentication protocol for mobile IoT",
     "authors": "Zeng, Xianjiao, Xu, Guangquan, Zheng, Xi, Xiang, Yang & Zhou, Wanlei 2018",
@@ -1243,6 +1356,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-114",
     "title": "Cyber security attacks to modern vehicular systems",
     "authors": "Pan, Lei, Zheng, Xi, Chen, HX, Luan, T & Bootwala, Huzefa et al. 2017",
@@ -1254,6 +1368,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-115",
     "title": "Big data storage and management in SaaS applications",
     "authors": "Zheng, Xi, Fu, Min & Chugh, Mohit 2017",
@@ -1265,6 +1380,7 @@
     "review_status": "legacy-published-public-page"
   },
   {
+    "managed_by": "legacy-import",
     "id": "publication-116",
     "title": "Efficient and scalable runtime monitoring for cyber–physical system",
     "authors": "Zheng, Xi, Julien, Christine, Podorozhny, Rodion, Cassez, Franck & Rakotoarivelo, Thierry 2016",

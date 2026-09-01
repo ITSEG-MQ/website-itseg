@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Shuaiyi Sun"
 role: "Ph.D. Candidate"
 category: "industry-engagement-officers"

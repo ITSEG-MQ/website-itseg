@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Large-scale E-commerce Decision-making Intelligence Model"
 category: "other"
 section: "Other Projects"

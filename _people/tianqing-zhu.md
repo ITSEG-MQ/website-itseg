@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "A/Prof. Tianqing Zhu"
 role: "Program Leader: Data Privacy and Differential Privacy Deep Learning"
 category: "program-leaders"

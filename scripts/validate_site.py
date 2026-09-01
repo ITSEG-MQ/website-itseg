@@ -15,6 +15,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from build_ui_assets import asset_errors as ui_asset_errors
+
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {"news": 14, "people": 37, "people_source_records": 37, "projects": 8, "publications": 116}
 EXPECTED_PEOPLE_SECTIONS = {
@@ -107,6 +109,22 @@ HIGH_RISK_PATTERNS = {
     "credential assignment": re.compile(r"\b(?:password|passwd|api[_-]?token|secret)\s*[:=]\s*['\"][^'\"]+", re.I),
     "users table query": re.compile(r"\b(?:from|into|update)\s+users\b", re.I),
 }
+ATTRIBUTE_NAME = re.compile(r"^[A-Za-z_:][A-Za-z0-9:._-]*$")
+URL_ATTRIBUTES = {"action", "formaction", "href", "poster", "src"}
+LEGACY_OWNER = "legacy-import"
+EDITORIAL_OWNER = "editorial"
+VALID_OWNERS = {LEGACY_OWNER, EDITORIAL_OWNER}
+SAFE_IDENTIFIER = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+EDITORIAL_ASSET_PREFIXES = {
+    "news": "/assets/uploads/news/",
+    "people": "/assets/uploads/people/",
+    "projects": "/assets/uploads/projects/",
+}
+COLLECTION_COMMON_FIELDS = {
+    "news": ("title", "date", "cover", "permalink"),
+    "people": ("title", "role", "category", "section", "image", "order", "permalink"),
+    "projects": ("title", "category", "section", "image", "order", "permalink"),
+}
 
 
 def managed_root_errors():
@@ -198,6 +216,53 @@ def front_matter(path: Path):
     return data, body
 
 
+def configured_value(name: str, config_path: Path | None = None):
+    """Read a top-level scalar from the active Jekyll config without a YAML dependency."""
+    path = config_path or ROOT / "_config.yml"
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    match = re.search(rf"^{re.escape(name)}\s*:\s*(.*?)\s*$", text, re.MULTILINE)
+    return scalar(match.group(1)) if match else None
+
+
+def configured_baseurl(config_path: Path | None = None) -> str:
+    value = configured_value("baseurl", config_path)
+    if not isinstance(value, str) or not value.strip() or value.strip() == "/":
+        return ""
+    return "/" + value.strip().strip("/")
+
+
+def unsafe_url_reason(attribute: str, value: str) -> str | None:
+    """Describe browser-active URLs that should never appear in generated attributes."""
+    if value != value.strip():
+        return "leading or trailing whitespace"
+    if any(ord(character) < 32 or ord(character) == 127 for character in value):
+        return "control character"
+    if "\\" in value:
+        return "backslash"
+    if value.startswith("//"):
+        return "protocol-relative URL"
+    try:
+        parsed = urlsplit(value)
+    except ValueError:
+        return "malformed URL"
+    scheme = parsed.scheme.lower()
+    allowed = {"http", "https"}
+    if attribute == "href":
+        allowed.update({"mailto", "tel"})
+    if scheme and scheme not in allowed:
+        return f"unsafe scheme {scheme!r}"
+    if parsed.netloc and not scheme:
+        return "network-path URL"
+    if scheme in {"http", "https"} and not parsed.netloc:
+        return f"{scheme} URL without a host"
+    if scheme in {"mailto", "tel"} and not parsed.path:
+        return f"empty {scheme} URL"
+    return None
+
+
 class DocumentParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -208,8 +273,25 @@ class DocumentParser(HTMLParser):
         self.anchors = []
         self.ids = set()
         self.title = False
+        self.errors = []
 
     def handle_starttag(self, tag, attrs):
+        names = [name for name, _ in attrs]
+        duplicates = sorted(name for name, count in Counter(names).items() if count > 1)
+        if duplicates:
+            self.errors.append(f"duplicate attributes on <{tag}>: {duplicates}")
+        for name, value in attrs:
+            if not ATTRIBUTE_NAME.fullmatch(name):
+                self.errors.append(f"malformed attribute name {name!r} on <{tag}>")
+            if value is None:
+                self.errors.append(f"attribute {name!r} on <{tag}> has no value")
+                continue
+            if name.lower().startswith("on"):
+                self.errors.append(f"unsafe event-handler attribute {name!r} on <{tag}>")
+            if name.lower() in URL_ATTRIBUTES:
+                reason = unsafe_url_reason(name.lower(), value)
+                if reason:
+                    self.errors.append(f"unsafe {name} on <{tag}> ({reason}): {value!r}")
         attrs = dict(attrs)
         self.tags.append(tag)
         if attrs.get("id"):
@@ -229,6 +311,37 @@ class DocumentParser(HTMLParser):
             self.title = True
 
 
+def owner_records(records, owner):
+    return [record for record in records if record[1].get("managed_by") == owner]
+
+
+def safe_collection_permalink(kind: str, value: object) -> bool:
+    if not isinstance(value, str) or value != value.strip():
+        return False
+    return bool(re.fullmatch(rf"/{re.escape(kind)}/[a-z0-9]+(?:-[a-z0-9]+)*/", value))
+
+
+def local_asset_error(path: Path, asset: object, prefix: str) -> str | None:
+    if not isinstance(asset, str) or not asset.startswith(prefix):
+        return f"asset path must start with {prefix!r}"
+    relative = Path(asset.lstrip("/"))
+    if asset != "/" + relative.as_posix() or relative.is_absolute() or ".." in relative.parts:
+        return "asset path must be a safe root-relative path"
+    if relative.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp", ".gif"}:
+        return "asset path must use a supported raster image extension"
+    destination = ROOT / relative
+    try:
+        resolved = destination.resolve(strict=False)
+        repository = ROOT.resolve()
+    except OSError:
+        return "asset path cannot be resolved"
+    if resolved != repository and repository not in resolved.parents:
+        return "asset path resolves outside the repository"
+    if destination.is_symlink() or not destination.is_file():
+        return f"missing regular asset {asset}"
+    return None
+
+
 def collection_errors(kind: str, required: list[str]):
     errors = []
     directory = ROOT / f"_{kind}"
@@ -237,9 +350,6 @@ def collection_errors(kind: str, required: list[str]):
         for path in directory.iterdir()
         if path.suffix == ".md" and not path.is_symlink() and path.is_file()
     ) if directory.is_dir() and not directory.is_symlink() else []
-    expected = EXPECTED[kind]
-    if len(paths) != expected:
-        errors.append(f"_{kind}: expected {expected} Markdown files, found {len(paths)}")
     records = []
     for path in paths:
         try:
@@ -248,16 +358,60 @@ def collection_errors(kind: str, required: list[str]):
             errors.append(f"{path.relative_to(ROOT)}: {exc}")
             continue
         records.append((path, data, body))
-        for key in required:
+        owner = data.get("managed_by")
+        if owner not in VALID_OWNERS:
+            errors.append(
+                f"{path.relative_to(ROOT)}: managed_by must be {LEGACY_OWNER!r} or {EDITORIAL_OWNER!r}"
+            )
+        generic_required = COLLECTION_COMMON_FIELDS[kind]
+        owner_required = required if owner == LEGACY_OWNER else ["id"] if owner == EDITORIAL_OWNER else []
+        for key in [*generic_required, *owner_required]:
             if key not in data or data[key] in (None, "", []):
                 errors.append(f"{path.relative_to(ROOT)}: missing required field {key!r}")
+            elif (key in generic_required and key != "order" or key == "id") and not isinstance(data[key], str):
+                errors.append(f"{path.relative_to(ROOT)}: field {key!r} must be a string")
         if not body.strip():
             errors.append(f"{path.relative_to(ROOT)}: empty body")
-        asset = data.get("cover") or data.get("image")
+        permalink = data.get("permalink")
+        if permalink and not safe_collection_permalink(kind, permalink):
+            errors.append(f"{path.relative_to(ROOT)}: permalink must be a safe /{kind}/lowercase-slug/ URL")
+        if kind == "news" and data.get("date") and not re.match(r"^\d{4}-\d{2}-\d{2}(?:[ T].*)?$", str(data["date"])):
+            errors.append(f"{path.relative_to(ROOT)}: date must begin with YYYY-MM-DD")
+        if kind in {"people", "projects"} and data.get("order") is not None:
+            if not isinstance(data["order"], int) or isinstance(data["order"], bool) or data["order"] < 1:
+                errors.append(f"{path.relative_to(ROOT)}: order must be a positive integer")
+        if kind == "people" and data.get("category") in EXPECTED_PEOPLE_SECTION_LABELS:
+            expected_section = EXPECTED_PEOPLE_SECTION_LABELS[data["category"]]
+            if data.get("section") != expected_section:
+                errors.append(
+                    f"{path.relative_to(ROOT)}: section label expected {expected_section!r}, found {data.get('section')!r}"
+                )
+        elif kind == "people" and data.get("category"):
+            errors.append(f"{path.relative_to(ROOT)}: category is not rendered by the People page")
+        if kind == "projects" and data.get("category") not in {None, "", *EXPECTED_PROJECT_CATEGORIES}:
+            errors.append(f"{path.relative_to(ROOT)}: category is not rendered by the Projects page")
+
+        asset = data.get("cover") if kind == "news" else data.get("image")
         if asset:
-            asset_path = ROOT / str(asset).lstrip("/")
-            if not asset_path.is_file():
-                errors.append(f"{path.relative_to(ROOT)}: missing asset {asset}")
+            prefix = (
+                EDITORIAL_ASSET_PREFIXES[kind]
+                if owner == EDITORIAL_OWNER
+                else {"news": "/assets/pic/brand/", "people": "/assets/pic/people/", "projects": "/assets/pic/projects/"}[kind]
+            )
+            reason = local_asset_error(path, asset, prefix)
+            if reason:
+                errors.append(f"{path.relative_to(ROOT)}: {reason}")
+        if owner == EDITORIAL_OWNER:
+            identifier = data.get("id")
+            if not isinstance(identifier, str) or not SAFE_IDENTIFIER.fullmatch(identifier):
+                errors.append(f"{path.relative_to(ROOT)}: editorial id must be a lowercase hyphenated identifier")
+            elif path.name != f"{identifier}.md":
+                errors.append(f"{path.relative_to(ROOT)}: editorial filename must be {identifier}.md")
+            expected_permalink = f"/{kind}/{identifier}/" if isinstance(identifier, str) else None
+            if expected_permalink and permalink != expected_permalink:
+                errors.append(
+                    f"{path.relative_to(ROOT)}: editorial permalink expected {expected_permalink!r}, found {permalink!r}"
+                )
     return paths, records, errors
 
 
@@ -276,7 +430,7 @@ def canonical_collection_manifest_records(kind, records):
             "file": str(path.relative_to(ROOT)),
             **{field: data.get(field) for field in fields},
         }
-        for path, data, _ in sorted(records, key=order_key)
+        for path, data, _ in sorted(owner_records(records, LEGACY_OWNER), key=order_key)
     ]
 
 
@@ -301,27 +455,55 @@ def publication_errors():
         return [], [f"_data/publications.yml: must be JSON-compatible YAML ({exc})"]
     if not isinstance(publications, list):
         return [], ["_data/publications.yml: top level must be a list"]
-    if len(publications) != EXPECTED["publications"]:
-        errors.append(f"publications: expected {EXPECTED['publications']}, found {len(publications)}")
     ids = []
     for index, pub in enumerate(publications, 1):
         if not isinstance(pub, dict):
             errors.append(f"publication {index}: must be an object")
             continue
-        for key in ["id", "title", "authors", "publisher", "category"]:
+        for key in ["managed_by", "id", "title", "authors", "publisher", "category"]:
             if not pub.get(key):
                 errors.append(f"publication {index}: missing required field {key!r}")
-        ids.append(pub.get("id"))
-    if len(ids) != len(set(ids)):
+            elif not isinstance(pub[key], str):
+                errors.append(f"publication {index}: field {key!r} must be a string")
+        owner = pub.get("managed_by")
+        if owner not in VALID_OWNERS:
+            errors.append(
+                f"publication {index}: managed_by must be {LEGACY_OWNER!r} or {EDITORIAL_OWNER!r}"
+            )
+        identifier = pub.get("id")
+        ids.append(identifier)
+        if not isinstance(identifier, str) or not SAFE_IDENTIFIER.fullmatch(identifier):
+            errors.append(f"publication {index}: id must be a lowercase hyphenated identifier")
+        if pub.get("category") not in EXPECTED_PUBLICATION_CATEGORIES:
+            errors.append(
+                f"publication {index}: category is not one of the existing rendered publication categories"
+            )
+    comparable_ids = [identifier for identifier in ids if isinstance(identifier, str)]
+    if len(comparable_ids) != len(set(comparable_ids)):
         errors.append("publications: ids are not unique")
-    categories = Counter(pub.get("category") for pub in publications if isinstance(pub, dict))
+    legacy_publications = [
+        pub for pub in publications
+        if isinstance(pub, dict) and pub.get("managed_by") == LEGACY_OWNER
+    ]
+    if len(legacy_publications) != EXPECTED["publications"]:
+        errors.append(
+            f"legacy publications: expected {EXPECTED['publications']}, found {len(legacy_publications)}"
+        )
+    categories = Counter(pub.get("category") for pub in legacy_publications)
     if dict(categories) != EXPECTED_PUBLICATION_CATEGORIES:
-        errors.append(f"publications: category counts expected {EXPECTED_PUBLICATION_CATEGORIES}, found {dict(categories)}")
+        errors.append(
+            f"legacy publications: category counts expected {EXPECTED_PUBLICATION_CATEGORIES}, found {dict(categories)}"
+        )
+    source_orders = [pub.get("source_order") for pub in legacy_publications]
+    if source_orders != list(range(1, EXPECTED["publications"] + 1)):
+        errors.append("legacy publications: source_order must remain exactly 1 through 116 in source order")
+    expected_ids = [f"publication-{index:03d}" for index in range(1, EXPECTED["publications"] + 1)]
+    if [pub.get("id") for pub in legacy_publications] != expected_ids:
+        errors.append("legacy publications: ids and record order must remain publication-001 through publication-116")
     solguard = [
         pub
-        for pub in publications
-        if isinstance(pub, dict)
-        and pub.get("title") == "SolGuard: Preventing external call issues in smart contract-based multi-agent robotic systems"
+        for pub in legacy_publications
+        if pub.get("title") == "SolGuard: Preventing external call issues in smart contract-based multi-agent robotic systems"
     ]
     if len(solguard) != 2:
         errors.append(f"publications: expected two preserved SolGuard rows, found {len(solguard)}")
@@ -337,7 +519,49 @@ def publication_errors():
 
 def collection_semantic_errors(records):
     errors = []
-    news = records.get("news", [])
+    all_permalinks = []
+    all_editorial_ids = []
+    all_baseline_identities = set()
+    for kind, found in records.items():
+        all_permalinks.extend(
+            (data.get("permalink"), path.relative_to(ROOT))
+            for path, data, _ in found
+            if data.get("permalink")
+        )
+        editorial = owner_records(found, EDITORIAL_OWNER)
+        editorial_ids = [data.get("id") for _, data, _ in editorial]
+        comparable_ids = [identifier for identifier in editorial_ids if isinstance(identifier, str)]
+        all_editorial_ids.extend(comparable_ids)
+        if len(comparable_ids) != len(set(comparable_ids)):
+            errors.append(f"{kind}: editorial ids are not unique")
+        baseline_identities = {
+            identity
+            for path, data, _ in owner_records(found, LEGACY_OWNER)
+            for identity in (path.stem, str(data.get("legacy_id", "")))
+            if identity
+        }
+        all_baseline_identities.update(baseline_identities)
+        collisions = sorted(set(comparable_ids) & baseline_identities)
+        if collisions:
+            errors.append(f"{kind}: editorial ids collide with the legacy baseline: {collisions}")
+    duplicate_editorial_ids = sorted(
+        identifier for identifier, count in Counter(all_editorial_ids).items() if count > 1
+    )
+    if duplicate_editorial_ids:
+        errors.append(f"collections: editorial ids are not globally unique: {duplicate_editorial_ids}")
+    global_baseline_collisions = sorted(set(all_editorial_ids) & all_baseline_identities)
+    if global_baseline_collisions:
+        errors.append(
+            f"collections: editorial ids collide with legacy baseline identities: {global_baseline_collisions}"
+        )
+    permalink_values = [value for value, _ in all_permalinks]
+    if len(permalink_values) != len(set(permalink_values)):
+        duplicates = sorted(value for value, count in Counter(permalink_values).items() if count > 1)
+        errors.append(f"collections: permalinks are not unique: {duplicates}")
+
+    news = owner_records(records.get("news", []), LEGACY_OWNER)
+    if len(news) != EXPECTED["news"]:
+        errors.append(f"legacy news: expected {EXPECTED['news']}, found {len(news)}")
     legacy_ids = [str(data.get("legacy_id")) for _, data, _ in news]
     expected_ids = {"80", "79", "12", "11", "10", "9", "8", "7", "6", "5", "4", "2", "1", "3"}
     if set(legacy_ids) != expected_ids or len(legacy_ids) != len(set(legacy_ids)):
@@ -365,13 +589,31 @@ def collection_semantic_errors(records):
     if len(news_permalinks) != len(set(news_permalinks)):
         errors.append("news: permalinks are not unique")
 
-    people = records.get("people", [])
+    all_people = records.get("people", [])
+    people = owner_records(all_people, LEGACY_OWNER)
+    if len(people) != EXPECTED["people"]:
+        errors.append(f"legacy people: expected {EXPECTED['people']}, found {len(people)}")
     people_sections = Counter(data.get("category") for _, data, _ in people)
     if dict(people_sections) != EXPECTED_PEOPLE_SECTIONS:
         errors.append(f"people: section counts expected {EXPECTED_PEOPLE_SECTIONS}, found {dict(people_sections)}")
     people_orders = [data.get("order") for _, data, _ in people]
     if sorted(people_orders) != list(range(1, 38)):
         errors.append("people: global order values must be exactly 1 through 37")
+    all_people_orders = [data.get("order") for _, data, _ in all_people if isinstance(data.get("order"), int)]
+    if len(all_people_orders) != len(set(all_people_orders)):
+        errors.append("people: order values must be unique across legacy and editorial records")
+    for path, data, _ in owner_records(all_people, EDITORIAL_OWNER):
+        if isinstance(data.get("order"), int) and data["order"] <= EXPECTED["people"]:
+            errors.append(
+                f"{path.relative_to(ROOT)}: editorial people order must be above the legacy range (greater than 37)"
+            )
+        homepage = data.get("homepage")
+        if homepage:
+            reason = unsafe_url_reason("href", str(homepage))
+            if reason or urlsplit(str(homepage)).scheme.lower() not in {"http", "https"}:
+                errors.append(
+                    f"{path.relative_to(ROOT)}: homepage must be a safe absolute HTTP(S) URL"
+                )
     jiaqi = [(path, data) for path, data, _ in people if data.get("title") == "Jiaqi Ge"]
     if len(jiaqi) != 2 or {data.get("category") for _, data in jiaqi} != {
         "industry-engagement-officers",
@@ -392,11 +634,29 @@ def collection_semantic_errors(records):
             errors.append(f"{path.relative_to(ROOT)}: biography body duplicates contact/homepage front matter")
         if re.search(r"<p[^>]*>\s*<(?:b|i)\b", body, re.I):
             errors.append(f"{path.relative_to(ROOT)}: biography body duplicates role/affiliation front matter")
+        homepage = data.get("homepage")
+        if homepage:
+            reason = unsafe_url_reason("href", str(homepage))
+            if reason or urlsplit(str(homepage)).scheme.lower() not in {"http", "https"}:
+                errors.append(
+                    f"{path.relative_to(ROOT)}: homepage must be a safe absolute HTTP(S) URL"
+                )
 
-    projects = records.get("projects", [])
+    all_projects = records.get("projects", [])
+    projects = owner_records(all_projects, LEGACY_OWNER)
+    if len(projects) != EXPECTED["projects"]:
+        errors.append(f"legacy projects: expected {EXPECTED['projects']}, found {len(projects)}")
     project_categories = Counter(data.get("category") for _, data, _ in projects)
     if dict(project_categories) != EXPECTED_PROJECT_CATEGORIES:
         errors.append(f"projects: category counts expected {EXPECTED_PROJECT_CATEGORIES}, found {dict(project_categories)}")
+    all_project_orders = [data.get("order") for _, data, _ in all_projects if isinstance(data.get("order"), int)]
+    if len(all_project_orders) != len(set(all_project_orders)):
+        errors.append("projects: order values must be unique across legacy and editorial records")
+    for path, data, _ in owner_records(all_projects, EDITORIAL_OWNER):
+        if isinstance(data.get("order"), int) and data["order"] <= EXPECTED["projects"]:
+            errors.append(
+                f"{path.relative_to(ROOT)}: editorial project order must be above the legacy range (greater than 8)"
+            )
     project_permalinks = []
     used_project_slugs = set()
     for path, data, _ in sorted(projects, key=lambda record: record[1].get("order", 0)):
@@ -416,7 +676,7 @@ def collection_semantic_errors(records):
 
 
 def source_scan_errors():
-    errors = []
+    errors = ui_asset_errors()
     suffixes = {".html", ".md", ".css", ".scss", ".yml", ".yaml", ".json", ".py"}
     candidates = []
     for rel in FRONTEND_DIRS:
@@ -442,7 +702,7 @@ def source_scan_errors():
     return errors
 
 
-def candidate_targets(site: Path, page: Path, value: str):
+def candidate_targets(site: Path, page: Path, value: str, baseurl: str | None = None):
     split = urlsplit(value)
     if split.scheme or split.netloc or value.startswith(("mailto:", "tel:", "data:")):
         return []
@@ -451,8 +711,12 @@ def candidate_targets(site: Path, page: Path, value: str):
         return []
     if raw.startswith("/"):
         relative = raw.lstrip("/")
-        if relative == "website-itseg" or relative.startswith("website-itseg/"):
-            relative = relative.removeprefix("website-itseg").lstrip("/")
+        active_baseurl = configured_baseurl() if baseurl is None else baseurl
+        baseurl_relative = active_baseurl.strip("/")
+        if baseurl_relative and (
+            relative == baseurl_relative or relative.startswith(baseurl_relative + "/")
+        ):
+            relative = relative[len(baseurl_relative):].lstrip("/")
         target = site / relative
     else:
         target = page.parent / raw
@@ -462,7 +726,7 @@ def candidate_targets(site: Path, page: Path, value: str):
     return options
 
 
-def generated_errors(site: Path, collection_records):
+def generated_errors(site: Path, collection_records, config_path: Path | None = None):
     errors = []
     if not site.is_dir():
         return [f"generated site directory does not exist: {site}"]
@@ -485,11 +749,15 @@ def generated_errors(site: Path, collection_records):
     if not html_paths:
         errors.append("generated site contains no HTML")
         return errors
+    baseurl = configured_baseurl(config_path)
+    environment = configured_value("environment", config_path)
     for path in html_paths:
         text = path.read_text(encoding="utf-8", errors="replace")
         rel = path.relative_to(site)
         parser = DocumentParser()
         parser.feed(text)
+        parser.close()
+        errors.extend(f"{rel}: {error}" for error in parser.errors)
         if not parser.title:
             errors.append(f"{rel}: missing title element")
         if parser.tags.count("main") != 1:
@@ -506,6 +774,14 @@ def generated_errors(site: Path, collection_records):
             errors.append(f"{rel}: missing theme-color meta")
         if not any(m.get("property", "").lower() == "og:title" for m in parser.meta):
             errors.append(f"{rel}: missing Open Graph title")
+        robots = [m for m in parser.meta if m.get("name", "").lower() == "robots"]
+        if environment == "production" and robots:
+            errors.append(f"{rel}: production page must omit robots noindex metadata")
+        if environment != "production" and not any(
+            m.get("content", "").replace(" ", "").lower() == "noindex,nofollow"
+            for m in robots
+        ):
+            errors.append(f"{rel}: staging page is missing robots noindex,nofollow metadata")
         if not re.search(r'<link\s+[^>]*rel=["\']canonical["\']', text, re.I):
             errors.append(f"{rel}: missing canonical link")
         if re.search(r"\bTACPS\b|tacps\.org", text, re.I):
@@ -533,14 +809,14 @@ def generated_errors(site: Path, collection_records):
             if value.startswith("{{"):
                 errors.append(f"{rel}: unrendered Liquid link {value}")
                 continue
-            targets = candidate_targets(site, path, value)
+            targets = candidate_targets(site, path, value, baseurl)
             if targets and not any(t.exists() for t in targets):
                 errors.append(f"{rel}: broken internal {attr} {value}")
     return errors
 
 
-def managed_output_errors(manifest):
-    """Require every managed root to contain exactly its manifested direct files."""
+def managed_output_errors(manifest, records=None):
+    """Keep legacy assets exact while allowing valid editorial collection files."""
     errors = []
     expected_by_directory = {relative: [] for relative in MANAGED_OUTPUT_DIRS}
     collections = manifest.get("collections", {}) if isinstance(manifest, dict) else {}
@@ -568,6 +844,7 @@ def managed_output_errors(manifest):
             continue
         expected_by_directory[path.parent].append(path.name)
 
+    collection_kind_by_path = {relative: kind for kind, relative in MANAGED_COLLECTION_DIRS.items()}
     for relative in sorted(MANAGED_OUTPUT_DIRS, key=str):
         expected_names = expected_by_directory[relative]
         if len(expected_names) != len(set(expected_names)):
@@ -580,10 +857,27 @@ def managed_output_errors(manifest):
                 errors.append(f"{entry.relative_to(ROOT)}: managed output is a symlink")
             elif not entry.is_file():
                 errors.append(f"{entry.relative_to(ROOT)}: unexpected non-file entry in managed directory")
-        if sorted(actual_names) != sorted(expected_names):
-            missing = sorted(set(expected_names) - set(actual_names))
-            extra = sorted(set(actual_names) - set(expected_names))
-            errors.append(f"{relative}: managed files differ from exact manifest set; missing={missing}, extra={extra}")
+        if relative in MANAGED_ASSET_DIRS:
+            if sorted(actual_names) != sorted(expected_names):
+                missing = sorted(set(expected_names) - set(actual_names))
+                extra = sorted(set(actual_names) - set(expected_names))
+                errors.append(f"{relative}: managed files differ from exact manifest set; missing={missing}, extra={extra}")
+            continue
+
+        kind = collection_kind_by_path[relative]
+        non_markdown = sorted(name for name in actual_names if Path(name).suffix != ".md")
+        if non_markdown:
+            errors.append(f"{relative}: unexpected non-Markdown files in collection: {non_markdown}")
+        found = records.get(kind, []) if isinstance(records, dict) else []
+        actual_legacy_names = sorted(
+            path.name for path, data, _ in found if data.get("managed_by") == LEGACY_OWNER
+        )
+        if actual_legacy_names != sorted(expected_names):
+            missing = sorted(set(expected_names) - set(actual_legacy_names))
+            extra = sorted(set(actual_legacy_names) - set(expected_names))
+            errors.append(
+                f"{relative}: legacy-import files differ from exact manifest set; missing={missing}, extra={extra}"
+            )
     return errors
 
 
@@ -597,12 +891,15 @@ def manifest_errors(records, manifest=None):
             return [f"docs/content-manifest.yml: must be JSON-compatible YAML ({exc})"]
     else:
         data = manifest
-    errors.extend(managed_output_errors(data))
+    errors.extend(managed_output_errors(data, records))
     counts = data.get("counts", {}) if isinstance(data, dict) else {}
     for key, expected in EXPECTED.items():
         if counts.get(key) != expected:
             errors.append(f"manifest count {key!r}: expected {expected}, found {counts.get(key)!r}")
-    people_sources = sum(int(data.get("source_records", 1)) for _, data, _ in records.get("people", []))
+    people_sources = sum(
+        int(data.get("source_records", 1))
+        for _, data, _ in owner_records(records.get("people", []), LEGACY_OWNER)
+    )
     if people_sources != EXPECTED["people_source_records"]:
         errors.append(f"people source record sum: expected 37, found {people_sources}")
     if counts.get("assets") != 61:
@@ -726,7 +1023,7 @@ def expected_url_map_rows(records, assets):
     """Build URL-map rows from canonical current records, never manifest order."""
     rows = list(PLANNED_URL_MAP_ROWS)
     for _, record, _ in sorted(
-        records.get("news", []),
+        owner_records(records.get("news", []), LEGACY_OWNER),
         key=lambda item: (
             item[1].get("source_order")
             if isinstance(item[1].get("source_order"), int)
@@ -847,7 +1144,7 @@ def source_fidelity_errors(records, publications):
     def compare_collection(kind, expected):
         actual = {
             path.name: (str(data.get("title", "")), body.strip())
-            for path, data, body in records.get(kind, [])
+            for path, data, body in owner_records(records.get(kind, []), LEGACY_OWNER)
         }
         if set(actual) != set(expected):
             errors.append(
@@ -861,7 +1158,10 @@ def source_fidelity_errors(records, publications):
                 errors.append(f"source fidelity {kind}: body mismatch in {filename}")
 
     def compare_metadata(kind, expected):
-        actual = {path.name: data for path, data, _ in records.get(kind, [])}
+        actual = {
+            path.name: data
+            for path, data, _ in owner_records(records.get(kind, []), LEGACY_OWNER)
+        }
         if actual != expected:
             errors.append(f"source fidelity {kind}: front matter differs from regenerated source expectations")
 
@@ -887,6 +1187,7 @@ def source_fidelity_errors(records, publications):
         ]
         news_expected[filename] = (title, body)
         news_metadata_expected[filename] = {
+            "managed_by": LEGACY_OWNER,
             "title": title,
             "date": record["a_date"].strip(),
             "legacy_id": legacy_id,
@@ -946,6 +1247,7 @@ def source_fidelity_errors(records, publications):
             or (title == "Jiaqi Ge" and occurrence == 1)
         ) else "legacy-published-public-page"
         people_metadata_expected[filename] = {
+            "managed_by": LEGACY_OWNER,
             "title": title,
             "role": metadata["role"],
             "category": section,
@@ -989,6 +1291,7 @@ def source_fidelity_errors(records, publications):
             filename = f"{project_order:02d}-{slug}.md"
             project_expected[filename] = (title, body)
             project_metadata_expected[filename] = {
+                "managed_by": LEGACY_OWNER,
                 "title": title,
                 "category": category,
                 "section": heading_text,
@@ -1017,6 +1320,7 @@ def source_fidelity_errors(records, publications):
         duplicate = title == "SolGuard: Preventing external call issues in smart contract-based multi-agent robotic systems"
         publication_expected.append(
             {
+                "managed_by": LEGACY_OWNER,
                 "id": f"publication-{index:03d}",
                 "title": title,
                 "authors": element.select_one(".authors").get_text(" ", strip=True),
@@ -1028,7 +1332,12 @@ def source_fidelity_errors(records, publications):
                 "review_status": "duplicate-preserved" if duplicate else "legacy-published-public-page",
             }
         )
-    if publications != publication_expected:
+    legacy_publications = [
+        publication
+        for publication in publications
+        if isinstance(publication, dict) and publication.get("managed_by") == LEGACY_OWNER
+    ]
+    if legacy_publications != publication_expected:
         errors.append("source fidelity publications: regenerated records differ from the 116 source rows")
 
     try:
@@ -1095,6 +1404,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--site", type=Path, help="also validate a generated _site directory")
     parser.add_argument(
+        "--config",
+        type=Path,
+        help="Jekyll config used for generated-site baseurl/environment checks",
+    )
+    parser.add_argument(
         "--check-source-fidelity",
         action="store_true",
         help="compare generated titles and bodies with the safe public /tmp inputs (requires BeautifulSoup)",
@@ -1131,7 +1445,8 @@ def main():
         migration_errors.extend(source_fidelity_errors(records, publications))
     global_errors = source_scan_errors()
     if args.site:
-        global_errors.extend(generated_errors(args.site.resolve(), records))
+        config_path = args.config.resolve() if args.config else None
+        global_errors.extend(generated_errors(args.site.resolve(), records, config_path))
     if migration_errors:
         print(f"FAIL: {len(migration_errors)} legacy public migration error(s)")
         for error in migration_errors:
@@ -1140,10 +1455,24 @@ def main():
     print("PASS: legacy public migration checks")
     if args.check_source_fidelity:
         print(" - authoritative full source-fidelity check: passed")
-    print(f" - news: {len(records['news'])}")
-    print(f" - people: {len(records['people'])} entries / {sum(int(d.get('source_records', 1)) for _, d, _ in records['people'])} source records")
-    print(f" - projects: {len(records['projects'])}")
-    print(f" - publications: {len(publications)}")
+    for kind in ["news", "people", "projects"]:
+        legacy_count = len(owner_records(records[kind], LEGACY_OWNER))
+        editorial_count = len(owner_records(records[kind], EDITORIAL_OWNER))
+        print(f" - {kind}: {legacy_count} legacy baseline / {editorial_count} editorial")
+    legacy_publication_count = sum(
+        publication.get("managed_by") == LEGACY_OWNER
+        for publication in publications
+        if isinstance(publication, dict)
+    )
+    editorial_publication_count = sum(
+        publication.get("managed_by") == EDITORIAL_OWNER
+        for publication in publications
+        if isinstance(publication, dict)
+    )
+    print(
+        f" - publications: {legacy_publication_count} legacy baseline / "
+        f"{editorial_publication_count} editorial"
+    )
     if args.site:
         print(f" - generated HTML pages: {len(list(args.site.resolve().rglob('*.html')))}")
     if global_errors:

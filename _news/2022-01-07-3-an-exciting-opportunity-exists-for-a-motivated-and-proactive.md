@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "An exciting opportunity exists for a motivated and proactive Postdoctoral Fellow to join our group:"
 date: "2022-01-07 09:06:08"
 legacy_id: "3"

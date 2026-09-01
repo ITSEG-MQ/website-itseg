@@ -4,19 +4,19 @@
 %}
 <section
   class="publication-section section container"
-  aria-labelledby="{{ include.id }}"
+  aria-labelledby="{{ include.id | escape }}"
 >
   <div class="section-heading">
-    <h2 id="{{ include.id }}">{{ include.heading }}</h2>
+    <h2 id="{{ include.id | escape }}">{{ include.heading | escape }}</h2>
     <span>{{ records.size }} records</span>
   </div>
   <ol class="publication-list">
     {% for publication in records %}
-      <li id="{{ publication.id }}">
+      <li id="{{ publication.id | escape }}">
         <article>
-          <h3>{{ publication.title }}</h3>
-          <p class="publication-authors">{{ publication.authors }}</p>
-          <p>{{ publication.publisher }}</p>
+          <h3>{{ publication.title | escape }}</h3>
+          <p class="publication-authors">{{ publication.authors | escape }}</p>
+          <p>{{ publication.publisher | escape }}</p>
         </article>
       </li>
     {% endfor %}

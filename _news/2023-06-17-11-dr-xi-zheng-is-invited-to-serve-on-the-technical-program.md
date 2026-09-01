@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Dr Xi Zheng is invited to serve on the technical program committee of IEEE PerCom 2024"
 date: "2023-06-17 04:15:54"
 legacy_id: "11"

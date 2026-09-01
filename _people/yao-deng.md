@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Yao Deng"
 role: "Ph.D."
 category: "industry-engagement-officers"

@@ -11,11 +11,15 @@ permalink: /publications/
   <p class="lead">Explore ITSEG research outputs spanning intelligent systems, software engineering, cyber-physical systems, and connected technologies.</p>
 </header>
 
+{% assign career_best_publications = site.data.publications | where: 'category', 'Ten Career-Best Research Outputs' %}
+{% assign book_chapter_publications = site.data.publications | where: 'category', 'Book Chapters' %}
+{% assign conference_publications = site.data.publications | where: 'category', 'Fully Referred Conference Proceedings' %}
+{% assign journal_publications = site.data.publications | where: 'category', 'Refereed Journal Articles' %}
 <nav class="section-nav container" aria-label="Publication categories">
-  <a href="#career-best">Career-best outputs (9)</a>
-  <a href="#book-chapters">Book chapters (1)</a>
-  <a href="#conferences">Conference proceedings (38)</a>
-  <a href="#journals">Journal articles (68)</a>
+  <a href="#career-best">Career-best outputs ({{ career_best_publications | size }})</a>
+  <a href="#book-chapters">Book chapters ({{ book_chapter_publications | size }})</a>
+  <a href="#conferences">Conference proceedings ({{ conference_publications | size }})</a>
+  <a href="#journals">Journal articles ({{ journal_publications | size }})</a>
 </nav>
 
 {% include publication-list.html

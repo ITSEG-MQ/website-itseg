@@ -32,7 +32,7 @@ python3 -m venv /tmp/itseg-migrate-venv
 /tmp/itseg-migrate-venv/bin/python scripts/validate_site.py --check-source-fidelity
 ```
 
-The final command is the authoritative full source-fidelity check. A normal `python3 scripts/validate_site.py` remains usable in CI without the `/tmp` source snapshot and prints the full command needed for source-fidelity verification. The importer reads only the safe public inputs listed in `content-manifest.yml`. Collection and migrated-asset output directories are managed roots: the importer refuses symlinked or out-of-repository roots, never follows output symlinks, and removes direct stale files or symlinks that are outside the exact current generated set without recursing below those roots.
+The final command is the authoritative full source-fidelity check. A normal `python3 scripts/validate_site.py` remains usable in CI without the `/tmp` source snapshot and prints the full command needed for source-fidelity verification. The importer reads only the safe public inputs listed in `content-manifest.yml`. Collection and migrated-asset output directories are managed roots: the importer refuses symlinked or out-of-repository roots and never follows output symlinks. On reruns it replaces the immutable `legacy-import` baseline and deletes only stale paths recorded in the previous legacy manifest. Files marked `managed_by: "editorial"` and editorial publication rows are preserved.
 
 ## Global site completion
 

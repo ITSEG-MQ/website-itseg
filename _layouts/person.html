@@ -4,32 +4,34 @@ layout: default
 <article class="detail-page">
   <div class="container profile-layout">
     <div>
-      <img class="profile-image" src="{{ page.image | relative_url }}" alt="Portrait of {{ page.title }}" width="480" height="560" loading="lazy">
+      <img class="profile-image" src="{{ page.image | relative_url | escape }}" alt="Portrait of {{ page.title | escape }}" width="480" height="560" loading="lazy">
     </div>
     <div>
-      <p class="eyebrow"><a href="{{ '/people/' | relative_url }}">People</a> · {{ page.section }}</p>
-      <h1>{{ page.title }}</h1>
-      <p class="lead">{{ page.role }}</p>
-      {% if page.affiliation %}
-        <p>{{ page.affiliation }}</p>
+      <p class="eyebrow"><a href="{{ '/people/' | relative_url | escape }}">People</a> · {{ page.section | escape }}</p>
+      <h1>{{ page.title | escape }}</h1>
+      <p class="lead">{{ page.role | escape }}</p>
+      {% if page.affiliation and page.affiliation != empty %}
+        <p>{{ page.affiliation | escape }}</p>
       {% endif %}
-      <ul class="contact-list">
-        {% if page.email %}
-          <li><a href="mailto:{{ page.email }}">{{ page.email }}</a></li>
-        {% endif %}
-        {% if page.phone %}
-          <li><a href="tel:{{ page.phone | remove: ' ' }}">{{ page.phone }}</a></li>
-        {% endif %}
-        {% if page.homepage %}
-          <li><a href="{{ page.homepage }}">Research profile or homepage</a></li>
-        {% endif %}
-      </ul>
+      {% if page.email != empty or page.phone != empty or page.homepage != empty %}
+        <ul class="contact-list">
+          {% if page.email and page.email != empty %}
+            <li><a href="mailto:{{ page.email | escape }}">{{ page.email | escape }}</a></li>
+          {% endif %}
+          {% if page.phone and page.phone != empty %}
+            <li><a href="tel:{{ page.phone | remove: ' ' | escape }}">{{ page.phone | escape }}</a></li>
+          {% endif %}
+          {% if page.homepage and page.homepage != empty %}
+            <li><a href="{{ page.homepage | escape }}">Research profile or homepage</a></li>
+          {% endif %}
+        </ul>
+      {% endif %}
     </div>
   </div>
   <div class="container narrow prose biography">
     {{ content }}
   </div>
   <nav class="container narrow back-link" aria-label="People return">
-    <a href="{{ '/people/' | relative_url }}">← All people</a>
+    <a href="{{ '/people/' | relative_url | escape }}">← All people</a>
   </nav>
 </article>

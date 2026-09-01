@@ -7,15 +7,19 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: production-release
+  cancel-in-progress: false
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
 
@@ -34,7 +38,7 @@ jobs:
           echo "Using _config_prod.yml as _config.yml for this build"
 
       - name: Build with Jekyll (Pages deps)
-        uses: actions/jekyll-build-pages@v1
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
         with:
           source: ./
           destination: ./_site
@@ -51,12 +55,12 @@ jobs:
           cd ..
 
       - name: Create/Update single 'prod' release and upload site.zip
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           tag_name: prod
           name: Production Build
           draft: false
           prerelease: false
           make_latest: true
-          replace_assets: true
+          overwrite_files: true
           files: site.zip

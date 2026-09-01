@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="{{ site.lang | default: 'en-AU' }}">
+<html lang="{{ site.lang | default: 'en-AU' | escape }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,19 +10,22 @@
     <meta name="description" content="{{ meta_description | escape }}">
     <meta name="theme-color" content="#a80f0a">
     <meta name="color-scheme" content="light">
-    <link rel="canonical" href="{{ canonical_url }}">
-    <link rel="icon" href="{{ '/assets/pic/brand/logo.png' | relative_url }}" type="image/png">
+    <link rel="canonical" href="{{ canonical_url | escape }}">
+    <link rel="icon" href="{{ '/assets/ui/itseg-logo.webp' | relative_url }}" type="image/webp">
     <meta property="og:site_name" content="{{ site.short_title | default: site.title | escape }}">
     <meta property="og:title" content="{% if page.title and page.title != 'Home' %}{{ page.title | escape }} · {% endif %}{{ site.short_title | default: site.title | escape }}">
     <meta property="og:description" content="{{ meta_description | escape }}">
     <meta property="og:type" content="{% if page.layout == 'news' %}article{% else %}website{% endif %}">
-    <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:image" content="{{ '/assets/pic/brand/logo-large.png' | absolute_url }}">
+    <meta property="og:url" content="{{ canonical_url | escape }}">
+    <meta property="og:image" content="{{ '/assets/pic/brand/logo-large.png' | absolute_url | escape }}">
     <meta property="og:image:alt" content="ITSEG lighthouse logo and Intelligent Systems Engineering Group wordmark">
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url }}">
+    {% if site.environment != 'production' %}
+      <meta name="robots" content="noindex,nofollow">
+    {% endif %}
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | escape }}">
+    <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url | escape }}">
   </head>
-  <body class="page-{{ page.nav | default: 'detail' }}">
+  <body class="page-{{ page.nav | default: 'detail' | escape }}">
     <a class="skip-link" href="#main-content">Skip to main content</a>
     {% include header.html %}
     <main id="main-content" tabindex="-1">

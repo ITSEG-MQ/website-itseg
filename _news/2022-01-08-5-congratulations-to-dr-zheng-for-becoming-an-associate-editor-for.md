@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Congratulations to Dr. Zheng for becoming an associate editor for ACM  DLT:"
 date: "2022-01-08 01:46:49"
 legacy_id: "5"

@@ -45,19 +45,19 @@ main:focus { outline: none; }
 .prose a, .card-body a, .publication-list a, .site-footer a { overflow-wrap: anywhere; }
 .skip-link { position: fixed; z-index: 100; top: 0.5rem; left: 0.5rem; transform: translateY(-160%); padding: 0.75rem 1rem; background: var(--paper); color: var(--ink); font-weight: 700; }
 .skip-link:focus { transform: translateY(0); }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
 .site-header { border-top: 0.35rem solid var(--red); border-bottom: 1px solid var(--line); background: var(--paper); }
 .header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.65rem 1.25rem; padding-block: 0.8rem; }
 .brand { display: inline-flex; min-height: 44px; max-width: 100%; align-items: center; gap: 0.7rem; color: var(--ink); text-decoration: none; }
-.site-logo { width: 3.25rem; height: 3.25rem; flex: 0 0 auto; object-fit: contain; }
-.wordmark { display: grid; line-height: 1.1; }
-.wordmark strong { color: var(--red); font-size: 1.25rem; letter-spacing: 0.13em; }
-.wordmark small { max-width: 17rem; color: var(--ink); font-size: 0.69rem; letter-spacing: 0.025em; }
+.site-logo { width: 3.5rem; height: 3.5rem; flex: 0 0 auto; object-fit: contain; }
+.wordmark { display: grid; line-height: 1.15; }
+.wordmark strong { color: var(--red); font-size: 1.3rem; letter-spacing: 0.13em; }
+.wordmark small { max-width: 18rem; color: var(--ink); font-size: 0.75rem; letter-spacing: 0.025em; }
 .site-nav { flex: 1 1 100%; }
 .site-nav ul { display: flex; flex-wrap: wrap; gap: 0.2rem; margin: 0; padding: 0; list-style: none; }
 .site-nav a { display: inline-flex; min-height: 44px; align-items: center; padding: 0.55rem 0.7rem; border-bottom: 3px solid transparent; color: var(--ink); font-size: 0.94rem; font-weight: 700; text-decoration: none; }
 .site-nav a:hover, .site-nav a[aria-current="page"] { border-color: var(--red); color: var(--red-dark); }
 .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--cream); }
-.hero::before { position: absolute; inset: 0 0 auto auto; width: 35vw; height: 0.45rem; background: var(--red); content: ""; }
 .hero-grid { display: grid; gap: 2.5rem; align-items: center; min-height: min(42rem, 78vh); padding-block: clamp(4rem, 10vw, 8rem); }
 .hero-copy { max-width: 42rem; color: var(--ink-soft); font-size: clamp(1.1rem, 2.5vw, 1.45rem); }
 .hero-mark { display: grid; gap: 0.55rem; align-content: center; padding-left: 1.5rem; border-left: 0.45rem solid var(--red); color: var(--ink-soft); font-size: clamp(1.1rem, 3vw, 1.75rem); font-weight: 700; letter-spacing: 0.04em; }
@@ -76,6 +76,7 @@ main:focus { outline: none; }
 .card-media { display: block; background: #e8e1d5; }
 .card-media img { width: 100%; object-fit: cover; }
 .news-card .card-media img { aspect-ratio: 16 / 9; }
+.news-card .card-media .news-card-logo { padding: 1.25rem; background: var(--cream); object-fit: contain; }
 .project-card .card-media img { aspect-ratio: 8 / 5; }
 .person-card .card-media img { aspect-ratio: 6 / 7; object-position: center 20%; }
 .card-body { padding: 1.25rem; }

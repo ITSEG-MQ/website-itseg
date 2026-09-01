@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Dr Sheng Wen"
 role: "Program Leader: System Security and Social Media Analysis"
 category: "program-leaders"

@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "\"Advancing Robust Autonomy in Cyber-Physical Systems\", CI, ARC Future Fellow grant FT240100269. Awarded $960,412. (2024)"
 category: "grants"
 section: "Australia National Competitive Grants"

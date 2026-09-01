@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Yong Li"
 role: "Ph.D. Candidate"
 category: "alumni-and-visit-scholars"

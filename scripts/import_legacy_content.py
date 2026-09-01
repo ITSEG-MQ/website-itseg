@@ -80,6 +80,8 @@ MANAGED_ASSET_DESTINATION_DIRS = {
     Path("assets/documents"),
 }
 MANAGED_OUTPUT_DIRS = MANAGED_COLLECTION_DIRS | MANAGED_ASSET_DESTINATION_DIRS
+LEGACY_OWNER = "legacy-import"
+EDITORIAL_OWNER = "editorial"
 
 SECTIONS = {
     "director": "Director",
@@ -181,35 +183,75 @@ def prepare_managed_roots() -> None:
         raise SystemExit("Refusing to operate on unsafe managed output roots: " + "; ".join(errors))
 
 
-def remove_existing_managed_symlinks() -> None:
-    """Prevent generated writes from ever following an existing output symlink."""
-    for relative in sorted(MANAGED_OUTPUT_DIRS, key=str):
-        directory = ROOT / relative
-        for entry in directory.iterdir():
-            if entry.is_symlink():
-                entry.unlink()
+def load_previous_manifest() -> dict:
+    """Load the immutable legacy baseline before regenerating it."""
+    path = ROOT / "docs/content-manifest.yml"
+    if not path.exists():
+        return {}
+    try:
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"{path}: cannot read previous legacy manifest ({exc})") from exc
+    if not isinstance(manifest, dict):
+        raise SystemExit(f"{path}: previous legacy manifest must be an object")
+    return manifest
 
 
-def remove_unexpected_managed_files(current: set[str]) -> None:
-    """Unlink direct stale files/symlinks only; never recurse below a managed root."""
+def manifested_legacy_paths(manifest: dict) -> set[str]:
+    """Return safe direct output paths owned by a legacy baseline manifest."""
+    paths: set[str] = set()
+    collections = manifest.get("collections", {}) if isinstance(manifest, dict) else {}
+    for kind in ("news", "people", "projects"):
+        relative = Path(f"_{kind}")
+        entries = collections.get(kind, []) if isinstance(collections, dict) else []
+        for record in entries if isinstance(entries, list) else []:
+            value = record.get("file") if isinstance(record, dict) else None
+            path = Path(value) if isinstance(value, str) else None
+            if path is None or path.is_absolute() or ".." in path.parts or path.parent != relative:
+                raise SystemExit(f"manifest {kind} collection has unsafe managed path: {value!r}")
+            paths.add(str(path))
+    assets = manifest.get("assets", []) if isinstance(manifest, dict) else []
+    for record in assets if isinstance(assets, list) else []:
+        value = record.get("destination") if isinstance(record, dict) else None
+        path = Path(value.lstrip("/")) if isinstance(value, str) else None
+        if (
+            path is None
+            or path.is_absolute()
+            or ".." in path.parts
+            or path.parent not in MANAGED_ASSET_DESTINATION_DIRS
+        ):
+            raise SystemExit(f"manifest asset has unsafe managed path: {value!r}")
+        paths.add(str(path))
+    return paths
+
+
+def remove_stale_legacy_outputs(previous: set[str], current: set[str]) -> None:
+    """Unlink only stale files recorded in the previous legacy manifest."""
     errors = managed_root_errors()
     if errors:
         raise SystemExit("Refusing to clean unsafe managed output roots: " + "; ".join(errors))
-    expected_by_directory = {
-        relative: {
-            Path(value).name
-            for value in current
-            if not Path(value).is_absolute() and Path(value).parent == relative
-        }
-        for relative in MANAGED_OUTPUT_DIRS
-    }
-    for relative in sorted(MANAGED_OUTPUT_DIRS, key=str):
-        directory = ROOT / relative
-        for entry in directory.iterdir():
-            if entry.name in expected_by_directory[relative]:
-                continue
-            if entry.is_symlink() or entry.is_file():
-                entry.unlink()
+    for value in sorted(previous - current):
+        path = Path(value)
+        if path.is_absolute() or ".." in path.parts or path.parent not in MANAGED_OUTPUT_DIRS:
+            raise SystemExit(f"Refusing to clean unsafe manifested output path: {value!r}")
+        destination = ROOT / path
+        if path.parent in MANAGED_COLLECTION_DIRS and destination.is_file() and not destination.is_symlink():
+            text = destination.read_text(encoding="utf-8", errors="replace")
+            if text.startswith("---\n"):
+                raw = text[4:].split("\n---\n", 1)[0]
+                owner_line = next(
+                    (line for line in raw.splitlines() if line.startswith("managed_by:")),
+                    "",
+                )
+                if owner_line:
+                    try:
+                        owner = json.loads(owner_line.split(":", 1)[1].strip())
+                    except json.JSONDecodeError:
+                        owner = None
+                    if owner == EDITORIAL_OWNER:
+                        continue
+        if destination.is_symlink() or destination.is_file():
+            destination.unlink()
 
 
 def slugify(value: str, limit: int = SLUG_MAX_LENGTH) -> str:
@@ -253,6 +295,8 @@ def json_scalar(value) -> str:
 
 def write_markdown(path: Path, fields: dict, body: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    if path.is_symlink():
+        path.unlink()
     front_matter = "\n".join(f"{key}: {json_scalar(value)}" for key, value in fields.items())
     path.write_text(f"---\n{front_matter}\n---\n\n{body.strip()}\n", encoding="utf-8")
 
@@ -278,7 +322,8 @@ def sanitized_href(value: object) -> str | None:
         and parsed.path.lower() in {"publications.php", "/publications.php", "./publications.php"}
     )
     if internal_publications:
-        return "/publications/" + (f"#{parsed.fragment}" if parsed.fragment else "")
+        relative_url = "{{ '/publications/' | relative_url }}"
+        return relative_url + (f"#{parsed.fragment}" if parsed.fragment else "")
 
     if scheme in {"http", "https"}:
         return href if parsed.netloc else None
@@ -398,6 +443,7 @@ def import_news() -> list[dict]:
             remove_legacy_quote_only=True,
         )
         fields = {
+            "managed_by": LEGACY_OWNER,
             "title": title,
             "date": timestamp,
             "legacy_id": legacy_id,
@@ -503,6 +549,7 @@ def import_people() -> list[dict]:
             or (title == "Jiaqi Ge" and occurrence == 1)
         ) else "legacy-published-public-page"
         fields = {
+            "managed_by": LEGACY_OWNER,
             "title": title,
             "role": role,
             "category": section,
@@ -551,6 +598,7 @@ def import_projects() -> list[dict]:
             filename = f"{global_order:02d}-{slug}.md"
             permalink = f"/projects/{slug}/"
             fields = {
+                "managed_by": LEGACY_OWNER,
                 "title": title,
                 "category": category,
                 "section": heading_text,
@@ -570,6 +618,21 @@ def import_projects() -> list[dict]:
 
 
 def import_publications() -> list[dict]:
+    destination = ROOT / "_data/publications.yml"
+    editorial_records = []
+    if destination.exists():
+        try:
+            current_records = json.loads(destination.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise SystemExit(f"{destination}: refusing to overwrite unreadable publication data ({exc})") from exc
+        if not isinstance(current_records, list):
+            raise SystemExit(f"{destination}: refusing to overwrite publication data that is not a list")
+        editorial_records = [
+            record
+            for record in current_records
+            if isinstance(record, dict) and record.get("managed_by") == EDITORIAL_OWNER
+        ]
+
     soup = BeautifulSoup(PUBLIC_SOURCE_FILES["publications"].read_text(encoding="utf-8"), "html.parser")
     category = ""
     records = []
@@ -585,6 +648,7 @@ def import_publications() -> list[dict]:
         index = len(records) + 1
         duplicate = title == "SolGuard: Preventing external call issues in smart contract-based multi-agent robotic systems"
         record = {
+            "managed_by": LEGACY_OWNER,
             "id": f"publication-{index:03d}",
             "title": title,
             "authors": authors,
@@ -607,9 +671,13 @@ def import_publications() -> list[dict]:
         raise SystemExit(f"publications: expected 116 and {expected}, found {len(records)} and {dict(counts)}")
     if sum(1 for record in records if record["duplicate"]) != 2:
         raise SystemExit("publications: expected exactly two preserved SolGuard duplicate rows")
-    destination = ROOT / "_data/publications.yml"
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if destination.is_symlink():
+        destination.unlink()
+    destination.write_text(
+        json.dumps([*records, *editorial_records], ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     return records
 
 
@@ -655,6 +723,8 @@ def copy_assets() -> list[dict]:
         destination_dir.mkdir(parents=True, exist_ok=True)
         for source in sorted(path for path in source_dir.iterdir() if path.is_file()):
             destination = destination_dir / source.name
+            if destination.is_symlink():
+                destination.unlink()
             destination_bytes, optimization = rendered_asset(source)
             destination.write_bytes(destination_bytes)
             records.append(
@@ -750,11 +820,11 @@ python3 -m venv /tmp/itseg-migrate-venv
 /tmp/itseg-migrate-venv/bin/python scripts/validate_site.py --check-source-fidelity
 ```
 
-The final command is the authoritative full source-fidelity check. A normal `python3 scripts/validate_site.py` remains usable in CI without the `/tmp` source snapshot and prints the full command needed for source-fidelity verification. The importer reads only the safe public inputs listed in `content-manifest.yml`. Collection and migrated-asset output directories are managed roots: the importer refuses symlinked or out-of-repository roots, never follows output symlinks, and removes direct stale files or symlinks that are outside the exact current generated set without recursing below those roots.
+The final command is the authoritative full source-fidelity check. A normal `python3 scripts/validate_site.py` remains usable in CI without the `/tmp` source snapshot and prints the full command needed for source-fidelity verification. The importer reads only the safe public inputs listed in `content-manifest.yml`. Collection and migrated-asset output directories are managed roots: the importer refuses symlinked or out-of-repository roots and never follows output symlinks. On reruns it replaces the immutable `legacy-import` baseline and deletes only stale paths recorded in the previous legacy manifest. Files marked `managed_by: "editorial"` and editorial publication rows are preserved.
 
-## Scope boundary
+## Global site completion
 
-Collection index pages, layouts, includes, Jekyll configuration, navigation, contact content, and other global pages remain untouched. The URL map marks those index destinations as planned global work rather than claiming they are converted here.
+The ITSEG collection indexes, layouts, includes, Jekyll configuration, navigation, contact page, sitemap, robots policy, and other global pages were completed after the source-fidelity migration. The URL map now marks the five global legacy destinations as migrated. These global presentation files remain outside the authoritative legacy title/body comparison; collection records, structured publication data, review flags, and manifest-managed assets remain governed by the checks above.
 """,
         encoding="utf-8",
     )
@@ -835,7 +905,7 @@ def main() -> int:
         raise SystemExit("Refusing to operate on unsafe managed output roots: " + "; ".join(errors))
     require_inputs()
     prepare_managed_roots()
-    remove_existing_managed_symlinks()
+    previous = manifested_legacy_paths(load_previous_manifest())
     news = import_news()
     people = import_people()
     projects = import_projects()
@@ -843,7 +913,7 @@ def main() -> int:
     assets = copy_assets()
     current = {record["file"] for record in [*news, *people, *projects]}
     current.update(record["destination"].lstrip("/") for record in assets)
-    remove_unexpected_managed_files(current)
+    remove_stale_legacy_outputs(previous, current)
     write_url_map(news, assets)
     write_review()
     write_manifest(news, people, projects, publications, assets)

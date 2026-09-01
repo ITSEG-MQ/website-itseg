@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Dr Huai Liu"
 role: "Program Leader: Software Testing"
 category: "program-leaders"

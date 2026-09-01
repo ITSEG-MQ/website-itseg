@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "\"Context-aware verification and validation framework for autonomous driving\", CI, ARC Discovery Project grant DP210102447. Awarded $448,958. 2021-2024."
 category: "grants"
 section: "Australia National Competitive Grants"

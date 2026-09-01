@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "\"A safety-preserving ecosystem for autonomous driving\", Leader CI, ARC Linkage Project grant LP190100676. Awarded $341,853. 2021-2024."
 category: "grants"
 section: "Australia National Competitive Grants"

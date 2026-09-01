@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Dr Lei Pan"
 role: "Associate Director: Incubation Platform"
 category: "advisory-board"

@@ -1,4 +1,5 @@
 ---
+managed_by: "legacy-import"
 title: "Congratulations to Dr. Xi Zheng on being awarded the prestigious ARC Future Fellowship (2024)!"
 date: "2024-08-27 01:05:08"
 legacy_id: "79"
