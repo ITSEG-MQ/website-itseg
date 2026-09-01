@@ -1,0 +1,10 @@
+---
+layout: null
+---
+{% if site.environment == "production" %}
+User-agent: *
+Allow: /
+{% else %}
+User-agent: *
+Disallow: /
+{% endif %}

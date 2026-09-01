@@ -1,0 +1,8 @@
+
+title: "TACPS"
+url: "https://itseg-mq.github.io" # GH Pages root
+baseurl: "/website-tacps"                 # repo name
+environment: "staging"            # env name
+exclude:
+  - editor-handbook.md
+  - maintainer-handbook.md

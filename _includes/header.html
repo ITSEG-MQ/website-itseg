@@ -1,0 +1,49 @@
+<!-- _includes/header.html -->
+<div class="banner">
+  <div class="top-left">
+    <div class="title1">
+      International Workshop on Trustworthy Cyber-Physical Systems (TACPS)
+      <!-- <span class="year">2026</span> -->
+    </div>
+    <!-- <div class="title2">
+      In Conjunction with 
+      <a href="https://aaai.org/conference/aaai/aaai-26/" target="_blank">AAAI 26'</a>
+    </div> -->
+
+  </div>
+  <!-- <div class="bottom-right">
+    Jan. 20-27, 2026 <br> Singapore EXPO
+  </div> -->
+</div>
+
+<table class="navigation">
+  <tr>
+    <td class="navigation">
+      <a href="{{ '/' | relative_url }}" class="{% if page.nav == 'home' %}current{% endif %}">Home</a>
+    </td>
+    <!-- <td class="navigation">
+      <a href="{{ '/registration/' | relative_url }}" class="{% if page.nav == 'registration' %}current{% endif %}">Registration</a>
+    </td>
+    <td class="navigation">
+      <a href="{{ '/program/' | relative_url }}" class="{% if page.nav == 'program' %}current{% endif %}">Program</a>
+    </td>
+    <td class="navigation">
+      <a href="{{ '/venue/' | relative_url }}" class="{% if page.nav == 'venue' %}current{% endif %}">Venue</a>
+    </td> -->
+    <td class="navigation">
+      <a href="{{ '/committee/' | relative_url }}" class="{% if page.nav == 'committee' %}current{% endif %}">Steering Committee</a>
+    </td>
+    <td class="navigation dropdown">
+      <a href="{{ '/archive/' | relative_url }}" class="{% if page.nav == 'archive' %}current{% endif %}">Past Workshops</a>
+      <div class="dropdown-content">
+        <a href="{{ '/archive/2026-jan/' | relative_url }}">TACPS 2026 Jan</a>
+        <a href="{{ '/archive/2025-jul/' | relative_url }}">TACPS 2025 Jul</a>
+        <a href="{{ '/archive/2024-oct/' | relative_url }}">TACPS 2024 Oct</a>
+        <a href="{{ '/archive/2024-jan/' | relative_url }}">TACPS 2024 Jan</a>
+      </div>
+    <!-- </td>
+        <td class="navigation">
+      <a href="{{ '/shonan/' | relative_url }}" class="{% if page.nav == 'shonan' %}current{% endif %}">Shonan Seminar</a>
+    </td> -->
+  </tr>
+</table>

@@ -1,0 +1,181 @@
+---
+layout: default
+title: 2026 Jan Program
+nav: archive
+---
+
+<style>
+  /* 强制恢复有序列表数字（避免主题把 list-style 干掉） */
+  ol {
+    list-style-type: decimal !important;
+    margin-left: 1.5em;
+    padding-left: 1em;
+  }
+
+  /* 顶层日程用 ul 包裹（通常不想显示圆点），主题若显示圆点可用下面一行关掉 */
+  ul.program {
+    list-style: none !important;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  /* 子弹列表（Panelists / Roadmap / Plans）强制显示圆点 */
+  ul.bullets {
+    list-style-type: disc !important;
+    margin-left: 1.5em;
+    padding-left: 1em;
+  }
+
+  /* 让每个大段落稍微留白 */
+  li.session {
+    margin-bottom: 0.8rem;
+  }
+
+  /* 修复：移动端标题换行重叠（主题 line-height 太小/固定导致） */
+  h2, h3 {
+    line-height: 1.25;
+  }
+
+  /* 防止 iOS 自动放大字体导致 line-height 不匹配 */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* 小屏下把标题字号降一点，更稳 */
+  @media (max-width: 600px) {
+    h2 { font-size: 1.7rem; }
+    h3 { font-size: 1.2rem; }
+  }
+</style>
+
+<h2>Conference Program on January 21, 2026 - Room: Garnet 215</h2>
+<h3>Making Embodied AI Reliable with Testing and Formal Verification</h3>
+
+Here is a <em><a href="./Program Schedule - AAAI'26 B10(2).pdf" target="_blank">downloadable version</a></em> for your convenience.
+
+<ul class="program">
+  <li class="session"><b>08:30 – 08:45 | Opening Remarks</b></li>
+
+  <li class="session">
+    <b>08:45 – 09:30 | Invited Talk</b><br>
+    <b>Speaker:</b> Prof. Guy Van Den Broeck (UCLA)<br>
+    <b>Title:</b> <em><a href="./keynote.html" target="_blank">Symbolic Reasoning in the Age of Large Language Models</a></em>
+  </li>
+
+  <li class="session">
+    <b>09:30 – 10:30 | Technical Session 1 – Embodied AI, Reinforcement Learning, World Models &amp; Multi-Robot Safety (4 Papers)</b>
+    <p>Each paper: 10-minute presentation + 5-minute Q&amp;A</p>
+
+    <ol>
+      <li>
+        <b><a href="https://arxiv.org/abs/2601.02666" target="_blank">Inferring Causal Graph Temporal Logic Formulas to Expedite Reinforcement Learning in Temporally Extended Tasks</a></b><br>
+        <em>Hadi Partovi Aria and Zhe Xu</em>
+      </li>
+      <li>
+        <b><a href="./aaai26-bridge-reai_paper_9-2.pdf" target="_blank">Towards a Feedback-driven Adaptive Embodied Environment Generator for Training Robotic Agents</a></b><br>
+        <em>Teresa Yeo, Dulaj Weerakoon, Dulanga Weerakoon and Archan Misra</em>
+      </li>
+      <li>
+        <b><a href="https://arxiv.org/abs/2601.01705" target="_blank">Explicit World Models for Reliable Human-Robot Collaboration</a></b><br>
+        <em>Kenneth Kwok, Basura Fernando, Qianli Xu, Vigneshwaran Subbaraju, Dongkyu Choi and Boon Kiat Quek</em>
+      </li>
+      <li>
+        <b><a href="https://arxiv.org/abs/2601.06728" target="_blank">Robust Evacuation for Multi-Drone Failure in Drone Light Shows</a></b><br>
+        <em>Minhyuk Park, Aloysius K. Mok and Tsz-Chiu Au</em>
+      </li>
+    </ol>
+  </li>
+
+  <li class="session"><b>10:30 – 11:00 | Coffee Break</b></li>
+
+  <li class="session">
+    <b>11:00 – 12:15 | Technical Session 2 – Verification, Certification, Program Analysis &amp; LLM Safety (5 Papers)</b>
+    <p>Each paper: 10-minute presentation + 5-minute Q&amp;A</p>
+
+    <ol>
+      <li>
+        <b><a href="https://www.arxiv.org/abs/2601.09740" target="_blank">Formal Safety Guarantees for Autonomous Vehicles using Barrier Certificates</a></b><br>
+        <em>Oumaima Barhoumi, Mohamed H Zaki and Sofiène Tahar</em>
+      </li>
+      <li>
+        <b><a href="https://arxiv.org/abs/2601.08065" target="_blank">A New Strategy for Verifying Reach-Avoid Specifications in Neural Feedback Systems</a></b><br>
+        <em>Sam Akinwande, Sydney Katz, Mykel Kochenderfer and Clark Barrett</em>
+      </li>
+      <li>
+        <b><a href="https://arxiv.org/abs/2601.03470" target="_blank">Toward Maturity-Based Certification of Embodied AI: Quantifying Trustworthiness Through Measurement Mechanisms</a></b><br>
+        <em>Michael Darling, Alan Hesu, Michael Mardikes, Brian McGuigan and Reed Milewicz</em>
+      </li>
+      <li>
+        <b><a href="https://arxiv.org/abs/2601.00882" target="_blank">BALI: Branch-Aware Loop Invariant Inference with Large Language Models</a></b><br>
+        <em>Mingxiu Wang, Jiawei Wang and Xiao Cheng</em>
+      </li>
+      <li>
+        <b><a href="./aaai26-bridge-reai_paper_10.pdf" target="_blank">A Unified Framework for Jailbreak Attacks on Large Language Models</a></b><br>
+        <em>Xiaobing Sun and Liangli Zhen</em>
+      </li>
+    </ol>
+  </li>
+
+  <li class="session">
+    <b>12:15 – 12:45 | Poster Session</b><br>
+    <small>(All accepted papers may optionally bring posters.)</small>
+  </li>
+
+  <li class="session"><b>12:45 – 14:00 | Lunch Break</b></li>
+
+  <li class="session">
+    <b>14:00 – 14:45 | Panel Discussion</b>
+    <p><b>Moderator:</b> Xi Zheng</p>
+    <p><b>Theme:</b> <em>Certification Challenges for AI-Enabled Autonomy: What Can Neurosymbolic Methods Enable?</em></p>
+
+    <p><b>Panellists:</b></p>
+    <ul class="bullets">
+      <li>Guy Van Den Broeck (UCLA)</li>
+      <li>Dinesh Manocha (UMCP)</li>
+      <li>Taylor T. Johnson (Vanderbilt University)</li>
+    </ul>
+  </li>
+
+  <li class="session">
+    <b>14:45 – 15:30 | Breakout Discussions</b><br>
+    Participants split into three focused groups:
+
+    <ol>
+      <li><b>Scenario-Based Testing and LLM-Guided Specification Mining</b> (led by Xi Zheng)</li>
+      <li><b>Compositional Verification and Modular Reasoning for Embodied AI</b> (led by Guy Van Den Broeck)</li>
+      <li><b>Robustness Under Uncertainty, Sensing Noise, and Human–Robot Interaction</b> (led by Archan Misra)</li>
+    </ol>
+
+    <p>Each group produces <b>2–3</b> actionable recommendations for the roadmap.</p>
+  </li>
+
+  <li class="session"><b>15:30 – 16:00 | Coffee Break</b></li>
+
+  <li class="session">
+    <b>16:00 – 16:30 | Breakout Report-Back Session</b><br>
+    Each group presents their key insights and open research questions.
+  </li>
+
+  <li class="session">
+    <b>16:30 – 16:50 | Roadmap Consolidation Discussion</b><br>
+    Collective shaping of a community roadmap for reliable embodied AI, covering:
+    <ul class="bullets">
+      <li>Neurosymbolic architectures</li>
+      <li>Testing and scenario generation</li>
+      <li>Specification mining</li>
+      <li>Verification and certification</li>
+      <li>Robustness and uncertainty management</li>
+    </ul>
+  </li>
+
+  <li class="session">
+    <b>16:50 – 17:00 | Closing Remarks</b>
+    <p>Plans for:</p>
+    <ul class="bullets">
+      <li>Community follow-up</li>
+      <li>Special issues / joint whitepaper</li>
+      <li>Future AAAI Bridge events and co-located workshops</li>
+    </ul>
+  </li>
+</ul>
+

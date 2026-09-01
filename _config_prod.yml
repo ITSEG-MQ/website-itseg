@@ -1,0 +1,8 @@
+
+title: "TACPS"
+url: "https://tacps.org"
+baseurl: "" 
+environment: "production"
+exclude:
+  - editor-handbook.md
+  - maintainer-handbook.md
