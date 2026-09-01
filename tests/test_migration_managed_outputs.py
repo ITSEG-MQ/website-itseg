@@ -176,12 +176,34 @@ class EditorialPublicationTests(unittest.TestCase):
         (self.repository / "_data").mkdir()
         self.old_root = validator.ROOT
         self.old_importer_root = importer.ROOT
+        self.old_publications_source = importer.PUBLIC_SOURCE_FILES["publications"]
         validator.ROOT = self.repository
         importer.ROOT = self.repository
+
+        baseline = json.loads(
+            (PROJECT_ROOT / "_data/publications.yml").read_text(encoding="utf-8")
+        )
+        source = self.repository / "legacy-publications.html"
+        chunks = []
+        current_category = None
+        for publication in baseline:
+            if publication["category"] != current_category:
+                current_category = publication["category"]
+                chunks.append(f"<h2>{html.escape(current_category)}</h2>")
+            chunks.append(
+                '<div class="caption">'
+                f'<p class="title">{html.escape(publication["title"])}</p>'
+                f'<p class="authors">{html.escape(publication["authors"])}</p>'
+                f'<p class="publisher">{html.escape(publication["publisher"])}</p>'
+                "</div>"
+            )
+        source.write_text("\n".join(chunks), encoding="utf-8")
+        importer.PUBLIC_SOURCE_FILES["publications"] = source
 
     def tearDown(self):
         validator.ROOT = self.old_root
         importer.ROOT = self.old_importer_root
+        importer.PUBLIC_SOURCE_FILES["publications"] = self.old_publications_source
         self.temporary.cleanup()
 
     def write_publications(self, extra):
