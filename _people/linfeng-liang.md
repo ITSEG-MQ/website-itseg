@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "linfeng-liang"
 title: "Linfeng Liang"
 role: "Ph.D. Candidate"
 category: "current-researchers"

@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "mengshi-zhang"
 title: "Dr Mengshi Zhang"
 role: "Industry Project Supervisor: Automated Software Debugging and Machine Learning"
 category: "industry-supervisor"

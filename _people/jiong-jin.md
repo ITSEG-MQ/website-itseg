@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "jiong-jin"
 title: "A/Prof. Jiong Jin"
 role: "Program Leader: Robotic Internet of Things Systems"
 category: "program-leaders"

@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "jiaohong-yao"
 title: "Jiaohong Yao"
 role: "Ph.D. Candidate"
 category: "current-researchers"

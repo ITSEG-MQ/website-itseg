@@ -503,7 +503,13 @@ def person_section(title: str, occurrence: int) -> str:
     raise ValueError(f"Unmapped public profile: {title!r} occurrence {occurrence}")
 
 
-def import_people() -> list[dict]:
+def import_people(*, write_output: bool = True) -> list[dict]:
+    """Parse the immutable 37-record people baseline.
+
+    The live ``_people`` collection is editorially maintained. Normal importer
+    runs therefore set ``write_output=False`` and use these records only for
+    provenance, manifest, and source-fidelity accounting.
+    """
     raw = PUBLIC_SOURCE_FILES["people"].read_text(encoding="utf-8")
     soup = uncomment_public_profiles(raw)
     headings = soup.find_all("h6")
@@ -568,7 +574,8 @@ def import_people() -> list[dict]:
             "duplicate_key": "jiaqi-ge" if title == "Jiaqi Ge" else "",
         }
         body = clean_body(card, skip=is_profile_metadata)
-        write_markdown(ROOT / "_people" / filename, fields, body)
+        if write_output:
+            write_markdown(ROOT / "_people" / filename, fields, body)
         output.append({"file": f"_people/{filename}", **fields})
     actual = Counter(record["category"] for record in output)
     if dict(actual) != EXPECTED_SECTION_COUNTS:
@@ -795,7 +802,7 @@ This review covers only the supplied public article export, rendered/source publ
 - **Broken recruitment PDF:** legacy article 3 links to `Advertising-template-for-Post-Doctoral-Research-Fellow_Computing.pdf`, but that file is absent from the supplied public assets. The original URL is retained as a legacy referenced URL and no placeholder PDF was created.
 - **Missing light logo:** rendered news content references `img/logo/logo-light.png`, but `logo-light.png` is absent from the supplied assets. No substitute was invented.
 - **Cloudflare email path:** the rendered group page replaces public email addresses with `/cdn-cgi/l/email-protection`. Profiles were imported from the supplied public source page so the Cloudflare path and scripts were not migrated.
-- **Duplicate person:** Jiaqi Ge appears once as a commented current profile and once as a published alumni/visit-scholar profile. Both are preserved as separate Markdown records and flagged with `duplicate_person: true`.
+- **Duplicate person provenance:** the supplied legacy source contains separate current and alumni Jiaqi Ge records. Both remain preserved in the immutable provenance manifest; the live editorial roster may retain, merge, or remove entries as membership changes.
 - **Duplicate publication:** the two SolGuard citations are preserved as distinct source rows (`publication-060` and `publication-065`) and share the `solguard-external-call-issues` duplicate group.
 - **Ten-versus-nine heading:** the legacy heading says “Ten Career-Best Research Outputs”, but only nine records occur before “Book Chapters”. The heading and all nine records are preserved without fabricating a tenth.
 - **DNS-broken Auckland profile:** Dr Xuyun Zhang's legacy homepage points to `https://unidirectory.auckland.ac.nz/profile/xuyun-zhang/`. It is retained and flagged for manual replacement because the legacy host does not resolve reliably.
@@ -805,9 +812,9 @@ This review covers only the supplied public article export, rendered/source publ
 
 All 61 supplied public assets were copied into the new public asset structure. The three valid supplied PDFs are under `assets/documents`. JPEGs larger than 1 MB are orientation-corrected, resized to at most 2000 pixels on the longest edge, and re-encoded with the pinned Pillow version and fixed JPEG settings. Source and destination SHA-256 hashes and per-file handling are recorded in `content-manifest.yml`.
 
-## People sections and bodies
+## People provenance and live roster
 
-The public source labels are preserved exactly: the 16 current profiles use category `industry-engagement-officers` with display label “Industry Engagement Officers”, while the six former/visiting profiles retain category `alumni-and-visit-scholars` with the source display label “Alumni and Visit Scholar”. Person Markdown bodies contain biography prose only; role, affiliation, email, phone, and homepage remain structured front matter fields.
+The 37 supplied legacy profiles, source labels, and duplicate accounting remain preserved in `content-manifest.yml` for provenance. The live `_people` collection is editorially maintained, is not rewritten by the importer, and may add, update, regroup, or remove members without changing the immutable source snapshot. Person Markdown bodies contain biography prose only; role, affiliation, email, phone, and homepage remain structured front matter fields.
 
 ## Reproduce
 
@@ -820,7 +827,7 @@ python3 -m venv /tmp/itseg-migrate-venv
 /tmp/itseg-migrate-venv/bin/python scripts/validate_site.py --check-source-fidelity
 ```
 
-The final command is the authoritative full source-fidelity check. A normal `python3 scripts/validate_site.py` remains usable in CI without the `/tmp` source snapshot and prints the full command needed for source-fidelity verification. The importer reads only the safe public inputs listed in `content-manifest.yml`. Collection and migrated-asset output directories are managed roots: the importer refuses symlinked or out-of-repository roots and never follows output symlinks. On reruns it replaces the immutable `legacy-import` baseline and deletes only stale paths recorded in the previous legacy manifest. Files marked `managed_by: "editorial"` and editorial publication rows are preserved.
+The final command is the authoritative full source-fidelity check. A normal `python3 scripts/validate_site.py` remains usable in CI without the `/tmp` source snapshot and prints the full command needed for source-fidelity verification. The importer reads only the safe public inputs listed in `content-manifest.yml`. Collection and migrated-asset output directories are managed roots: the importer refuses symlinked or out-of-repository roots and never follows output symlinks. On reruns it replaces the immutable `legacy-import` news, project, publication, and asset baselines while preserving editorial records. It parses the 37 legacy people records only to refresh provenance metadata and never rewrites the live editorial `_people` collection.
 
 ## Global site completion
 
@@ -907,7 +914,7 @@ def main() -> int:
     prepare_managed_roots()
     previous = manifested_legacy_paths(load_previous_manifest())
     news = import_news()
-    people = import_people()
+    people = import_people(write_output=False)
     projects = import_projects()
     publications = import_publications()
     assets = copy_assets()
@@ -917,7 +924,10 @@ def main() -> int:
     write_url_map(news, assets)
     write_review()
     write_manifest(news, people, projects, publications, assets)
-    print("Imported 14 news, 37 people, 8 projects, 116 publications, and 61 public assets.")
+    print(
+        "Imported 14 news, retained 37 people provenance records, imported 8 projects, "
+        "116 publications, and 61 public assets; the live people roster was preserved."
+    )
     return 0
 
 

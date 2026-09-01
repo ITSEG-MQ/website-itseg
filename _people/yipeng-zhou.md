@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "yipeng-zhou"
 title: "Dr Yipeng Zhou"
 role: "Program Leader: Federated and Distributed Learning; Intelligent Multimedia Networks/Systems"
 category: "program-leaders"

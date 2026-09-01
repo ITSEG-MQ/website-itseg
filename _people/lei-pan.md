@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "lei-pan"
 title: "Dr Lei Pan"
 role: "Associate Director: Incubation Platform"
 category: "advisory-board"

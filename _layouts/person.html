@@ -9,7 +9,9 @@ layout: default
     <div>
       <p class="eyebrow"><a href="{{ '/people/' | relative_url | escape }}">People</a> · {{ page.section | escape }}</p>
       <h1>{{ page.title | escape }}</h1>
-      <p class="lead">{{ page.role | escape }}</p>
+      {% if page.role and page.role != empty %}
+        <p class="lead">{{ page.role | escape }}</p>
+      {% endif %}
       {% if page.affiliation and page.affiliation != empty %}
         <p>{{ page.affiliation | escape }}</p>
       {% endif %}

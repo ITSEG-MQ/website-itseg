@@ -1,7 +1,8 @@
 ---
-managed_by: "legacy-import"
-title: "Chuxuan Tong"
-role: "Ph.D."
+managed_by: "editorial"
+id: "chuxuan-tong"
+title: "Dr Chuxuan Tong"
+role: ""
 category: "current-researchers"
 section: "Current Researchers"
 image: "/assets/pic/people/tong.jpg"
@@ -18,4 +19,4 @@ duplicate_person: false
 duplicate_key: ""
 ---
 
-<p>Chuxuan Tong received a Master of Data Science from the University of Queensland and a Bachelor of IT from the Queensland University of Technology. Currently, she is a Ph.D. student working on the Deep learning-based voiceprint authentication system for IoT at Deakin University.</p>
+<p>Chuxuan Tong received a Master of Data Science from the University of Queensland and a Bachelor of IT from the Queensland University of Technology. Currently, she is working on the Deep learning-based voiceprint authentication system for IoT.</p>

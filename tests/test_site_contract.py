@@ -251,15 +251,21 @@ class SiteContractTests(unittest.TestCase):
                 self.assertIsNone(prohibited.search(text))
         self.assertFalse((ROOT / "_includes/review-status.html").exists())
 
-    def test_migration_records_and_internal_review_metadata_are_preserved(self):
+    def test_migration_provenance_and_live_people_roster_are_preserved(self):
         publications = json.loads(
             (ROOT / "_data/publications.yml").read_text(encoding="utf-8")
         )
+        manifest = json.loads(
+            (ROOT / "docs/content-manifest.yml").read_text(encoding="utf-8")
+        )
         people = list((ROOT / "_people").glob("*.md"))
         self.assertEqual(len(publications), 116)
-        self.assertEqual(len(people), 37)
+        self.assertEqual(manifest["counts"]["people"], 37)
+        self.assertEqual(len(manifest["collections"]["people"]), 37)
+        self.assertGreater(len(people), 0)
+        self.assertTrue(all('managed_by: "editorial"' in path.read_text(encoding="utf-8") for path in people))
         self.assertTrue(all(item.get("managed_by") == "legacy-import" for item in publications))
-        for collection in ["_news", "_people", "_projects"]:
+        for collection in ["_news", "_projects"]:
             for path in (ROOT / collection).glob("*.md"):
                 self.assertIn('managed_by: "legacy-import"', path.read_text(encoding="utf-8"))
         self.assertEqual(
@@ -269,8 +275,16 @@ class SiteContractTests(unittest.TestCase):
             ),
             2,
         )
+        duplicate_flag = next(
+            flag
+            for flag in manifest["flags"]
+            if flag.get("id") == "duplicate-person-jiaqi-ge"
+        )
+        self.assertEqual(
+            duplicate_flag.get("records"),
+            ["jiaqi-ge-current.md", "jiaqi-ge-alumni.md"],
+        )
         people_source = "\n".join(path.read_text(encoding="utf-8") for path in people)
-        self.assertEqual(people_source.count("duplicate_person: true"), 2)
         self.assertIn('source_status: "legacy-commented-public-source"', people_source)
 
     def test_handbooks_document_safe_editorial_workflow(self):
@@ -283,10 +297,10 @@ class SiteContractTests(unittest.TestCase):
             "assets/uploads/news",
             "assets/uploads/people",
             "assets/uploads/projects",
-            "greater than 37",
+            "unused positive integer",
             "greater than 8",
             "publication-001` through `publication-116",
-            "preserves collection files and publication rows",
+            "never rewrites the live editorial `_people` collection",
             "scripts/import_legacy_content.py",
             "scripts/validate_site.py --check-source-fidelity",
             "python3 -m unittest discover -s tests -v",
@@ -301,6 +315,12 @@ class SiteContractTests(unittest.TestCase):
                 Path("assets/pic/brand"),
                 Path("assets/documents"),
             })
+
+    def test_importer_preserves_live_people_roster(self):
+        importer = (ROOT / "scripts/import_legacy_content.py").read_text(encoding="utf-8")
+        self.assertIn("def import_people(*, write_output: bool = True)", importer)
+        self.assertIn("if write_output:\n            write_markdown(ROOT / \"_people\" / filename", importer)
+        self.assertIn("people = import_people(write_output=False)", importer)
 
     def test_footer_uses_canonical_external_license(self):
         footer = (ROOT / "_includes/footer.html").read_text(encoding="utf-8")

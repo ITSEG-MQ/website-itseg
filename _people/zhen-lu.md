@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "zhen-lu"
 title: "Zhen Lu"
 role: "Ph.D. Candidate"
 category: "current-researchers"

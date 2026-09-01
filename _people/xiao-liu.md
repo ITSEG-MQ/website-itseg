@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "xiao-liu"
 title: "A/Prof. Xiao Liu"
 role: "Program Leader: Edge and Fog Computing"
 category: "program-leaders"

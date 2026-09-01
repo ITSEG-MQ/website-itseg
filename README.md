@@ -5,12 +5,12 @@ This repository contains the Jekyll website for the Intelligent Systems Engineer
 ## Legacy baseline
 
 - `_news`: 14 verified legacy news records
-- `_people`: 37 verified legacy source records in six groups
+- `_people`: live editorial roster with a dynamic member count; the original 37-record source snapshot remains in the provenance manifest
 - `_projects`: eight verified legacy projects (five national competitive grants and three other projects)
 - `_data/publications.yml`: 116 verified legacy publication records
 - `docs/content-manifest.yml`: authoritative migration manifest and asset checksums
 
-These are immutable baseline counts, not limits on future content. New records use `managed_by: "editorial"`; do not edit migration-managed records or assets by hand. See `editor-handbook.md` for routine editing and `maintainer-handbook.md` for validation and release procedures.
+The news, project, publication, asset, and 37-record people provenance baselines remain immutable. The live `_people` collection is intentionally editorial and may change in size, grouping, and wording without changing that provenance snapshot. New live records use `managed_by: "editorial"`; do not edit migration-managed news, project, publication, or asset records by hand. See `editor-handbook.md` for routine editing and `maintainer-handbook.md` for validation and release procedures.
 
 ## Local build
 

@@ -1,9 +1,10 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "siwei-luo"
 title: "Siwei Luo"
 role: "Ph.D. Candidate"
-category: "industry-engagement-officers"
-section: "Industry Engagement Officers"
+category: "current-researchers"
+section: "Current Researchers"
 image: "/assets/pic/people/siwei-luo.jpg"
 affiliation: "School of Computing, Macquarie University, Australia"
 email: ""

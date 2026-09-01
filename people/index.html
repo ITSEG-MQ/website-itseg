@@ -52,8 +52,8 @@ permalink: /people/
 </section>
 
 {% assign group = site.people | where: 'category', 'current-researchers' | sort: 'order' %}
-<section class="people-section section container" aria-labelledby="engagement">
-  <h2 id="engagement">Current Researchers</h2>
+<section class="people-section section container" aria-labelledby="current-researchers">
+  <h2 id="current-researchers">Current Researchers</h2>
   <div class="card-grid card-grid-3">
     {% for item in group %}
       {% include person-card.html item=item %}
@@ -61,9 +61,9 @@ permalink: /people/
   </div>
 </section>
 
-{% assign group = site.people | where: 'category', 'alumni-and-visit-scholars' | sort: 'order' %}
+{% assign group = site.people | where: 'category', 'alumni-and-visiting-scholars' | sort: 'order' %}
 <section class="people-section section container" aria-labelledby="alumni">
-  <h2 id="alumni">Alumni and Visit Scholar</h2>
+  <h2 id="alumni">Alumni and Visiting Scholars</h2>
   <div class="card-grid card-grid-3">
     {% for item in group %}
       {% include person-card.html item=item %}

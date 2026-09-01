@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "jian-yang"
 title: "Professor Jian Yang"
 role: "Program Leader: Social Network and Big Data Analytics"
 category: "program-leaders"

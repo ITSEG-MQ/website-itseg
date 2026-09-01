@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "yimeng-feng"
 title: "Dr Yimeng Feng"
 role: "Program Leader: Intelligent Transportation Systems"
 category: "program-leaders"

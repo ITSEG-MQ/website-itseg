@@ -41,18 +41,18 @@ python3 -m venv /tmp/itseg-migrate-venv
 /tmp/itseg-migrate-venv/bin/python scripts/validate_site.py --check-source-fidelity
 ```
 
-The manifest is an immutable legacy baseline. The validator applies exact counts (14 news, 37 people source records, 8 projects, and 116 publications), legacy IDs, source ordering, source-review flags, hashes, collection map, asset set, and URL map only to records marked `managed_by: "legacy-import"`. It validates additional `managed_by: "editorial"` records generically, so approved additions do not change the baseline manifest.
+The manifest is an immutable legacy provenance baseline. It retains exact counts for 14 news records, the original 37 people source records, 8 projects, 116 publications, and 61 assets. The live `_people` collection is editorially maintained and validated without a fixed member count; changing the roster does not rewrite the provenance manifest.
 
 For any editorial addition, follow the complete field examples in `editor-handbook.md`. In summary:
 
 - collection filenames, `id` values, and permalinks use the same unique lowercase hyphenated ID;
 - news requires `title`, `date`, `cover`, and a non-empty body;
-- people requires `title`, `role`, a currently rendered `category` and matching `section`, `image`, a unique integer `order` greater than 37, and a non-empty biography;
+- people requires `title`, a currently rendered `category` and matching `section`, `image`, an unused positive integer `order`, and a non-empty biography; `role` is optional;
 - projects requires `title`, rendered `category` (`grants` or `other`), `section`, `image`, a unique integer `order` greater than 8, and a non-empty description;
 - publications require unique `id`, `title`, `authors`, `publisher`, and one of the four currently rendered categories;
-- collection uploads go only under `assets/uploads/news`, `assets/uploads/people`, or `assets/uploads/projects` and never under a manifest-managed asset directory.
+- new collection uploads go under `assets/uploads/news`, `assets/uploads/people`, or `assets/uploads/projects`; existing live people records may continue using their provenance-managed portraits under `assets/pic/people`.
 
-All editorial records must set `managed_by: "editorial"`. A record falsely marked `legacy-import` is rejected because it is not part of the manifest baseline.
+All live people and new editorial records must set `managed_by: "editorial"`. A new news, project, publication, or asset record falsely marked `legacy-import` is rejected because it is not part of the provenance baseline.
 
 ## CI and beta release
 
@@ -64,7 +64,7 @@ Do not commit deployment archives, generated `_site` output, source snapshots, c
 
 ## Migration ownership
 
-`scripts/import_legacy_content.py` owns only the manifest-listed legacy records and legacy asset destinations. It regenerates the baseline, merges existing editorial publication rows back into `_data/publications.yml`, and deletes only stale paths listed in the previous manifest. It does not delete valid editorial collection files, and it does not manage `assets/uploads/`.
+`scripts/import_legacy_content.py` owns only the manifest-listed news, project, publication, and legacy asset destinations. It parses the original 37 people records to refresh provenance metadata but never rewrites the live editorial `_people` collection. It merges existing editorial publication rows back into `_data/publications.yml`, deletes only stale manifest-owned paths, preserves valid editorial collection files, and does not manage `assets/uploads/`.
 
 To verify importer idempotence when the approved `/tmp` snapshot is present, run the pinned importer twice, then source fidelity and the normal suite:
 

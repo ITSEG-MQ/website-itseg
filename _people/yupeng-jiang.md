@@ -1,9 +1,10 @@
 ---
-managed_by: "legacy-import"
-title: "Yupeng Jiang"
-role: "Ph.D."
-category: "alumni-and-visit-scholars"
-section: "Alumni and Visit Scholar"
+managed_by: "editorial"
+id: "yupeng-jiang"
+title: "Dr Yupeng Jiang"
+role: "Alumni"
+category: "alumni-and-visiting-scholars"
+section: "Alumni and Visiting Scholars"
 image: "/assets/pic/people/YupengJiang.jpg"
 affiliation: "School of Computing, Macquarie University, Australia"
 email: ""
@@ -18,4 +19,4 @@ duplicate_person: false
 duplicate_key: ""
 ---
 
-<p>Yupeng Jiang got a Master of Computer Science from UNSW, Bachelor of Science in Computer Software specialty from Jilin University. Now studying PhD in Computing at Macquarie University specialized in big data analysis in IoT.</p>
+<p>Yupeng Jiang got a Master of Computer Science from UNSW, Bachelor of Science in Computer Software specialty from Jilin University. Specialized in big data analysis in IoT.</p>

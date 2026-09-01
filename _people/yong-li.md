@@ -1,9 +1,10 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "yong-li"
 title: "Yong Li"
 role: "Ph.D. Candidate"
-category: "alumni-and-visit-scholars"
-section: "Alumni and Visit Scholar"
+category: "alumni-and-visiting-scholars"
+section: "Alumni and Visiting Scholars"
 image: "/assets/pic/people/Yong-Li.jpg"
 affiliation: ""
 email: ""

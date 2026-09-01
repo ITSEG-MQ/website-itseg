@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "xuyun-zhang"
 title: "Dr Xuyun Zhang"
 role: "Program Leader: Anomaly Detection"
 category: "program-leaders"

@@ -1,7 +1,8 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "yuzhe-tian"
 title: "Yuzhe Tian"
-role: "Ph.D Candidate"
+role: "Ph.D. Candidate"
 category: "current-researchers"
 section: "Current Researchers"
 image: "/assets/pic/people/Yuzhe-Tian.jpg"

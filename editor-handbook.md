@@ -13,12 +13,10 @@ The navigation has six public destinations: Home, News, People, Projects, Public
 
 ## Editing principles
 
-Every content record has an ownership marker. Existing source-fidelity records use `managed_by: "legacy-import"`; new records must use `managed_by: "editorial"`. Never mark a new record `legacy-import`, edit `docs/content-manifest.yml` to register it, or place a new image in an importer-managed directory.
+Every content record has an ownership marker. Migration-managed news, project, and publication records use `managed_by: "legacy-import"`; new records use `managed_by: "editorial"`. The live `_people` collection is fully editorial, has no fixed member count, and is not rewritten by the legacy importer. Never mark a new record `legacy-import`, edit `docs/content-manifest.yml` to register it, or place a new image in an importer-managed directory.
 
-The migrated collections, publication data, and manifest-managed images are an immutable legacy baseline. Do not silently remove, merge, rename, or rewrite them. In particular:
+The migration manifest remains an immutable provenance baseline. It preserves the original 37 people source records and source-review flags without constraining the live roster. Do not silently rewrite migration-managed news, project, publication, or asset data. In particular:
 
-- retain both Jiaqi Ge records and their review flags;
-- retain the three profiles marked `legacy-commented-public-source`;
 - retain both duplicate SolGuard publication rows;
 - retain the “Ten Career-Best Research Outputs” heading with its nine source records;
 - do not link or invent a replacement for the missing recruitment PDF.
@@ -51,8 +49,8 @@ Write the announcement here.
 
 ## Add a person
 
-1. Add the portrait under `assets/uploads/people/`.
-2. Choose an unused integer `order` greater than 37. The validator requires all legacy and editorial people orders to remain unique.
+1. Add the portrait under `assets/uploads/people/`. Existing migrated portraits under `assets/pic/people/` may continue to be referenced by their current records.
+2. Choose an unused positive integer `order`. Orders must be unique but do not need to be contiguous, so the roster can grow or shrink without renumbering every profile.
 3. Create `_people/<id>.md` with these fields and a non-empty biography:
 
 ```yaml
@@ -75,7 +73,7 @@ permalink: "/people/example-researcher/"
 Write biography prose here. Do not repeat role, affiliation, email, phone, or homepage labels in the body.
 ```
 
-`category` must be one of `director`, `advisory-board`, `industry-supervisor`, `program-leaders`, `industry-engagement-officers`, or `alumni-and-visit-scholars`; `section` must use the matching heading already shown on the People page. Optional `email`, `phone`, and `homepage` values may be empty. A homepage, when present, must be an absolute `https://` or `http://` URL.
+`category` must be one of `director`, `advisory-board`, `industry-supervisor`, `program-leaders`, `current-researchers`, or `alumni-and-visiting-scholars`; `section` must use the matching heading already shown on the People page. `role`, `email`, `phone`, and `homepage` are optional and may be empty; empty roles are omitted from the rendered card and profile. A homepage, when present, must be an absolute `https://` or `http://` URL.
 
 ## Add a project
 
@@ -137,6 +135,6 @@ python3 scripts/validate_site.py --site _site --config _config.yml
 git diff --check
 ```
 
-The legacy importer can be rerun safely: it regenerates the exact manifest baseline, preserves collection files and publication rows marked `managed_by: "editorial"`, and only removes stale legacy paths listed by the previous manifest. Validation will reject a new or unlisted file falsely marked `legacy-import`.
+The legacy importer can be rerun safely: it regenerates the exact manifest baseline for news, projects, publications, assets, and the 37-record people provenance snapshot. It preserves the live editorial `_people` collection and other collection files or publication rows marked `managed_by: "editorial"`. Validation rejects a new or unlisted migration-managed news, project, publication, or asset record.
 
 Ask a maintainer before changing configuration, layouts, workflows, the validator, the migration scripts, or any manifest-managed record.

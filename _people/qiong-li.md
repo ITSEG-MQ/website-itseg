@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "qiong-li"
 title: "Qiong Li"
 role: "Ph.D. Candidate"
 category: "current-researchers"

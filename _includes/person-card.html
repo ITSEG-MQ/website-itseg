@@ -4,7 +4,9 @@
   </a>
   <div class="card-body">
     <h3><a href="{{ include.item.url | relative_url | escape }}">{{ include.item.title | escape }}</a></h3>
-    <p class="role">{{ include.item.role | escape }}</p>
+    {% if include.item.role and include.item.role != empty %}
+      <p class="role">{{ include.item.role | escape }}</p>
+    {% endif %}
     {% if include.item.affiliation and include.item.affiliation != empty %}
       <p>{{ include.item.affiliation | escape }}</p>
     {% endif %}

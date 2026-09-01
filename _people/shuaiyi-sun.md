@@ -1,9 +1,10 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "shuaiyi-sun"
 title: "Shuaiyi Sun"
 role: "Ph.D. Candidate"
-category: "industry-engagement-officers"
-section: "Industry Engagement Officers"
+category: "current-researchers"
+section: "Current Researchers"
 image: "/assets/pic/people/shuaiyi-sun.jpg"
 affiliation: "Faculty of Data Science, City University of Macau, Macau, China"
 email: ""

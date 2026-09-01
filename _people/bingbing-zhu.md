@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "bingbing-zhu"
 title: "Bingbing Zhu"
 role: "Ph.D. Candidate"
 category: "current-researchers"

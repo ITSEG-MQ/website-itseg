@@ -35,6 +35,14 @@ EXPECTED_PEOPLE_SECTION_LABELS = {
     "industry-engagement-officers": "Industry Engagement Officers",
     "alumni-and-visit-scholars": "Alumni and Visit Scholar",
 }
+LIVE_PEOPLE_SECTION_LABELS = {
+    "director": "Director",
+    "advisory-board": "Advisory Board",
+    "industry-supervisor": "Industry Supervisor",
+    "program-leaders": "Program Leaders",
+    "current-researchers": "Current Researchers",
+    "alumni-and-visiting-scholars": "Alumni and Visiting Scholars",
+}
 EXPECTED_SOURCE_TITLE_BODY_COUNTS = {
     "news": {"titles": 14, "bodies": 14},
     "people": {"titles": 37, "bodies": 37},
@@ -122,7 +130,7 @@ EDITORIAL_ASSET_PREFIXES = {
 }
 COLLECTION_COMMON_FIELDS = {
     "news": ("title", "date", "cover", "permalink"),
-    "people": ("title", "role", "category", "section", "image", "order", "permalink"),
+    "people": ("title", "category", "section", "image", "order", "permalink"),
     "projects": ("title", "category", "section", "image", "order", "permalink"),
 }
 
@@ -380,8 +388,8 @@ def collection_errors(kind: str, required: list[str]):
         if kind in {"people", "projects"} and data.get("order") is not None:
             if not isinstance(data["order"], int) or isinstance(data["order"], bool) or data["order"] < 1:
                 errors.append(f"{path.relative_to(ROOT)}: order must be a positive integer")
-        if kind == "people" and data.get("category") in EXPECTED_PEOPLE_SECTION_LABELS:
-            expected_section = EXPECTED_PEOPLE_SECTION_LABELS[data["category"]]
+        if kind == "people" and data.get("category") in LIVE_PEOPLE_SECTION_LABELS:
+            expected_section = LIVE_PEOPLE_SECTION_LABELS[data["category"]]
             if data.get("section") != expected_section:
                 errors.append(
                     f"{path.relative_to(ROOT)}: section label expected {expected_section!r}, found {data.get('section')!r}"
@@ -393,11 +401,18 @@ def collection_errors(kind: str, required: list[str]):
 
         asset = data.get("cover") if kind == "news" else data.get("image")
         if asset:
-            prefix = (
-                EDITORIAL_ASSET_PREFIXES[kind]
-                if owner == EDITORIAL_OWNER
-                else {"news": "/assets/pic/brand/", "people": "/assets/pic/people/", "projects": "/assets/pic/projects/"}[kind]
-            )
+            if owner == EDITORIAL_OWNER:
+                prefix = EDITORIAL_ASSET_PREFIXES[kind]
+                if kind == "people" and str(asset).startswith("/assets/pic/people/"):
+                    # Migrated portraits remain provenance-managed assets while
+                    # the live people records are now editorially maintained.
+                    prefix = "/assets/pic/people/"
+            else:
+                prefix = {
+                    "news": "/assets/pic/brand/",
+                    "people": "/assets/pic/people/",
+                    "projects": "/assets/pic/projects/",
+                }[kind]
             reason = local_asset_error(path, asset, prefix)
             if reason:
                 errors.append(f"{path.relative_to(ROOT)}: {reason}")
@@ -590,46 +605,20 @@ def collection_semantic_errors(records):
         errors.append("news: permalinks are not unique")
 
     all_people = records.get("people", [])
-    people = owner_records(all_people, LEGACY_OWNER)
-    if len(people) != EXPECTED["people"]:
-        errors.append(f"legacy people: expected {EXPECTED['people']}, found {len(people)}")
-    people_sections = Counter(data.get("category") for _, data, _ in people)
-    if dict(people_sections) != EXPECTED_PEOPLE_SECTIONS:
-        errors.append(f"people: section counts expected {EXPECTED_PEOPLE_SECTIONS}, found {dict(people_sections)}")
-    people_orders = [data.get("order") for _, data, _ in people]
-    if sorted(people_orders) != list(range(1, 38)):
-        errors.append("people: global order values must be exactly 1 through 37")
-    all_people_orders = [data.get("order") for _, data, _ in all_people if isinstance(data.get("order"), int)]
+    if not all_people:
+        errors.append("people: live collection must contain at least one record")
+    if owner_records(all_people, LEGACY_OWNER):
+        errors.append(
+            "people: live records are editorially maintained; legacy-import records belong only to the provenance manifest"
+        )
+    all_people_orders = [
+        data.get("order")
+        for _, data, _ in all_people
+        if isinstance(data.get("order"), int)
+    ]
     if len(all_people_orders) != len(set(all_people_orders)):
-        errors.append("people: order values must be unique across legacy and editorial records")
-    for path, data, _ in owner_records(all_people, EDITORIAL_OWNER):
-        if isinstance(data.get("order"), int) and data["order"] <= EXPECTED["people"]:
-            errors.append(
-                f"{path.relative_to(ROOT)}: editorial people order must be above the legacy range (greater than 37)"
-            )
-        homepage = data.get("homepage")
-        if homepage:
-            reason = unsafe_url_reason("href", str(homepage))
-            if reason or urlsplit(str(homepage)).scheme.lower() not in {"http", "https"}:
-                errors.append(
-                    f"{path.relative_to(ROOT)}: homepage must be a safe absolute HTTP(S) URL"
-                )
-    jiaqi = [(path, data) for path, data, _ in people if data.get("title") == "Jiaqi Ge"]
-    if len(jiaqi) != 2 or {data.get("category") for _, data in jiaqi} != {
-        "industry-engagement-officers",
-        "alumni-and-visit-scholars",
-    }:
-        errors.append("people: Jiaqi Ge must be preserved as separate current and alumni records")
-    elif any(data.get("duplicate_person") is not True or data.get("duplicate_key") != "jiaqi-ge" for _, data in jiaqi):
-        errors.append("people: both Jiaqi Ge records must carry the duplicate-person flag")
-    for path, data, body in people:
-        if not str(data.get("image", "")).startswith("/assets/pic/people/"):
-            errors.append(f"{path.relative_to(ROOT)}: person image is outside assets/pic/people")
-        expected_section = EXPECTED_PEOPLE_SECTION_LABELS.get(data.get("category"))
-        if data.get("section") != expected_section:
-            errors.append(
-                f"{path.relative_to(ROOT)}: section label expected {expected_section!r}, found {data.get('section')!r}"
-            )
+        errors.append("people: order values must be unique")
+    for path, data, body in all_people:
         if re.search(r"<p[^>]*>\s*(?:<[^>]+>\s*)*(?:Email|Phone|Homepage):", body, re.I):
             errors.append(f"{path.relative_to(ROOT)}: biography body duplicates contact/homepage front matter")
         if re.search(r"<p[^>]*>\s*<(?:b|i)\b", body, re.I):
@@ -868,6 +857,10 @@ def managed_output_errors(manifest, records=None):
         non_markdown = sorted(name for name in actual_names if Path(name).suffix != ".md")
         if non_markdown:
             errors.append(f"{relative}: unexpected non-Markdown files in collection: {non_markdown}")
+        if kind == "people":
+            # The manifest retains the immutable 37-record provenance baseline,
+            # while the live roster is an independently edited collection.
+            continue
         found = records.get(kind, []) if isinstance(records, dict) else []
         actual_legacy_names = sorted(
             path.name for path, data, _ in found if data.get("managed_by") == LEGACY_OWNER
@@ -896,12 +889,6 @@ def manifest_errors(records, manifest=None):
     for key, expected in EXPECTED.items():
         if counts.get(key) != expected:
             errors.append(f"manifest count {key!r}: expected {expected}, found {counts.get(key)!r}")
-    people_sources = sum(
-        int(data.get("source_records", 1))
-        for _, data, _ in owner_records(records.get("people", []), LEGACY_OWNER)
-    )
-    if people_sources != EXPECTED["people_source_records"]:
-        errors.append(f"people source record sum: expected 37, found {people_sources}")
     if counts.get("assets") != 61:
         errors.append(f"manifest count 'assets': expected 61, found {counts.get('assets')!r}")
     if counts.get("pdfs") != 3:
@@ -936,6 +923,17 @@ def manifest_errors(records, manifest=None):
         entry_files = [record.get("file") for record in entries if isinstance(record, dict)]
         if len(entry_files) != len(set(entry_files)):
             errors.append(f"manifest {kind} collection contains duplicate file records")
+        if kind == "people":
+            baseline_orders = [
+                record.get("order") for record in entries if isinstance(record, dict)
+            ]
+            if len(entries) != EXPECTED["people"] or baseline_orders != list(
+                range(1, EXPECTED["people"] + 1)
+            ):
+                errors.append(
+                    "manifest people collection is not in canonical 37-record provenance order"
+                )
+            continue
         if entries != expected:
             errors.append(
                 f"manifest {kind} collection does not exactly match canonical generated order and required metadata"
@@ -1104,9 +1102,8 @@ def migration_document_errors(records):
     if not review_text.strip():
         errors.append("docs/content-review.md: missing or empty")
     for required_text in [
-        "industry-engagement-officers",
-        "Industry Engagement Officers",
-        "Alumni and Visit Scholar",
+        "37 supplied legacy profiles",
+        "live `_people` collection is editorially maintained",
         "biography prose only",
         "requirements-legacy-migration.txt",
         "/tmp/itseg-migrate-venv/bin/python scripts/validate_site.py --check-source-fidelity",
@@ -1265,8 +1262,9 @@ def source_fidelity_errors(records, publications):
             "duplicate_person": title == "Jiaqi Ge",
             "duplicate_key": "jiaqi-ge" if title == "Jiaqi Ge" else "",
         }
-    compare_collection("people", people_expected)
-    compare_metadata("people", people_metadata_expected)
+    # Live people are editorially maintained. The immutable 37-record people
+    # baseline is checked against the provenance manifest below instead of
+    # being compared with the live collection.
 
     project_expected = {}
     project_metadata_expected = {}
@@ -1344,6 +1342,24 @@ def source_fidelity_errors(records, publications):
         manifest = json.loads((ROOT / "docs/content-manifest.yml").read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         return errors + [f"source fidelity manifest: cannot parse ({exc})"]
+
+    expected_people_manifest = [
+        {
+            "file": f"_people/{filename}",
+            **{
+                field: metadata.get(field)
+                for field in MANIFEST_COLLECTION_FIELDS["people"]
+            },
+        }
+        for filename, metadata in sorted(
+            people_metadata_expected.items(), key=lambda item: item[1]["order"]
+        )
+    ]
+    actual_people_manifest = manifest.get("collections", {}).get("people", [])
+    if actual_people_manifest != expected_people_manifest:
+        errors.append(
+            "source fidelity manifest: people provenance differs from the 37 source records"
+        )
 
     expected_provenance = {
         str(path): importer.sha256(path)

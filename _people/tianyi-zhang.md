@@ -1,5 +1,6 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "tianyi-zhang"
 title: "A/Prof. Tianyi Zhang"
 role: "Program Leader: Human-Computer Interaction and Software Modelling"
 category: "program-leaders"

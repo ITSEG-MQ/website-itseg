@@ -351,6 +351,27 @@ class EditorialCollectionIntegrationTests(unittest.TestCase):
 
         self.assertEqual(errors, [])
 
+    def test_live_people_count_can_change_without_altering_provenance_manifest(self):
+        people = sorted((self.repository / "_people").glob("*.md"))
+        for path in people[:3]:
+            path.unlink()
+
+        specifications = {
+            "news": ["title", "date", "legacy_id", "source_order", "cover", "permalink", "source_status"],
+            "people": ["title", "role", "category", "section", "image", "order", "permalink", "source_status", "source_records"],
+            "projects": ["title", "category", "image", "order", "permalink", "source_status"],
+        }
+        records = {}
+        errors = []
+        for kind, required in specifications.items():
+            _, records[kind], found_errors = validator.collection_errors(kind, required)
+            errors.extend(found_errors)
+        errors.extend(validator.collection_semantic_errors(records))
+        errors.extend(validator.manifest_errors(records))
+
+        self.assertEqual(errors, [])
+        self.assertEqual(len(records["people"]), len(people) - 3)
+
 
 class LegacyUrlMapTests(unittest.TestCase):
     @classmethod

@@ -1,9 +1,10 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "yi-he"
 title: "Yi He"
 role: "Ph.D. Candidate"
-category: "alumni-and-visit-scholars"
-section: "Alumni and Visit Scholar"
+category: "alumni-and-visiting-scholars"
+section: "Alumni and Visiting Scholars"
 image: "/assets/pic/people/YiHe.jpg"
 affiliation: "School of Computing, Macquarie University, Australia"
 email: ""

@@ -1,9 +1,10 @@
 ---
-managed_by: "legacy-import"
+managed_by: "editorial"
+id: "wenyu-dong"
 title: "Wenyu Dong"
 role: "Ph.D. Candidate"
-category: "industry-engagement-officers"
-section: "Industry Engagement Officers"
+category: "current-researchers"
+section: "Current Researchers"
 image: "/assets/pic/people/wenyu-dong.jpg"
 affiliation: "Department of Intelligence and Computing, Tianjin University, China"
 email: ""
