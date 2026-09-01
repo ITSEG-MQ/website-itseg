@@ -56,7 +56,7 @@ All editorial records must set `managed_by: "editorial"`. A record falsely marke
 
 ## CI and beta release
 
-The validation workflow runs on feature branches, pull requests, and manual dispatch. It performs source validation, builds the staging site, validates generated HTML, and never publishes a release.
+The validation workflow runs on feature branches, pull requests, and manual dispatch. It performs source validation, builds the beta production configuration for an exact deployment preview, validates generated HTML, uploads the preview artifact, and never publishes a release.
 
 The release workflow retains its existing automatic `main` and manual triggers and its rolling `prod` release tag. It validates source before building with `_config_prod.yml`, validates generated HTML before packaging, and only then replaces `site.zip` on the existing release. The packaged site is intended for the beta host at `https://beta.itseg.org`.
 
