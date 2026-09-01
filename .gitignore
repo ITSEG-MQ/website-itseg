@@ -32,6 +32,9 @@ package.json
 .sftpconfig
 
 ### Compiled Source ###
+__pycache__/
+*.py[cod]
+*$py.class
 *.com
 *.class
 *.dll

@@ -1,0 +1,81 @@
+legacy_url,new_url,content_type,status,notes
+/index.php,/,page,planned-global,Global page conversion is outside this migration.
+/news.php,/news/,collection-index,planned-global,Collection content migrated; index page is out of scope.
+/group.php,/people/,collection-index,planned-global,37 people entries migrated.
+/projects.php,/projects/,collection-index,planned-global,8 project entries migrated.
+/publications.php,/publications/,collection-index,planned-global,116 publication rows migrated.
+/post.php?id=80,/news/2024-08-27-80-dr-xi-zheng-has-been-invited-to-serve-on-the-technical-program/,news,migrated,Legacy article id 80
+/post.php?id=79,/news/2024-08-27-79-congratulations-to-dr-xi-zheng-on-being-awarded-the-prestigious/,news,migrated,Legacy article id 79
+/post.php?id=12,/news/2024-02-08-12-congratulations-to-dr-xi-zheng-for-being-an-editor-of-journal-of/,news,migrated,Legacy article id 12
+/post.php?id=11,/news/2023-06-17-11-dr-xi-zheng-is-invited-to-serve-on-the-technical-program/,news,migrated,Legacy article id 11
+/post.php?id=10,/news/2023-06-17-10-dr-xi-zheng-is-invited-to-serve-on-the-program-committee-of-the/,news,migrated,Legacy article id 10
+/post.php?id=9,/news/2022-06-27-9-congratulations-to-dr-xi-zheng-for-being-a-member-of-program/,news,migrated,Legacy article id 9
+/post.php?id=8,/news/2022-05-12-8-congratulations-to-dr-xi-zheng-for-becoming-a-track-chair-of-msn/,news,migrated,Legacy article id 8
+/post.php?id=7,/news/2022-04-12-7-congratulations-to-dr-zheng-for-becoming-a-program-chair-for/,news,migrated,Legacy article id 7
+/post.php?id=6,/news/2022-01-08-6-congratulations-to-dr-zheng-for-becoming-a-program-chair-for/,news,migrated,Legacy article id 6
+/post.php?id=5,/news/2022-01-08-5-congratulations-to-dr-zheng-for-becoming-an-associate-editor-for/,news,migrated,Legacy article id 5
+/post.php?id=4,/news/2022-01-08-4-media-reports/,news,migrated,Legacy article id 4
+/post.php?id=2,/news/2022-01-07-2-congratulations-to-dr-xi-zheng-for-being-a-member-of-program/,news,migrated,Legacy article id 2
+/post.php?id=1,/news/2022-01-07-1-congratulations-to-dr-xi-zheng-for-becoming-a-member-of-program/,news,migrated,Legacy article id 1
+/post.php?id=3,/news/2022-01-07-3-an-exciting-opportunity-exists-for-a-motivated-and-proactive/,news,migrated,Legacy article id 3
+/img/group/Alireza-Jolfaei.jpg,/assets/pic/people/Alireza-Jolfaei.jpg,asset,migrated,copied-original
+/img/group/GuannanLou.jpg,/assets/pic/people/GuannanLou.jpg,asset,migrated,copied-original
+/img/group/Huai-Liu.jpg,/assets/pic/people/Huai-Liu.jpg,asset,migrated,copied-original
+/img/group/JianYang.jpg,/assets/pic/people/JianYang.jpg,asset,migrated,copied-original
+/img/group/JiaqiGe.jpg,/assets/pic/people/JiaqiGe.jpg,asset,migrated,copied-original
+/img/group/JiongJin.jpg,/assets/pic/people/JiongJin.jpg,asset,migrated,copied-original
+/img/group/Jiwei-Guan.jpg,/assets/pic/people/Jiwei-Guan.jpg,asset,migrated,copied-original
+/img/group/LeiPan.jpg,/assets/pic/people/LeiPan.jpg,asset,migrated,copied-original
+/img/group/Linfeng.JPG,/assets/pic/people/Linfeng.JPG,asset,migrated,copied-original
+/img/group/MengshiZhang.jpg,/assets/pic/people/MengshiZhang.jpg,asset,migrated,copied-original
+/img/group/RobertAbbas.jpg,/assets/pic/people/RobertAbbas.jpg,asset,migrated,copied-original
+/img/group/ShengWen.jpg,/assets/pic/people/ShengWen.jpg,asset,migrated,copied-original
+/img/group/TianyiZhang.jpg,/assets/pic/people/TianyiZhang.jpg,asset,migrated,copied-original
+/img/group/XiweiXU.jpg,/assets/pic/people/XiweiXU.jpg,asset,migrated,copied-original
+/img/group/XuyunZhang.jpg,/assets/pic/people/XuyunZhang.jpg,asset,migrated,copied-original
+/img/group/YiHe.jpg,/assets/pic/people/YiHe.jpg,asset,migrated,copied-original
+/img/group/Yimeng-Feng.jpg,/assets/pic/people/Yimeng-Feng.jpg,asset,migrated,copied-original
+/img/group/Yipeng-Zhou.jpg,/assets/pic/people/Yipeng-Zhou.jpg,asset,migrated,copied-original
+/img/group/Yong-Li.jpg,/assets/pic/people/Yong-Li.jpg,asset,migrated,copied-original
+/img/group/YupengJiang.jpg,/assets/pic/people/YupengJiang.jpg,asset,migrated,copied-original
+/img/group/Yuzhe-Tian.jpg,/assets/pic/people/Yuzhe-Tian.jpg,asset,migrated,copied-original
+/img/group/bingbing-zhu.jpg,/assets/pic/people/bingbing-zhu.jpg,asset,migrated,copied-original
+/img/group/cai_yuxuan.jpg,/assets/pic/people/cai_yuxuan.jpg,asset,migrated,pillow-12.3.0-jpeg-q85-max-2000
+/img/group/dy.jpg,/assets/pic/people/dy.jpg,asset,migrated,copied-original
+/img/group/jameszheng.jpg,/assets/pic/people/jameszheng.jpg,asset,migrated,copied-original
+/img/group/jiaohong-yao.jpg,/assets/pic/people/jiaohong-yao.jpg,asset,migrated,copied-original
+/img/group/liuxiao.jpg,/assets/pic/people/liuxiao.jpg,asset,migrated,copied-original
+/img/group/lu.jpg,/assets/pic/people/lu.jpg,asset,migrated,copied-original
+/img/group/qiong-li.jpg,/assets/pic/people/qiong-li.jpg,asset,migrated,copied-original
+/img/group/sam.jpg,/assets/pic/people/sam.jpg,asset,migrated,copied-original
+/img/group/shuaiyi-sun.jpg,/assets/pic/people/shuaiyi-sun.jpg,asset,migrated,copied-original
+/img/group/siwei-luo.jpg,/assets/pic/people/siwei-luo.jpg,asset,migrated,pillow-12.3.0-jpeg-q85-max-2000
+/img/group/tianqing.jpg,/assets/pic/people/tianqing.jpg,asset,migrated,copied-original
+/img/group/tong.jpg,/assets/pic/people/tong.jpg,asset,migrated,copied-original
+/img/group/wenyu-dong.jpg,/assets/pic/people/wenyu-dong.jpg,asset,migrated,pillow-12.3.0-jpeg-q85-max-2000
+/img/group/zhen-lu.jpg,/assets/pic/people/zhen-lu.jpg,asset,migrated,copied-original
+/img/projects/ADAS.jpg,/assets/pic/projects/ADAS.jpg,asset,migrated,copied-original
+/img/projects/Cyber_physical.jpg,/assets/pic/projects/Cyber_physical.jpg,asset,migrated,copied-original
+/img/projects/Picture1.png,/assets/pic/projects/Picture1.png,asset,migrated,copied-original
+/img/projects/Picture2.png,/assets/pic/projects/Picture2.png,asset,migrated,copied-original
+/img/projects/Picture3.jpeg,/assets/pic/projects/Picture3.jpeg,asset,migrated,copied-original
+/img/projects/Picture4.jpg,/assets/pic/projects/Picture4.jpg,asset,migrated,pillow-12.3.0-jpeg-q85-max-2000
+/img/projects/alibaba.jpg,/assets/pic/projects/alibaba.jpg,asset,migrated,copied-original
+/img/projects/autonomous.jpeg,/assets/pic/projects/autonomous.jpeg,asset,migrated,copied-original
+/img/projects/battery.jpg,/assets/pic/projects/battery.jpg,asset,migrated,copied-original
+/img/projects/safe.jpg,/assets/pic/projects/safe.jpg,asset,migrated,copied-original
+/img/logo/bannerPercom2022_small.jpg,/assets/pic/brand/bannerPercom2022_small.jpg,asset,migrated,copied-original
+/img/logo/fse_2022_small.jpg,/assets/pic/brand/fse_2022_small.jpg,asset,migrated,copied-original
+/img/logo/logo-large-old.png,/assets/pic/brand/logo-large-old.png,asset,migrated,copied-original
+/img/logo/logo-large.png,/assets/pic/brand/logo-large.png,asset,migrated,copied-original
+/img/logo/logo.png,/assets/pic/brand/logo.png,asset,migrated,copied-original
+/img/logo/logo2.png,/assets/pic/brand/logo2.png,asset,migrated,copied-original
+/img/logo/logo3.png,/assets/pic/brand/logo3.png,asset,migrated,copied-original
+/img/logo/logo_uni-old.png,/assets/pic/brand/logo_uni-old.png,asset,migrated,copied-original
+/img/background/background.jpg,/assets/pic/brand/background.jpg,asset,migrated,copied-original
+/img/background/computer_room_small.jpg,/assets/pic/brand/computer_room_small.jpg,asset,migrated,copied-original
+/img/background/conference.jpg,/assets/pic/brand/conference.jpg,asset,migrated,copied-original
+/img/background/project_70.jpg,/assets/pic/brand/project_70.jpg,asset,migrated,copied-original
+/doc/Top-Downloaded-Article-2017-2018.pdf,/assets/documents/Top-Downloaded-Article-2017-2018.pdf,asset,migrated,copied-original
+/doc/citations2.pdf,/assets/documents/citations2.pdf,asset,migrated,copied-original
+/doc/innovation-project.pdf,/assets/documents/innovation-project.pdf,asset,migrated,copied-original

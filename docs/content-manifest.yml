@@ -1,0 +1,1150 @@
+{
+  "schema_version": 1,
+  "scope": "legacy-public-content-and-assets-only",
+  "source_inputs": [
+    "/tmp/itseg_public_articles.json",
+    "/tmp/itseg-legacy-public/html/news.html",
+    "/tmp/itseg-legacy-public/html/group.html",
+    "/tmp/itseg-legacy-public/html/publications.html",
+    "/tmp/itseg-legacy-public/source/group.php",
+    "/tmp/itseg-legacy-public/source/projects.php",
+    "/tmp/itseg-legacy-public/assets/{group,projects,logo,background,doc}"
+  ],
+  "source_provenance": [
+    {
+      "path": "/tmp/itseg_public_articles.json",
+      "sha256": "1b587b413231a8b645b4f894713d6d8c136b3c2452a434aa5f7bb31dd24311dd"
+    },
+    {
+      "path": "/tmp/itseg-legacy-public/html/news.html",
+      "sha256": "7475d41e54632222b327d6386db0d05577383962c56d346cbede9758e364c78c"
+    },
+    {
+      "path": "/tmp/itseg-legacy-public/html/group.html",
+      "sha256": "4da84a7c4b37cfdfb531d8c9fba9eec879b6b720f996d4fc97996935086e8cff"
+    },
+    {
+      "path": "/tmp/itseg-legacy-public/html/publications.html",
+      "sha256": "96001de3e4eabf2719ce57988eae899057c680e69543414674f0327c966aa737"
+    },
+    {
+      "path": "/tmp/itseg-legacy-public/source/group.php",
+      "sha256": "9d94a9e57f69bb00dffbdfeafcac1f539474fbf4d57e74216d7d087ef35b83f4"
+    },
+    {
+      "path": "/tmp/itseg-legacy-public/source/projects.php",
+      "sha256": "ed8f35ed3bf2d78073090d1f0fdc3c13ed1a5f40f910145f3e03ea1daa7b8e6a"
+    }
+  ],
+  "counts": {
+    "news": 14,
+    "people": 37,
+    "people_source_records": 37,
+    "projects": 8,
+    "publications": 116,
+    "assets": 61,
+    "pdfs": 3
+  },
+  "source_title_body_counts": {
+    "news": {
+      "titles": 14,
+      "bodies": 14
+    },
+    "people": {
+      "titles": 37,
+      "bodies": 37
+    },
+    "projects": {
+      "titles": 8,
+      "bodies": 8
+    },
+    "publications": {
+      "titles": 116,
+      "bodies": 116
+    }
+  },
+  "people_sections": {
+    "director": 1,
+    "advisory-board": 1,
+    "industry-supervisor": 1,
+    "program-leaders": 12,
+    "industry-engagement-officers": 16,
+    "alumni-and-visit-scholars": 6
+  },
+  "people_section_labels": {
+    "director": "Director",
+    "advisory-board": "Advisory Board",
+    "industry-supervisor": "Industry Supervisor",
+    "program-leaders": "Program Leaders",
+    "industry-engagement-officers": "Industry Engagement Officers",
+    "alumni-and-visit-scholars": "Alumni and Visit Scholar"
+  },
+  "project_categories": {
+    "grants": 5,
+    "other": 3
+  },
+  "publication_categories": {
+    "Ten Career-Best Research Outputs": 9,
+    "Book Chapters": 1,
+    "Fully Referred Conference Proceedings": 38,
+    "Refereed Journal Articles": 68
+  },
+  "collections": {
+    "news": [
+      {
+        "file": "_news/2024-08-27-80-dr-xi-zheng-has-been-invited-to-serve-on-the-technical-program.md",
+        "legacy_id": "80",
+        "source_order": 1,
+        "permalink": "/news/2024-08-27-80-dr-xi-zheng-has-been-invited-to-serve-on-the-technical-program/"
+      },
+      {
+        "file": "_news/2024-08-27-79-congratulations-to-dr-xi-zheng-on-being-awarded-the-prestigious.md",
+        "legacy_id": "79",
+        "source_order": 2,
+        "permalink": "/news/2024-08-27-79-congratulations-to-dr-xi-zheng-on-being-awarded-the-prestigious/"
+      },
+      {
+        "file": "_news/2024-02-08-12-congratulations-to-dr-xi-zheng-for-being-an-editor-of-journal-of.md",
+        "legacy_id": "12",
+        "source_order": 3,
+        "permalink": "/news/2024-02-08-12-congratulations-to-dr-xi-zheng-for-being-an-editor-of-journal-of/"
+      },
+      {
+        "file": "_news/2023-06-17-11-dr-xi-zheng-is-invited-to-serve-on-the-technical-program.md",
+        "legacy_id": "11",
+        "source_order": 4,
+        "permalink": "/news/2023-06-17-11-dr-xi-zheng-is-invited-to-serve-on-the-technical-program/"
+      },
+      {
+        "file": "_news/2023-06-17-10-dr-xi-zheng-is-invited-to-serve-on-the-program-committee-of-the.md",
+        "legacy_id": "10",
+        "source_order": 5,
+        "permalink": "/news/2023-06-17-10-dr-xi-zheng-is-invited-to-serve-on-the-program-committee-of-the/"
+      },
+      {
+        "file": "_news/2022-06-27-9-congratulations-to-dr-xi-zheng-for-being-a-member-of-program.md",
+        "legacy_id": "9",
+        "source_order": 6,
+        "permalink": "/news/2022-06-27-9-congratulations-to-dr-xi-zheng-for-being-a-member-of-program/"
+      },
+      {
+        "file": "_news/2022-05-12-8-congratulations-to-dr-xi-zheng-for-becoming-a-track-chair-of-msn.md",
+        "legacy_id": "8",
+        "source_order": 7,
+        "permalink": "/news/2022-05-12-8-congratulations-to-dr-xi-zheng-for-becoming-a-track-chair-of-msn/"
+      },
+      {
+        "file": "_news/2022-04-12-7-congratulations-to-dr-zheng-for-becoming-a-program-chair-for.md",
+        "legacy_id": "7",
+        "source_order": 8,
+        "permalink": "/news/2022-04-12-7-congratulations-to-dr-zheng-for-becoming-a-program-chair-for/"
+      },
+      {
+        "file": "_news/2022-01-08-6-congratulations-to-dr-zheng-for-becoming-a-program-chair-for.md",
+        "legacy_id": "6",
+        "source_order": 9,
+        "permalink": "/news/2022-01-08-6-congratulations-to-dr-zheng-for-becoming-a-program-chair-for/"
+      },
+      {
+        "file": "_news/2022-01-08-5-congratulations-to-dr-zheng-for-becoming-an-associate-editor-for.md",
+        "legacy_id": "5",
+        "source_order": 10,
+        "permalink": "/news/2022-01-08-5-congratulations-to-dr-zheng-for-becoming-an-associate-editor-for/"
+      },
+      {
+        "file": "_news/2022-01-08-4-media-reports.md",
+        "legacy_id": "4",
+        "source_order": 11,
+        "permalink": "/news/2022-01-08-4-media-reports/"
+      },
+      {
+        "file": "_news/2022-01-07-2-congratulations-to-dr-xi-zheng-for-being-a-member-of-program.md",
+        "legacy_id": "2",
+        "source_order": 12,
+        "permalink": "/news/2022-01-07-2-congratulations-to-dr-xi-zheng-for-being-a-member-of-program/"
+      },
+      {
+        "file": "_news/2022-01-07-1-congratulations-to-dr-xi-zheng-for-becoming-a-member-of-program.md",
+        "legacy_id": "1",
+        "source_order": 13,
+        "permalink": "/news/2022-01-07-1-congratulations-to-dr-xi-zheng-for-becoming-a-member-of-program/"
+      },
+      {
+        "file": "_news/2022-01-07-3-an-exciting-opportunity-exists-for-a-motivated-and-proactive.md",
+        "legacy_id": "3",
+        "source_order": 14,
+        "permalink": "/news/2022-01-07-3-an-exciting-opportunity-exists-for-a-motivated-and-proactive/"
+      }
+    ],
+    "people": [
+      {
+        "file": "_people/james-xi-zheng.md",
+        "category": "director",
+        "section": "Director",
+        "order": 1,
+        "permalink": "/people/james-xi-zheng/"
+      },
+      {
+        "file": "_people/lei-pan.md",
+        "category": "advisory-board",
+        "section": "Advisory Board",
+        "order": 2,
+        "permalink": "/people/lei-pan/"
+      },
+      {
+        "file": "_people/mengshi-zhang.md",
+        "category": "industry-supervisor",
+        "section": "Industry Supervisor",
+        "order": 3,
+        "permalink": "/people/mengshi-zhang/"
+      },
+      {
+        "file": "_people/jian-yang.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 4,
+        "permalink": "/people/jian-yang/"
+      },
+      {
+        "file": "_people/yipeng-zhou.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 5,
+        "permalink": "/people/yipeng-zhou/"
+      },
+      {
+        "file": "_people/yimeng-feng.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 6,
+        "permalink": "/people/yimeng-feng/"
+      },
+      {
+        "file": "_people/alireza-jolfaei.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 7,
+        "permalink": "/people/alireza-jolfaei/"
+      },
+      {
+        "file": "_people/xuyun-zhang.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 8,
+        "permalink": "/people/xuyun-zhang/"
+      },
+      {
+        "file": "_people/tianqing-zhu.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 9,
+        "permalink": "/people/tianqing-zhu/"
+      },
+      {
+        "file": "_people/xiao-liu.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 10,
+        "permalink": "/people/xiao-liu/"
+      },
+      {
+        "file": "_people/sheng-wen.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 11,
+        "permalink": "/people/sheng-wen/"
+      },
+      {
+        "file": "_people/tianyi-zhang.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 12,
+        "permalink": "/people/tianyi-zhang/"
+      },
+      {
+        "file": "_people/huai-liu.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 13,
+        "permalink": "/people/huai-liu/"
+      },
+      {
+        "file": "_people/xiwei-xu.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 14,
+        "permalink": "/people/xiwei-xu/"
+      },
+      {
+        "file": "_people/jiong-jin.md",
+        "category": "program-leaders",
+        "section": "Program Leaders",
+        "order": 15,
+        "permalink": "/people/jiong-jin/"
+      },
+      {
+        "file": "_people/robert-abbas.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 16,
+        "permalink": "/people/robert-abbas/"
+      },
+      {
+        "file": "_people/yao-deng.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 17,
+        "permalink": "/people/yao-deng/"
+      },
+      {
+        "file": "_people/yupeng-jiang.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 18,
+        "permalink": "/people/yupeng-jiang/"
+      },
+      {
+        "file": "_people/jiwei-guan.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 19,
+        "permalink": "/people/jiwei-guan/"
+      },
+      {
+        "file": "_people/chuxuan-tong.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 20,
+        "permalink": "/people/chuxuan-tong/"
+      },
+      {
+        "file": "_people/yuzhe-tian.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 21,
+        "permalink": "/people/yuzhe-tian/"
+      },
+      {
+        "file": "_people/yi-he.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 22,
+        "permalink": "/people/yi-he/"
+      },
+      {
+        "file": "_people/jiaqi-ge-current.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 23,
+        "permalink": "/people/jiaqi-ge-current/"
+      },
+      {
+        "file": "_people/linfeng-liang.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 24,
+        "permalink": "/people/linfeng-liang/"
+      },
+      {
+        "file": "_people/jiaohong-yao.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 25,
+        "permalink": "/people/jiaohong-yao/"
+      },
+      {
+        "file": "_people/siwei-luo.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 26,
+        "permalink": "/people/siwei-luo/"
+      },
+      {
+        "file": "_people/wenyu-dong.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 27,
+        "permalink": "/people/wenyu-dong/"
+      },
+      {
+        "file": "_people/qiong-li.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 28,
+        "permalink": "/people/qiong-li/"
+      },
+      {
+        "file": "_people/zhen-lu.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 29,
+        "permalink": "/people/zhen-lu/"
+      },
+      {
+        "file": "_people/bingbing-zhu.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 30,
+        "permalink": "/people/bingbing-zhu/"
+      },
+      {
+        "file": "_people/shuaiyi-sun.md",
+        "category": "industry-engagement-officers",
+        "section": "Industry Engagement Officers",
+        "order": 31,
+        "permalink": "/people/shuaiyi-sun/"
+      },
+      {
+        "file": "_people/jianchao-lu.md",
+        "category": "alumni-and-visit-scholars",
+        "section": "Alumni and Visit Scholar",
+        "order": 32,
+        "permalink": "/people/jianchao-lu/"
+      },
+      {
+        "file": "_people/yuxuan-cai.md",
+        "category": "alumni-and-visit-scholars",
+        "section": "Alumni and Visit Scholar",
+        "order": 33,
+        "permalink": "/people/yuxuan-cai/"
+      },
+      {
+        "file": "_people/jiaqi-ge-alumni.md",
+        "category": "alumni-and-visit-scholars",
+        "section": "Alumni and Visit Scholar",
+        "order": 34,
+        "permalink": "/people/jiaqi-ge-alumni/"
+      },
+      {
+        "file": "_people/guannan-lou.md",
+        "category": "alumni-and-visit-scholars",
+        "section": "Alumni and Visit Scholar",
+        "order": 35,
+        "permalink": "/people/guannan-lou/"
+      },
+      {
+        "file": "_people/samundra-deep.md",
+        "category": "alumni-and-visit-scholars",
+        "section": "Alumni and Visit Scholar",
+        "order": 36,
+        "permalink": "/people/samundra-deep/"
+      },
+      {
+        "file": "_people/yong-li.md",
+        "category": "alumni-and-visit-scholars",
+        "section": "Alumni and Visit Scholar",
+        "order": 37,
+        "permalink": "/people/yong-li/"
+      }
+    ],
+    "projects": [
+      {
+        "file": "_projects/01-advancing-robust-autonomy-in-cyber-physical-systems-ci-arc.md",
+        "category": "grants",
+        "order": 1,
+        "permalink": "/projects/advancing-robust-autonomy-in-cyber-physical-systems-ci-arc/"
+      },
+      {
+        "file": "_projects/02-robust-and-scalable-autonomous-landing-for-drones-ci-arc-linkage.md",
+        "category": "grants",
+        "order": 2,
+        "permalink": "/projects/robust-and-scalable-autonomous-landing-for-drones-ci-arc-linkage/"
+      },
+      {
+        "file": "_projects/03-context-aware-verification-and-validation-framework-for.md",
+        "category": "grants",
+        "order": 3,
+        "permalink": "/projects/context-aware-verification-and-validation-framework-for/"
+      },
+      {
+        "file": "_projects/04-a-safety-preserving-ecosystem-for-autonomous-driving-leader-ci.md",
+        "category": "grants",
+        "order": 4,
+        "permalink": "/projects/a-safety-preserving-ecosystem-for-autonomous-driving-leader-ci/"
+      },
+      {
+        "file": "_projects/05-trustworthy-ai-human-interaction-in-cyber-physical-systems.md",
+        "category": "grants",
+        "order": 5,
+        "permalink": "/projects/trustworthy-ai-human-interaction-in-cyber-physical-systems/"
+      },
+      {
+        "file": "_projects/06-enhanced-adas-intelligent-assisted-driving.md",
+        "category": "other",
+        "order": 6,
+        "permalink": "/projects/enhanced-adas-intelligent-assisted-driving/"
+      },
+      {
+        "file": "_projects/07-large-scale-e-commerce-decision-making-intelligence-model.md",
+        "category": "other",
+        "order": 7,
+        "permalink": "/projects/large-scale-e-commerce-decision-making-intelligence-model/"
+      },
+      {
+        "file": "_projects/08-driving-condition-recognition.md",
+        "category": "other",
+        "order": 8,
+        "permalink": "/projects/driving-condition-recognition/"
+      }
+    ]
+  },
+  "assets": [
+    {
+      "source_category": "group",
+      "source_name": "Alireza-Jolfaei.jpg",
+      "destination": "/assets/pic/people/Alireza-Jolfaei.jpg",
+      "source_bytes": 148009,
+      "destination_bytes": 148009,
+      "source_sha256": "120b96da29a77f483187fd92a8607495f4d2a432dbde0f72df4b9610875a23ec",
+      "destination_sha256": "120b96da29a77f483187fd92a8607495f4d2a432dbde0f72df4b9610875a23ec",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "GuannanLou.jpg",
+      "destination": "/assets/pic/people/GuannanLou.jpg",
+      "source_bytes": 193130,
+      "destination_bytes": 193130,
+      "source_sha256": "2a8480f16c90414237d2d1dfdeaa24b7d0630b21882c9eab6b7cb5513e609193",
+      "destination_sha256": "2a8480f16c90414237d2d1dfdeaa24b7d0630b21882c9eab6b7cb5513e609193",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "Huai-Liu.jpg",
+      "destination": "/assets/pic/people/Huai-Liu.jpg",
+      "source_bytes": 5052,
+      "destination_bytes": 5052,
+      "source_sha256": "ea8481c88df571a8f9e5561e2deba9f4bb2b19c16a1f4c7c0be69b354ce12b1b",
+      "destination_sha256": "ea8481c88df571a8f9e5561e2deba9f4bb2b19c16a1f4c7c0be69b354ce12b1b",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "JianYang.jpg",
+      "destination": "/assets/pic/people/JianYang.jpg",
+      "source_bytes": 10260,
+      "destination_bytes": 10260,
+      "source_sha256": "4d8cf94f06dab3db5fe946cf574c00ffc851ec0aecb968b2406b9e09f1e39548",
+      "destination_sha256": "4d8cf94f06dab3db5fe946cf574c00ffc851ec0aecb968b2406b9e09f1e39548",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "JiaqiGe.jpg",
+      "destination": "/assets/pic/people/JiaqiGe.jpg",
+      "source_bytes": 331078,
+      "destination_bytes": 331078,
+      "source_sha256": "ef2ed53f38efcbac1c560a1ee93b9a298b550fe12f0369ea4ab6db9e473a91f3",
+      "destination_sha256": "ef2ed53f38efcbac1c560a1ee93b9a298b550fe12f0369ea4ab6db9e473a91f3",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "JiongJin.jpg",
+      "destination": "/assets/pic/people/JiongJin.jpg",
+      "source_bytes": 131586,
+      "destination_bytes": 131586,
+      "source_sha256": "37636f38cd68d5a8258f767e59c3b0a66abe637a9b37e741f9543f86435a81e3",
+      "destination_sha256": "37636f38cd68d5a8258f767e59c3b0a66abe637a9b37e741f9543f86435a81e3",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "Jiwei-Guan.jpg",
+      "destination": "/assets/pic/people/Jiwei-Guan.jpg",
+      "source_bytes": 91672,
+      "destination_bytes": 91672,
+      "source_sha256": "dd342475401e8440eca3f2a52108396fcaaf13855656a1a40109151a781b1a9d",
+      "destination_sha256": "dd342475401e8440eca3f2a52108396fcaaf13855656a1a40109151a781b1a9d",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "LeiPan.jpg",
+      "destination": "/assets/pic/people/LeiPan.jpg",
+      "source_bytes": 9513,
+      "destination_bytes": 9513,
+      "source_sha256": "50dd7a0d246cf1bd8367db93d3ab067e8f86c41210f3524ed9a0db08f6a5f370",
+      "destination_sha256": "50dd7a0d246cf1bd8367db93d3ab067e8f86c41210f3524ed9a0db08f6a5f370",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "Linfeng.JPG",
+      "destination": "/assets/pic/people/Linfeng.JPG",
+      "source_bytes": 244843,
+      "destination_bytes": 244843,
+      "source_sha256": "2457a819fcf20c8907ef02e1cd4024880f65cc6b4732eefb71e5b1e898b88e52",
+      "destination_sha256": "2457a819fcf20c8907ef02e1cd4024880f65cc6b4732eefb71e5b1e898b88e52",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "MengshiZhang.jpg",
+      "destination": "/assets/pic/people/MengshiZhang.jpg",
+      "source_bytes": 17240,
+      "destination_bytes": 17240,
+      "source_sha256": "f37b5896ffafdffe0aa75851028554bc9d21c0bc63d224453763de310954bdd1",
+      "destination_sha256": "f37b5896ffafdffe0aa75851028554bc9d21c0bc63d224453763de310954bdd1",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "RobertAbbas.jpg",
+      "destination": "/assets/pic/people/RobertAbbas.jpg",
+      "source_bytes": 2615,
+      "destination_bytes": 2615,
+      "source_sha256": "c335db8e8ed3ff64269020ca934d91239b91c074de0d1aba166b0f32e1cb11b1",
+      "destination_sha256": "c335db8e8ed3ff64269020ca934d91239b91c074de0d1aba166b0f32e1cb11b1",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "ShengWen.jpg",
+      "destination": "/assets/pic/people/ShengWen.jpg",
+      "source_bytes": 3691,
+      "destination_bytes": 3691,
+      "source_sha256": "1f63a9a076d40a87b15c49b96c6d555e846e746113974145b17e190b42c188d1",
+      "destination_sha256": "1f63a9a076d40a87b15c49b96c6d555e846e746113974145b17e190b42c188d1",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "TianyiZhang.jpg",
+      "destination": "/assets/pic/people/TianyiZhang.jpg",
+      "source_bytes": 16022,
+      "destination_bytes": 16022,
+      "source_sha256": "fbb92e0b023c670f61830b6aa383a7aac0cac9b2622eed6635ce3fac31c08a1f",
+      "destination_sha256": "fbb92e0b023c670f61830b6aa383a7aac0cac9b2622eed6635ce3fac31c08a1f",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "XiweiXU.jpg",
+      "destination": "/assets/pic/people/XiweiXU.jpg",
+      "source_bytes": 603081,
+      "destination_bytes": 603081,
+      "source_sha256": "ed1bba39ba54bbea629a78cab377c8b22559f3fa0cf5b8322d6c0e24e034c932",
+      "destination_sha256": "ed1bba39ba54bbea629a78cab377c8b22559f3fa0cf5b8322d6c0e24e034c932",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "XuyunZhang.jpg",
+      "destination": "/assets/pic/people/XuyunZhang.jpg",
+      "source_bytes": 292176,
+      "destination_bytes": 292176,
+      "source_sha256": "263546fba0097d62ee9affbcb6fff4adc7ce46e2beec2e1897b19816066c5151",
+      "destination_sha256": "263546fba0097d62ee9affbcb6fff4adc7ce46e2beec2e1897b19816066c5151",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "YiHe.jpg",
+      "destination": "/assets/pic/people/YiHe.jpg",
+      "source_bytes": 262562,
+      "destination_bytes": 262562,
+      "source_sha256": "d86097c2b2bfafc6f654c687cb203e3078b9e8680aa0a6c371675f9119ccef45",
+      "destination_sha256": "d86097c2b2bfafc6f654c687cb203e3078b9e8680aa0a6c371675f9119ccef45",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "Yimeng-Feng.jpg",
+      "destination": "/assets/pic/people/Yimeng-Feng.jpg",
+      "source_bytes": 4728,
+      "destination_bytes": 4728,
+      "source_sha256": "1d0a7aef80bae02e5bbb32c0242859b7f722031f8e74088adae395bd280baf0d",
+      "destination_sha256": "1d0a7aef80bae02e5bbb32c0242859b7f722031f8e74088adae395bd280baf0d",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "Yipeng-Zhou.jpg",
+      "destination": "/assets/pic/people/Yipeng-Zhou.jpg",
+      "source_bytes": 69266,
+      "destination_bytes": 69266,
+      "source_sha256": "bfa8fb6e35a66ebe6a1b89e372c37cbef2da05d61b9bfa706575e9ac01d090f7",
+      "destination_sha256": "bfa8fb6e35a66ebe6a1b89e372c37cbef2da05d61b9bfa706575e9ac01d090f7",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "Yong-Li.jpg",
+      "destination": "/assets/pic/people/Yong-Li.jpg",
+      "source_bytes": 19655,
+      "destination_bytes": 19655,
+      "source_sha256": "25132d82b6015861cb9de9cb05105c5ebb43530725084ae119a0bc23fa72b03b",
+      "destination_sha256": "25132d82b6015861cb9de9cb05105c5ebb43530725084ae119a0bc23fa72b03b",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "YupengJiang.jpg",
+      "destination": "/assets/pic/people/YupengJiang.jpg",
+      "source_bytes": 51611,
+      "destination_bytes": 51611,
+      "source_sha256": "15ff504c5cde8866b5a16b35b998c1187b39e138c01dba5751ca8e5442636b17",
+      "destination_sha256": "15ff504c5cde8866b5a16b35b998c1187b39e138c01dba5751ca8e5442636b17",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "Yuzhe-Tian.jpg",
+      "destination": "/assets/pic/people/Yuzhe-Tian.jpg",
+      "source_bytes": 3883,
+      "destination_bytes": 3883,
+      "source_sha256": "b0c59b19a29a297bdf7b9bbbf7cdcde09cb5fd86016cd0bcfcd84730d3ae6fed",
+      "destination_sha256": "b0c59b19a29a297bdf7b9bbbf7cdcde09cb5fd86016cd0bcfcd84730d3ae6fed",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "bingbing-zhu.jpg",
+      "destination": "/assets/pic/people/bingbing-zhu.jpg",
+      "source_bytes": 63410,
+      "destination_bytes": 63410,
+      "source_sha256": "6143697cf860752d0c1d13ade6b52ae82854c0f5cdacb36f3ff4874e771b6a26",
+      "destination_sha256": "6143697cf860752d0c1d13ade6b52ae82854c0f5cdacb36f3ff4874e771b6a26",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "cai_yuxuan.jpg",
+      "destination": "/assets/pic/people/cai_yuxuan.jpg",
+      "source_bytes": 3402549,
+      "destination_bytes": 261486,
+      "source_sha256": "95b1d114d47b3d6beac6638cadebe2bdedc730b727fdc4524ba3f95d9e0af995",
+      "destination_sha256": "e103e2944be3c6af6cfcbbef73f5fcf4974c80b9abc1983f9c8e57d030a83001",
+      "optimization": "pillow-12.3.0-jpeg-q85-max-2000"
+    },
+    {
+      "source_category": "group",
+      "source_name": "dy.jpg",
+      "destination": "/assets/pic/people/dy.jpg",
+      "source_bytes": 160117,
+      "destination_bytes": 160117,
+      "source_sha256": "2b34bceb1b0ebf85bc52d33d91a566ec01fa2b386f4bcc6280324bd0cf25b563",
+      "destination_sha256": "2b34bceb1b0ebf85bc52d33d91a566ec01fa2b386f4bcc6280324bd0cf25b563",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "jameszheng.jpg",
+      "destination": "/assets/pic/people/jameszheng.jpg",
+      "source_bytes": 141046,
+      "destination_bytes": 141046,
+      "source_sha256": "71c1b1093971461d556f05095bd88b5d7e9a860c0595def1dddbb31258eab196",
+      "destination_sha256": "71c1b1093971461d556f05095bd88b5d7e9a860c0595def1dddbb31258eab196",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "jiaohong-yao.jpg",
+      "destination": "/assets/pic/people/jiaohong-yao.jpg",
+      "source_bytes": 294515,
+      "destination_bytes": 294515,
+      "source_sha256": "82b3703e1f6f29e4c08a7be23a3377aeeb6ed80ba9fa5b438b53ecc7abd33754",
+      "destination_sha256": "82b3703e1f6f29e4c08a7be23a3377aeeb6ed80ba9fa5b438b53ecc7abd33754",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "liuxiao.jpg",
+      "destination": "/assets/pic/people/liuxiao.jpg",
+      "source_bytes": 312414,
+      "destination_bytes": 312414,
+      "source_sha256": "a8d03c71deaf5b721be897bc34a177c702990ff91998ea463c5f198dbccce034",
+      "destination_sha256": "a8d03c71deaf5b721be897bc34a177c702990ff91998ea463c5f198dbccce034",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "lu.jpg",
+      "destination": "/assets/pic/people/lu.jpg",
+      "source_bytes": 196983,
+      "destination_bytes": 196983,
+      "source_sha256": "e35362a098a9cae5bb05dcc65bcec35ce934efcf38d96ce8aa1a4351187438a5",
+      "destination_sha256": "e35362a098a9cae5bb05dcc65bcec35ce934efcf38d96ce8aa1a4351187438a5",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "qiong-li.jpg",
+      "destination": "/assets/pic/people/qiong-li.jpg",
+      "source_bytes": 131073,
+      "destination_bytes": 131073,
+      "source_sha256": "8424018d6cbbf6a9d32ed2f8f871a852a2dcacf7d1cc4108e0373eae203de5c5",
+      "destination_sha256": "8424018d6cbbf6a9d32ed2f8f871a852a2dcacf7d1cc4108e0373eae203de5c5",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "sam.jpg",
+      "destination": "/assets/pic/people/sam.jpg",
+      "source_bytes": 93312,
+      "destination_bytes": 93312,
+      "source_sha256": "3b0adc2b4d9da79c33b6f8e3ab8e28e396f24b1fdf62082d34e6fa10712b92e6",
+      "destination_sha256": "3b0adc2b4d9da79c33b6f8e3ab8e28e396f24b1fdf62082d34e6fa10712b92e6",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "shuaiyi-sun.jpg",
+      "destination": "/assets/pic/people/shuaiyi-sun.jpg",
+      "source_bytes": 547277,
+      "destination_bytes": 547277,
+      "source_sha256": "5b9c1cfca2809cae757de3e313cad6c35dfae772403e2d3e58da7a8ca44de1ad",
+      "destination_sha256": "5b9c1cfca2809cae757de3e313cad6c35dfae772403e2d3e58da7a8ca44de1ad",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "siwei-luo.jpg",
+      "destination": "/assets/pic/people/siwei-luo.jpg",
+      "source_bytes": 6271442,
+      "destination_bytes": 462615,
+      "source_sha256": "6e1e5bfe11ca135125b187b73b88b9cdcf385f5d29ff8cf2b2dfe76f4ffa004c",
+      "destination_sha256": "f7fe045b72875a047d3042e88eacd11b915c785c086dc06cf066888b22176d77",
+      "optimization": "pillow-12.3.0-jpeg-q85-max-2000"
+    },
+    {
+      "source_category": "group",
+      "source_name": "tianqing.jpg",
+      "destination": "/assets/pic/people/tianqing.jpg",
+      "source_bytes": 23758,
+      "destination_bytes": 23758,
+      "source_sha256": "7e47a9581e7cad329080821e2abafd2f9ac2908ae33baf720d6a3cb934c97e80",
+      "destination_sha256": "7e47a9581e7cad329080821e2abafd2f9ac2908ae33baf720d6a3cb934c97e80",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "tong.jpg",
+      "destination": "/assets/pic/people/tong.jpg",
+      "source_bytes": 143650,
+      "destination_bytes": 143650,
+      "source_sha256": "8f074618f1bc70437aed07fdb280ab769aa04798dd95da845de6848bdbb05941",
+      "destination_sha256": "8f074618f1bc70437aed07fdb280ab769aa04798dd95da845de6848bdbb05941",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "group",
+      "source_name": "wenyu-dong.jpg",
+      "destination": "/assets/pic/people/wenyu-dong.jpg",
+      "source_bytes": 5845196,
+      "destination_bytes": 233812,
+      "source_sha256": "27cfeb944344b75ab643dd68210906702c0469caaed2459e2258f310543a9547",
+      "destination_sha256": "c106c4c068e8fc48c0d389c0b51ceff787df1550b9c40f7ac3f3c0885ef31ecf",
+      "optimization": "pillow-12.3.0-jpeg-q85-max-2000"
+    },
+    {
+      "source_category": "group",
+      "source_name": "zhen-lu.jpg",
+      "destination": "/assets/pic/people/zhen-lu.jpg",
+      "source_bytes": 195424,
+      "destination_bytes": 195424,
+      "source_sha256": "a8956da37e6d4bae4b49e16f2a6ed9674e9a345e7770be92bbbe31928f32dd98",
+      "destination_sha256": "a8956da37e6d4bae4b49e16f2a6ed9674e9a345e7770be92bbbe31928f32dd98",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "ADAS.jpg",
+      "destination": "/assets/pic/projects/ADAS.jpg",
+      "source_bytes": 73184,
+      "destination_bytes": 73184,
+      "source_sha256": "d22fc31b06a352ef05855a4dc910397aeeae1b80d3aa21e669c6f1f056bdb321",
+      "destination_sha256": "d22fc31b06a352ef05855a4dc910397aeeae1b80d3aa21e669c6f1f056bdb321",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "Cyber_physical.jpg",
+      "destination": "/assets/pic/projects/Cyber_physical.jpg",
+      "source_bytes": 184375,
+      "destination_bytes": 184375,
+      "source_sha256": "d6f846b312dd8d097d4960024f178110d05de5d84be92c9a9476415563cd729e",
+      "destination_sha256": "d6f846b312dd8d097d4960024f178110d05de5d84be92c9a9476415563cd729e",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "Picture1.png",
+      "destination": "/assets/pic/projects/Picture1.png",
+      "source_bytes": 986798,
+      "destination_bytes": 986798,
+      "source_sha256": "428b5a5bde424ff18f20d00af1951210cb737dd0adca2952f292d3593814b03d",
+      "destination_sha256": "428b5a5bde424ff18f20d00af1951210cb737dd0adca2952f292d3593814b03d",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "Picture2.png",
+      "destination": "/assets/pic/projects/Picture2.png",
+      "source_bytes": 177917,
+      "destination_bytes": 177917,
+      "source_sha256": "989e4b172eb3b0723f9d855c589d2db780c1d3a1daab2cac283f844a19e947ec",
+      "destination_sha256": "989e4b172eb3b0723f9d855c589d2db780c1d3a1daab2cac283f844a19e947ec",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "Picture3.jpeg",
+      "destination": "/assets/pic/projects/Picture3.jpeg",
+      "source_bytes": 120303,
+      "destination_bytes": 120303,
+      "source_sha256": "0e0e1bedb07811d22711f7817840ebaefbb41a867f0a86e8ca599f3ae1d6299c",
+      "destination_sha256": "0e0e1bedb07811d22711f7817840ebaefbb41a867f0a86e8ca599f3ae1d6299c",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "Picture4.jpg",
+      "destination": "/assets/pic/projects/Picture4.jpg",
+      "source_bytes": 1054310,
+      "destination_bytes": 292128,
+      "source_sha256": "0708ab0a90eae8286d00f320276f4996a116449184c588f94171b48174bc3db7",
+      "destination_sha256": "68a45eb226ff7063def5c24882f012222f810918ea6521e35b7b4bd94fe45870",
+      "optimization": "pillow-12.3.0-jpeg-q85-max-2000"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "alibaba.jpg",
+      "destination": "/assets/pic/projects/alibaba.jpg",
+      "source_bytes": 97057,
+      "destination_bytes": 97057,
+      "source_sha256": "88ddc7d82c7f9aab940e5e004ffd54f196fba6ce986a6708e35778e0ccac161a",
+      "destination_sha256": "88ddc7d82c7f9aab940e5e004ffd54f196fba6ce986a6708e35778e0ccac161a",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "autonomous.jpeg",
+      "destination": "/assets/pic/projects/autonomous.jpeg",
+      "source_bytes": 76472,
+      "destination_bytes": 76472,
+      "source_sha256": "f1f367cfc68a5c86e99f7d5b15b654c2669ee1ad2e8d8634b626aad34f44122c",
+      "destination_sha256": "f1f367cfc68a5c86e99f7d5b15b654c2669ee1ad2e8d8634b626aad34f44122c",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "battery.jpg",
+      "destination": "/assets/pic/projects/battery.jpg",
+      "source_bytes": 21080,
+      "destination_bytes": 21080,
+      "source_sha256": "c4710fa41f20450312c4072f94a4ca3fd7cc241d461a3b1dea72985f8b64b478",
+      "destination_sha256": "c4710fa41f20450312c4072f94a4ca3fd7cc241d461a3b1dea72985f8b64b478",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "projects",
+      "source_name": "safe.jpg",
+      "destination": "/assets/pic/projects/safe.jpg",
+      "source_bytes": 51952,
+      "destination_bytes": 51952,
+      "source_sha256": "d5ade27862e633fcbac3a97b0f4cdda396d268c15df8e490d36a657fac361666",
+      "destination_sha256": "d5ade27862e633fcbac3a97b0f4cdda396d268c15df8e490d36a657fac361666",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "logo",
+      "source_name": "bannerPercom2022_small.jpg",
+      "destination": "/assets/pic/brand/bannerPercom2022_small.jpg",
+      "source_bytes": 171656,
+      "destination_bytes": 171656,
+      "source_sha256": "7fa782eadfe44e49b0895634c316d7a8d476b8f848f9061c90c42366a1234c4a",
+      "destination_sha256": "7fa782eadfe44e49b0895634c316d7a8d476b8f848f9061c90c42366a1234c4a",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "logo",
+      "source_name": "fse_2022_small.jpg",
+      "destination": "/assets/pic/brand/fse_2022_small.jpg",
+      "source_bytes": 42029,
+      "destination_bytes": 42029,
+      "source_sha256": "b50dc912e592470cc355cb0761b8526ed9fa709db370757e816b6f9b398305df",
+      "destination_sha256": "b50dc912e592470cc355cb0761b8526ed9fa709db370757e816b6f9b398305df",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "logo",
+      "source_name": "logo-large-old.png",
+      "destination": "/assets/pic/brand/logo-large-old.png",
+      "source_bytes": 64123,
+      "destination_bytes": 64123,
+      "source_sha256": "d08e4d5d92baab1bac3acffcc168597cfc0636eae1fce5ffea1130315d769f51",
+      "destination_sha256": "d08e4d5d92baab1bac3acffcc168597cfc0636eae1fce5ffea1130315d769f51",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "logo",
+      "source_name": "logo-large.png",
+      "destination": "/assets/pic/brand/logo-large.png",
+      "source_bytes": 589623,
+      "destination_bytes": 589623,
+      "source_sha256": "76ba09089db3976e7a39a127dc5535adb4d21c2531ef2492457b6f1533ff4858",
+      "destination_sha256": "76ba09089db3976e7a39a127dc5535adb4d21c2531ef2492457b6f1533ff4858",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "logo",
+      "source_name": "logo.png",
+      "destination": "/assets/pic/brand/logo.png",
+      "source_bytes": 385250,
+      "destination_bytes": 385250,
+      "source_sha256": "2dd82fb8b9ab30e8fdd9e627a1c9051335d9c4e35ec076d8242990c3623c7ee6",
+      "destination_sha256": "2dd82fb8b9ab30e8fdd9e627a1c9051335d9c4e35ec076d8242990c3623c7ee6",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "logo",
+      "source_name": "logo2.png",
+      "destination": "/assets/pic/brand/logo2.png",
+      "source_bytes": 45659,
+      "destination_bytes": 45659,
+      "source_sha256": "9419b66b8b06ac8b6f0630d967595509ab2c0b87b2c084ef1db76e06d93f69a8",
+      "destination_sha256": "9419b66b8b06ac8b6f0630d967595509ab2c0b87b2c084ef1db76e06d93f69a8",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "logo",
+      "source_name": "logo3.png",
+      "destination": "/assets/pic/brand/logo3.png",
+      "source_bytes": 26571,
+      "destination_bytes": 26571,
+      "source_sha256": "72c732c1361837c358c46329b8839de5bf18c08822f40228fe078055558c3569",
+      "destination_sha256": "72c732c1361837c358c46329b8839de5bf18c08822f40228fe078055558c3569",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "logo",
+      "source_name": "logo_uni-old.png",
+      "destination": "/assets/pic/brand/logo_uni-old.png",
+      "source_bytes": 50225,
+      "destination_bytes": 50225,
+      "source_sha256": "f37552614ddd898e5164ba028113091d05b28c48ecf692c06d064ee55eedc031",
+      "destination_sha256": "f37552614ddd898e5164ba028113091d05b28c48ecf692c06d064ee55eedc031",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "background",
+      "source_name": "background.jpg",
+      "destination": "/assets/pic/brand/background.jpg",
+      "source_bytes": 65995,
+      "destination_bytes": 65995,
+      "source_sha256": "e6bb34738a6a554955e0f12ceb8c632ba4d10613cb7a4ca5303776f15cc9e801",
+      "destination_sha256": "e6bb34738a6a554955e0f12ceb8c632ba4d10613cb7a4ca5303776f15cc9e801",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "background",
+      "source_name": "computer_room_small.jpg",
+      "destination": "/assets/pic/brand/computer_room_small.jpg",
+      "source_bytes": 68090,
+      "destination_bytes": 68090,
+      "source_sha256": "3601f95c4e68bf3e7978638fdf53f36d1a259665bd1acae38e089247c44dc876",
+      "destination_sha256": "3601f95c4e68bf3e7978638fdf53f36d1a259665bd1acae38e089247c44dc876",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "background",
+      "source_name": "conference.jpg",
+      "destination": "/assets/pic/brand/conference.jpg",
+      "source_bytes": 79317,
+      "destination_bytes": 79317,
+      "source_sha256": "370330e83a9939aa0075bccc29dcf198b034f6dd0219a02e0df34bb8bc952998",
+      "destination_sha256": "370330e83a9939aa0075bccc29dcf198b034f6dd0219a02e0df34bb8bc952998",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "background",
+      "source_name": "project_70.jpg",
+      "destination": "/assets/pic/brand/project_70.jpg",
+      "source_bytes": 35683,
+      "destination_bytes": 35683,
+      "source_sha256": "e045d408f1bea8792e1ba50b34c9f4d3eb512d5f6c3bba61c99dcdf8a4ed0094",
+      "destination_sha256": "e045d408f1bea8792e1ba50b34c9f4d3eb512d5f6c3bba61c99dcdf8a4ed0094",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "doc",
+      "source_name": "Top-Downloaded-Article-2017-2018.pdf",
+      "destination": "/assets/documents/Top-Downloaded-Article-2017-2018.pdf",
+      "source_bytes": 400863,
+      "destination_bytes": 400863,
+      "source_sha256": "a0b07eba01faae53cb02b6581c15e72f217c6e8dde0af0f8b27a468e235a867c",
+      "destination_sha256": "a0b07eba01faae53cb02b6581c15e72f217c6e8dde0af0f8b27a468e235a867c",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "doc",
+      "source_name": "citations2.pdf",
+      "destination": "/assets/documents/citations2.pdf",
+      "source_bytes": 745994,
+      "destination_bytes": 745994,
+      "source_sha256": "bef70b9df1f48209d3fe58e599ecc44b4d49cb7c0a63540f27614e20497771b1",
+      "destination_sha256": "bef70b9df1f48209d3fe58e599ecc44b4d49cb7c0a63540f27614e20497771b1",
+      "optimization": "copied-original"
+    },
+    {
+      "source_category": "doc",
+      "source_name": "innovation-project.pdf",
+      "destination": "/assets/documents/innovation-project.pdf",
+      "source_bytes": 162752,
+      "destination_bytes": 162752,
+      "source_sha256": "08578e9e0f3ca394d2634f62d3f61ce5495a59b00bef18dfd506ae71c5199f07",
+      "destination_sha256": "08578e9e0f3ca394d2634f62d3f61ce5495a59b00bef18dfd506ae71c5199f07",
+      "optimization": "copied-original"
+    }
+  ],
+  "flags": [
+    {
+      "id": "broken-recruitment-pdf",
+      "status": "flagged",
+      "legacy_article_id": "3"
+    },
+    {
+      "id": "missing-logo-light",
+      "status": "flagged",
+      "legacy_path": "/img/logo/logo-light.png"
+    },
+    {
+      "id": "cloudflare-email-path",
+      "status": "excluded",
+      "legacy_path": "/cdn-cgi/l/email-protection"
+    },
+    {
+      "id": "duplicate-person-jiaqi-ge",
+      "status": "preserved",
+      "records": [
+        "jiaqi-ge-current.md",
+        "jiaqi-ge-alumni.md"
+      ]
+    },
+    {
+      "id": "duplicate-publication-solguard",
+      "status": "preserved",
+      "records": [
+        "publication-060",
+        "publication-065"
+      ]
+    },
+    {
+      "id": "ten-versus-nine-heading",
+      "status": "flagged",
+      "record_count": 9
+    },
+    {
+      "id": "dns-broken-auckland-profile",
+      "status": "flagged",
+      "url": "https://unidirectory.auckland.ac.nz/profile/xuyun-zhang/"
+    },
+    {
+      "id": "bot-blocked-external-links",
+      "status": "manual-review-required"
+    }
+  ]
+}
