@@ -1,11 +1,11 @@
 name: Package to zip
 on:
   push:
-    branches: ["main"]          # change if you deploy from another branch
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
-  contents: write               # create/update releases
+  contents: write
 
 jobs:
   build-and-release:
@@ -14,14 +14,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Replace _config.yml with the prod config only for this workflow run
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-legacy-migration.txt
+
+      - name: Validate source before build
+        run: |
+          python scripts/validate_site.py
+          python -m unittest discover -s tests -v
+
       - name: Use production config
         run: |
           test -f _config_prod.yml || { echo "::error ::_config_prod.yml not found"; exit 1; }
           cp _config_prod.yml _config.yml
           echo "Using _config_prod.yml as _config.yml for this build"
 
-      # Build using GitHub Pages' preinstalled Jekyll toolchain
       - name: Build with Jekyll (Pages deps)
         uses: actions/jekyll-build-pages@v1
         with:
@@ -29,6 +40,9 @@ jobs:
           destination: ./_site
         env:
           JEKYLL_ENV: production
+
+      - name: Validate generated site before packaging
+        run: python scripts/validate_site.py --site _site
 
       - name: Zip site
         run: |
@@ -39,10 +53,10 @@ jobs:
       - name: Create/Update single 'prod' release and upload site.zip
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: prod                   # single rolling tag
-          name: Production Build           # release name
+          tag_name: prod
+          name: Production Build
           draft: false
           prerelease: false
-          make_latest: true                # mark as latest
-          replace_assets: true             # overwrite existing site.zip
+          make_latest: true
+          replace_assets: true
           files: site.zip

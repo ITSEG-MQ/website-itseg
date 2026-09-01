@@ -1,9 +1,9 @@
 legacy_url,new_url,content_type,status,notes
-/index.php,/,page,planned-global,Global page conversion is outside this migration.
-/news.php,/news/,collection-index,planned-global,Collection content migrated; index page is out of scope.
-/group.php,/people/,collection-index,planned-global,37 people entries migrated.
-/projects.php,/projects/,collection-index,planned-global,8 project entries migrated.
-/publications.php,/publications/,collection-index,planned-global,116 publication rows migrated.
+/index.php,/,page,migrated,ITSEG home page implemented.
+/news.php,/news/,collection-index,migrated,News index implemented with 14 records.
+/group.php,/people/,collection-index,migrated,People index implemented with 37 source records.
+/projects.php,/projects/,collection-index,migrated,Projects index implemented with 8 records.
+/publications.php,/publications/,collection-index,migrated,Publications index implemented with 116 records.
 /post.php?id=80,/news/2024-08-27-80-dr-xi-zheng-has-been-invited-to-serve-on-the-technical-program/,news,migrated,Legacy article id 80
 /post.php?id=79,/news/2024-08-27-79-congratulations-to-dr-xi-zheng-on-being-awarded-the-prestigious/,news,migrated,Legacy article id 79
 /post.php?id=12,/news/2024-02-08-12-congratulations-to-dr-xi-zheng-for-being-an-editor-of-journal-of/,news,migrated,Legacy article id 12

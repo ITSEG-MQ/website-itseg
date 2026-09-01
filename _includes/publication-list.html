@@ -1,0 +1,24 @@
+{% assign records = site.data.publications
+  | where: 'category', include.category
+  | sort: 'source_order'
+%}
+<section
+  class="publication-section section container"
+  aria-labelledby="{{ include.id }}"
+>
+  <div class="section-heading">
+    <h2 id="{{ include.id }}">{{ include.heading }}</h2>
+    <span>{{ records.size }} records</span>
+  </div>
+  <ol class="publication-list">
+    {% for publication in records %}
+      <li id="{{ publication.id }}">
+        <article>
+          <h3>{{ publication.title }}</h3>
+          <p class="publication-authors">{{ publication.authors }}</p>
+          <p>{{ publication.publisher }}</p>
+        </article>
+      </li>
+    {% endfor %}
+  </ol>
+</section>

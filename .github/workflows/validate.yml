@@ -1,0 +1,43 @@
+name: Validate site
+
+on:
+  push:
+    branches:
+      - "feature/**"
+      - "feat/**"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-legacy-migration.txt
+
+      - name: Validate source and migration records
+        run: |
+          python scripts/validate_site.py
+          python -m unittest discover -s tests -v
+
+      - name: Build staging site
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+        env:
+          JEKYLL_ENV: production
+
+      - name: Validate generated site
+        run: python scripts/validate_site.py --site _site

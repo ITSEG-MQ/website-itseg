@@ -1,0 +1,35 @@
+---
+layout: default
+title: Projects
+nav: projects
+description: "ITSEG research projects spanning trustworthy intelligent systems, autonomous systems, learning, and connected technologies."
+permalink: /projects/
+---
+<header class="page-intro container">
+  <p class="eyebrow">Research portfolio</p>
+  <h1>Projects</h1>
+  <p class="lead">Research projects in trustworthy intelligent systems, autonomous systems, learning, and connected technologies.</p>
+</header>
+
+{% assign grants = site.projects | where: 'category', 'grants' | sort: 'category_order' %}
+<section class="section container" aria-labelledby="grants-title">
+  <h2 id="grants-title">Australia National Competitive Grants</h2>
+  <div class="card-grid card-grid-2">
+    {% for item in grants %}
+      {% include project-card.html item=item %}
+    {% endfor %}
+  </div>
+</section>
+
+{% assign other_projects = site.projects | where: 'category', 'other' | sort: 'category_order' %}
+<section class="section section-cream" aria-labelledby="other-title">
+  <div class="container">
+    <h2 id="other-title">Other Projects</h2>
+    <div class="card-grid card-grid-3">
+      {% for item in other_projects %}
+        {% include project-card.html item=item %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+

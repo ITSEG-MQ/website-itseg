@@ -1,0 +1,40 @@
+---
+layout: default
+title: Publications
+nav: publications
+description: "Browse ITSEG publications in intelligent systems, software engineering, cyber-physical systems, and related research areas."
+permalink: /publications/
+---
+<header class="page-intro container">
+  <p class="eyebrow">Research record</p>
+  <h1>Publications</h1>
+  <p class="lead">Explore ITSEG research outputs spanning intelligent systems, software engineering, cyber-physical systems, and connected technologies.</p>
+</header>
+
+<nav class="section-nav container" aria-label="Publication categories">
+  <a href="#career-best">Career-best outputs (9)</a>
+  <a href="#book-chapters">Book chapters (1)</a>
+  <a href="#conferences">Conference proceedings (38)</a>
+  <a href="#journals">Journal articles (68)</a>
+</nav>
+
+{% include publication-list.html
+  category="Ten Career-Best Research Outputs"
+  heading="Career-Best Research Outputs"
+  id="career-best"
+%}
+{% include publication-list.html
+  category="Book Chapters"
+  heading="Book Chapters"
+  id="book-chapters"
+%}
+{% include publication-list.html
+  category="Fully Referred Conference Proceedings"
+  heading="Fully Refereed Conference Proceedings"
+  id="conferences"
+%}
+{% include publication-list.html
+  category="Refereed Journal Articles"
+  heading="Refereed Journal Articles"
+  id="journals"
+%}

@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<article class="detail-page">
+  <div class="container profile-layout">
+    <div>
+      <img class="profile-image" src="{{ page.image | relative_url }}" alt="Portrait of {{ page.title }}" width="480" height="560" loading="lazy">
+    </div>
+    <div>
+      <p class="eyebrow"><a href="{{ '/people/' | relative_url }}">People</a> · {{ page.section }}</p>
+      <h1>{{ page.title }}</h1>
+      <p class="lead">{{ page.role }}</p>
+      {% if page.affiliation %}
+        <p>{{ page.affiliation }}</p>
+      {% endif %}
+      <ul class="contact-list">
+        {% if page.email %}
+          <li><a href="mailto:{{ page.email }}">{{ page.email }}</a></li>
+        {% endif %}
+        {% if page.phone %}
+          <li><a href="tel:{{ page.phone | remove: ' ' }}">{{ page.phone }}</a></li>
+        {% endif %}
+        {% if page.homepage %}
+          <li><a href="{{ page.homepage }}">Research profile or homepage</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  <div class="container narrow prose biography">
+    {{ content }}
+  </div>
+  <nav class="container narrow back-link" aria-label="People return">
+    <a href="{{ '/people/' | relative_url }}">← All people</a>
+  </nav>
+</article>

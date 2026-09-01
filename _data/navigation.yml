@@ -1,0 +1,23 @@
+- label: Home
+  path: /
+  nav: home
+
+- label: News
+  path: /news/
+  nav: news
+
+- label: People
+  path: /people/
+  nav: people
+
+- label: Projects
+  path: /projects/
+  nav: projects
+
+- label: Publications
+  path: /publications/
+  nav: publications
+
+- label: Contact
+  path: /contact/
+  nav: contact

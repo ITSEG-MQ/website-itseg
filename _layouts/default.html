@@ -1,22 +1,33 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ page.title }} | {{ site.title }}</title>
-  <link rel="shortcut icon" type="image/png" href="{{ '/assets/pic/favicon.png' | relative_url }}" />
-  <link rel="stylesheet" type="text/css" media="all" href="{{ '/assets/css/main.css' | relative_url }}" />
-  <link rel="stylesheet" type="text/css" media="all" href="{{ '/assets/css/extra.css' | relative_url }}" />
-</head>
-<body>
-
-  {% include header.html %}
-
-  <main class="content">
-    {{ content }}
-  </main>
-
-  {% include footer.html %}
-
-</body>
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-AU' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% assign meta_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | normalize_whitespace | truncate: 160 %}
+    {% assign canonical_url = page.url | replace: 'index.html', '' | absolute_url %}
+    <title>{% if page.title and page.title != 'Home' %}{{ page.title | escape }} · {% endif %}{{ site.short_title | default: site.title | escape }}</title>
+    <meta name="description" content="{{ meta_description | escape }}">
+    <meta name="theme-color" content="#a80f0a">
+    <meta name="color-scheme" content="light">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="icon" href="{{ '/assets/pic/brand/logo.png' | relative_url }}" type="image/png">
+    <meta property="og:site_name" content="{{ site.short_title | default: site.title | escape }}">
+    <meta property="og:title" content="{% if page.title and page.title != 'Home' %}{{ page.title | escape }} · {% endif %}{{ site.short_title | default: site.title | escape }}">
+    <meta property="og:description" content="{{ meta_description | escape }}">
+    <meta property="og:type" content="{% if page.layout == 'news' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="{{ '/assets/pic/brand/logo-large.png' | absolute_url }}">
+    <meta property="og:image:alt" content="ITSEG lighthouse logo and Intelligent Systems Engineering Group wordmark">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/extra.css' | relative_url }}">
+  </head>
+  <body class="page-{{ page.nav | default: 'detail' }}">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    {% include header.html %}
+    <main id="main-content" tabindex="-1">
+      {{ content }}
+    </main>
+    {% include footer.html %}
+  </body>
 </html>

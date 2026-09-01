@@ -1,0 +1,20 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% assign public_pages = 'index.html,news/index.html,people/index.html,projects/index.html,publications/index.html,contact/index.html' | split: ',' %}
+  {% for page_path in public_pages %}{% assign item = site.pages | where: 'path', page_path | first %}
+  <url><loc>{{ item.url | absolute_url | escape }}</loc></url>
+  {% endfor %}
+  {% assign news_items = site.news | sort: 'date' | reverse %}{% for item in news_items %}
+  <url><loc>{{ item.url | absolute_url | escape }}</loc><lastmod>{{ item.date | date_to_xmlschema }}</lastmod></url>
+  {% endfor %}
+  {% assign people_items = site.people | sort: 'order' %}{% for item in people_items %}
+  <url><loc>{{ item.url | absolute_url | escape }}</loc></url>
+  {% endfor %}
+  {% assign project_items = site.projects | sort: 'order' %}{% for item in project_items %}
+  <url><loc>{{ item.url | absolute_url | escape }}</loc></url>
+  {% endfor %}
+</urlset>

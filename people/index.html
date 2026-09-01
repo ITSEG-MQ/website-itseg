@@ -1,0 +1,72 @@
+---
+layout: default
+title: People
+nav: people
+description: "Meet the researchers, advisers, industry partners, and alumni connected with the Intelligent Systems Engineering Group."
+permalink: /people/
+---
+<header class="page-intro container">
+  <p class="eyebrow">The group</p>
+  <h1>People</h1>
+  <p class="lead">Meet the researchers, advisers, industry partners, and alumni who contribute to ITSEG’s work.</p>
+</header>
+
+{% assign group = site.people | where: 'category', 'director' | sort: 'section_order' %}
+<section class="people-section section container" aria-labelledby="director">
+  <h2 id="director">Director</h2>
+  <div class="card-grid card-grid-3">
+    {% for item in group %}
+      {% include person-card.html item=item %}
+    {% endfor %}
+  </div>
+</section>
+
+{% assign group = site.people | where: 'category', 'advisory-board' | sort: 'section_order' %}
+<section class="people-section section container" aria-labelledby="advisory">
+  <h2 id="advisory">Advisory Board</h2>
+  <div class="card-grid card-grid-3">
+    {% for item in group %}
+      {% include person-card.html item=item %}
+    {% endfor %}
+  </div>
+</section>
+
+{% assign group = site.people | where: 'category', 'industry-supervisor' | sort: 'section_order' %}
+<section class="people-section section container" aria-labelledby="supervisor">
+  <h2 id="supervisor">Industry Supervisor</h2>
+  <div class="card-grid card-grid-3">
+    {% for item in group %}
+      {% include person-card.html item=item %}
+    {% endfor %}
+  </div>
+</section>
+
+{% assign group = site.people | where: 'category', 'program-leaders' | sort: 'section_order' %}
+<section class="people-section section container" aria-labelledby="leaders">
+  <h2 id="leaders">Program Leaders</h2>
+  <div class="card-grid card-grid-3">
+    {% for item in group %}
+      {% include person-card.html item=item %}
+    {% endfor %}
+  </div>
+</section>
+
+{% assign group = site.people | where: 'category', 'industry-engagement-officers' | sort: 'section_order' %}
+<section class="people-section section container" aria-labelledby="engagement">
+  <h2 id="engagement">Industry Engagement Officers</h2>
+  <div class="card-grid card-grid-3">
+    {% for item in group %}
+      {% include person-card.html item=item %}
+    {% endfor %}
+  </div>
+</section>
+
+{% assign group = site.people | where: 'category', 'alumni-and-visit-scholars' | sort: 'section_order' %}
+<section class="people-section section container" aria-labelledby="alumni">
+  <h2 id="alumni">Alumni and Visit Scholar</h2>
+  <div class="card-grid card-grid-3">
+    {% for item in group %}
+      {% include person-card.html item=item %}
+    {% endfor %}
+  </div>
+</section>

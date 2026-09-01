@@ -1,0 +1,21 @@
+---
+layout: default
+title: News
+nav: news
+description: "News and announcements from the Intelligent Systems Engineering Group, newest first."
+permalink: /news/
+---
+<header class="page-intro container">
+  <p class="eyebrow">Group updates</p>
+  <h1>News</h1>
+  <p class="lead">News and announcements from ITSEG, presented newest first.</p>
+</header>
+{% assign ordered_news = site.news | sort: 'date' | reverse %}
+<section class="section container" aria-label="News archive">
+  <div class="card-grid card-grid-2">
+    {% for item in ordered_news %}
+      {% include news-card.html item=item %}
+    {% endfor %}
+  </div>
+</section>
+

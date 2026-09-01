@@ -1,0 +1,10 @@
+<article class="card news-card">
+  <a class="card-media" href="{{ include.item.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ include.item.cover | relative_url }}" alt="News image for {{ include.item.title }}" width="640" height="360" loading="lazy">
+  </a>
+  <div class="card-body">
+    <p class="eyebrow"><time datetime="{{ include.item.date | date_to_xmlschema }}">{{ include.item.date | date: '%-d %B %Y' }}</time></p>
+    <h3><a href="{{ include.item.url | relative_url }}">{{ include.item.title }}</a></h3>
+    <p>{{ include.item.content | strip_html | normalize_whitespace | truncatewords: 28 }}</p>
+  </div>
+</article>

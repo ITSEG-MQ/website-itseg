@@ -1,0 +1,44 @@
+---
+layout: default
+title: Contact
+nav: contact
+description: "Contact ITSEG at Macquarie University about research, collaboration, and PhD or MRes study."
+permalink: /contact/
+---
+<header class="page-intro container">
+  <p class="eyebrow">Get in touch</p>
+  <h1>Contact ITSEG</h1>
+  <p class="lead">Research, collaboration, and study enquiries are welcome through the Sydney office contacts below.</p>
+</header>
+
+<section class="section container contact-grid" aria-labelledby="office-title">
+  <div>
+    <p class="eyebrow">Location</p>
+    <h2 id="office-title">{{ site.contact.office }}</h2>
+  </div>
+  <div class="contact-card">
+    <h3>Address</h3>
+    <address>
+      {{ site.contact.organisation }}<br>
+      {{ site.contact.room }}<br>
+      {{ site.contact.street }}<br>
+      {{ site.contact.locality }}
+    </address>
+  </div>
+  <div class="contact-card">
+    <h3>Phone &amp; email</h3>
+    <p>
+      <a href="tel:{{ site.contact.phone_href }}">{{ site.contact.phone }}</a><br>
+      <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+    </p>
+  </div>
+</section>
+
+<section id="recruitment" class="section section-dark">
+  <div class="container narrow prose">
+    <p class="eyebrow">Research degrees</p>
+    <h2>PhD and MRes enquiries</h2>
+    <p>ITSEG welcomes enquiries from highly motivated and self-disciplined PhD and MRes applicants. Applicants need 6.5 out of 7 for a master’s degree in the Macquarie University GPA rating system to be considered for a PhD scholarship. An exception may be made for strong applicants who have worked with the director or collaborators on top journals (Q1) or conferences (CORE A or above), or who have extensive research and industry experience; two referees are required.</p>
+    <p>An interview is mandatory for all applicants. Email <a href="mailto:{{ site.contact.email }}?subject=apply%20for%20ITSEG%20PhD%20or%20MRes">{{ site.contact.email }}</a> with <strong>apply for ITSEG PhD or MRes</strong> in the subject line.</p>
+  </div>
+</section>

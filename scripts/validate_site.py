@@ -94,11 +94,11 @@ MANAGED_ASSET_DIRS = {
 MANAGED_OUTPUT_DIRS = set(MANAGED_COLLECTION_DIRS.values()) | MANAGED_ASSET_DIRS
 URL_MAP_HEADER = ("legacy_url", "new_url", "content_type", "status", "notes")
 PLANNED_URL_MAP_ROWS = [
-    ("/index.php", "/", "page", "planned-global", "Global page conversion is outside this migration."),
-    ("/news.php", "/news/", "collection-index", "planned-global", "Collection content migrated; index page is out of scope."),
-    ("/group.php", "/people/", "collection-index", "planned-global", "37 people entries migrated."),
-    ("/projects.php", "/projects/", "collection-index", "planned-global", "8 project entries migrated."),
-    ("/publications.php", "/publications/", "collection-index", "planned-global", "116 publication rows migrated."),
+    ("/index.php", "/", "page", "migrated", "ITSEG home page implemented."),
+    ("/news.php", "/news/", "collection-index", "migrated", "News index implemented with 14 records."),
+    ("/group.php", "/people/", "collection-index", "migrated", "People index implemented with 37 source records."),
+    ("/projects.php", "/projects/", "collection-index", "migrated", "Projects index implemented with 8 records."),
+    ("/publications.php", "/publications/", "collection-index", "migrated", "Publications index implemented with 116 records."),
 ]
 HIGH_RISK_PATTERNS = {
     "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
@@ -205,13 +205,18 @@ class DocumentParser(HTMLParser):
         self.images = []
         self.tags = []
         self.meta = []
+        self.anchors = []
+        self.ids = set()
         self.title = False
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         self.tags.append(tag)
+        if attrs.get("id"):
+            self.ids.add(attrs["id"])
         if tag == "a" and attrs.get("href"):
             self.links.append(("href", attrs["href"]))
+            self.anchors.append(attrs)
         if tag in {"img", "link", "script", "source"}:
             attr = "href" if tag == "link" else "src"
             if attrs.get(attr):
@@ -445,7 +450,10 @@ def candidate_targets(site: Path, page: Path, value: str):
     if not raw:
         return []
     if raw.startswith("/"):
-        target = site / raw.lstrip("/")
+        relative = raw.lstrip("/")
+        if relative == "website-itseg" or relative.startswith("website-itseg/"):
+            relative = relative.removeprefix("website-itseg").lstrip("/")
+        target = site / relative
     else:
         target = page.parent / raw
     options = [target]
@@ -458,6 +466,9 @@ def generated_errors(site: Path, collection_records):
     errors = []
     if not site.is_dir():
         return [f"generated site directory does not exist: {site}"]
+    for rel in ["robots.txt", "sitemap.xml"]:
+        if not (site / rel).is_file():
+            errors.append(f"generated site missing {rel}")
     for rel in REQUIRED_PAGES:
         if not (site / rel).is_file():
             errors.append(f"generated site missing {rel}")
@@ -481,8 +492,18 @@ def generated_errors(site: Path, collection_records):
         parser.feed(text)
         if not parser.title:
             errors.append(f"{rel}: missing title element")
+        if parser.tags.count("main") != 1:
+            errors.append(f"{rel}: expected exactly one main landmark, found {parser.tags.count('main')}")
+        if not any(anchor.get("href") == "#main-content" for anchor in parser.anchors):
+            errors.append(f"{rel}: missing skip link to #main-content")
+        if "main-content" not in parser.ids:
+            errors.append(f"{rel}: main landmark is missing id=main-content")
         if not any(m.get("name", "").lower() == "viewport" for m in parser.meta):
             errors.append(f"{rel}: missing viewport meta")
+        if not any(m.get("name", "").lower() == "description" and m.get("content") for m in parser.meta):
+            errors.append(f"{rel}: missing description meta")
+        if not any(m.get("name", "").lower() == "theme-color" and m.get("content") for m in parser.meta):
+            errors.append(f"{rel}: missing theme-color meta")
         if not any(m.get("property", "").lower() == "og:title" for m in parser.meta):
             errors.append(f"{rel}: missing Open Graph title")
         if not re.search(r'<link\s+[^>]*rel=["\']canonical["\']', text, re.I):
@@ -493,12 +514,21 @@ def generated_errors(site: Path, collection_records):
             errors.append(f"{rel}: contains a .php link")
         if "<table" in text.lower() and "nav" in text.lower():
             errors.append(f"{rel}: possible table-based navigation")
+        if "script" in parser.tags:
+            errors.append(f"{rel}: JavaScript is not required by this static site")
+        if "{{" in text or "{%" in text:
+            errors.append(f"{rel}: contains unrendered Liquid")
         for image in parser.images:
             for attr in ["src", "alt", "width", "height"]:
                 if not image.get(attr):
                     errors.append(f"{rel}: image missing {attr}")
             if image.get("class") != "site-logo" and image.get("loading") != "lazy":
                 errors.append(f"{rel}: content image missing loading=lazy")
+        for anchor in parser.anchors:
+            if anchor.get("target", "").lower() == "_blank":
+                rel_values = set(anchor.get("rel", "").lower().split())
+                if not {"noopener", "noreferrer"}.issubset(rel_values):
+                    errors.append(f"{rel}: target=_blank link is missing rel=noopener noreferrer")
         for attr, value in parser.links:
             if value.startswith("{{"):
                 errors.append(f"{rel}: unrendered Liquid link {value}")

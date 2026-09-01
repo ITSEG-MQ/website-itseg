@@ -1,0 +1,12 @@
+<article class="card person-card">
+  <a class="card-media" href="{{ include.item.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ include.item.image | relative_url }}" alt="Portrait of {{ include.item.title }}" width="480" height="560" loading="lazy">
+  </a>
+  <div class="card-body">
+    <h3><a href="{{ include.item.url | relative_url }}">{{ include.item.title }}</a></h3>
+    <p class="role">{{ include.item.role }}</p>
+    {% if include.item.affiliation %}
+      <p>{{ include.item.affiliation }}</p>
+    {% endif %}
+  </div>
+</article>

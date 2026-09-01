@@ -34,6 +34,6 @@ python3 -m venv /tmp/itseg-migrate-venv
 
 The final command is the authoritative full source-fidelity check. A normal `python3 scripts/validate_site.py` remains usable in CI without the `/tmp` source snapshot and prints the full command needed for source-fidelity verification. The importer reads only the safe public inputs listed in `content-manifest.yml`. Collection and migrated-asset output directories are managed roots: the importer refuses symlinked or out-of-repository roots, never follows output symlinks, and removes direct stale files or symlinks that are outside the exact current generated set without recursing below those roots.
 
-## Scope boundary
+## Global site completion
 
-Collection index pages, layouts, includes, Jekyll configuration, navigation, contact content, and other global pages remain untouched. The URL map marks those index destinations as planned global work rather than claiming they are converted here.
+The ITSEG collection indexes, layouts, includes, Jekyll configuration, navigation, contact page, sitemap, robots policy, and other global pages were completed after the source-fidelity migration. The URL map now marks the five global legacy destinations as migrated. These global presentation files remain outside the authoritative legacy title/body comparison; collection records, structured publication data, review flags, and manifest-managed assets remain governed by the checks above.

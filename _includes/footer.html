@@ -1,4 +1,26 @@
-
-<footer>
-    &copy; TACPS.ORG 2023-2026&nbsp;All Rights Reserved. | Template adopted from <a href="https://github.com/mikepierce">Mike Pierce</a>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="footer-title">ITSEG</p>
+      <p>Intelligent Systems Engineering Group<br>{{ site.contact.organisation }}</p>
+    </div>
+    <div>
+      <p>
+        <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a><br>
+        <a href="tel:{{ site.contact.phone_href }}">{{ site.contact.phone }}</a>
+      </p>
+    </div>
+    <div>
+      <p>
+        &copy; {{ 'now' | date: '%Y' }} ITSEG. Site template adapted from
+        <a href="https://github.com/mikepierce/conference-website-template">Mike Pierce’s conference website template</a>
+        under the repository’s GPL-3.0
+        <a
+          href="https://github.com/ITSEG-MQ/website-itseg/blob/main/LICENSE"
+          target="_blank"
+          rel="noopener noreferrer"
+        >LICENSE</a>.
+      </p>
+    </div>
+  </div>
 </footer>

@@ -1,8 +1,63 @@
 
-title: "TACPS"
-url: "https://tacps.org"
-baseurl: "" 
+title: "ITSEG — Intelligent Systems Engineering Group"
+short_title: "ITSEG"
+description: "Macquarie University's Intelligent Systems Engineering Group researches trustworthy intelligent systems, cyber-physical systems, autonomous systems, and software engineering."
+url: "https://beta.itseg.org"
+baseurl: ""
 environment: "production"
+lang: "en-AU"
+timezone: "Australia/Sydney"
+
+contact:
+  email: "james.zheng@mq.edu.au"
+  phone: "+61 2 9850 6330"
+  phone_href: "+61298506330"
+  office: "Sydney Office"
+  organisation: "School of Computing, Macquarie University"
+  room: "Room 361, Level 3"
+  street: "4 Research Park Drive"
+  locality: "Macquarie University, NSW, Australia"
+
+collections:
+  news:
+    output: true
+    permalink: /news/:name/
+  people:
+    output: true
+    permalink: /people/:name/
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: ""
+      type: news
+    values:
+      layout: news
+  - scope:
+      path: ""
+      type: people
+    values:
+      layout: person
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
 exclude:
   - editor-handbook.md
   - maintainer-handbook.md
+  - requirements-legacy-migration.txt
+  - scripts
+  - tests
+  - docs
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

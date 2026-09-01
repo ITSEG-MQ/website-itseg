@@ -692,11 +692,11 @@ def write_url_map(news: list[dict], assets: list[dict]) -> None:
     destination = ROOT / "docs/legacy-url-map.csv"
     destination.parent.mkdir(parents=True, exist_ok=True)
     rows = [
-        ("/index.php", "/", "page", "planned-global", "Global page conversion is outside this migration."),
-        ("/news.php", "/news/", "collection-index", "planned-global", "Collection content migrated; index page is out of scope."),
-        ("/group.php", "/people/", "collection-index", "planned-global", "37 people entries migrated."),
-        ("/projects.php", "/projects/", "collection-index", "planned-global", "8 project entries migrated."),
-        ("/publications.php", "/publications/", "collection-index", "planned-global", "116 publication rows migrated."),
+        ("/index.php", "/", "page", "migrated", "ITSEG home page implemented."),
+        ("/news.php", "/news/", "collection-index", "migrated", "News index implemented with 14 records."),
+        ("/group.php", "/people/", "collection-index", "migrated", "People index implemented with 37 source records."),
+        ("/projects.php", "/projects/", "collection-index", "migrated", "Projects index implemented with 8 records."),
+        ("/publications.php", "/publications/", "collection-index", "migrated", "Publications index implemented with 116 records."),
     ]
     rows.extend(
         (record["legacy_url"], record["permalink"], "news", "migrated", f"Legacy article id {record['legacy_id']}")

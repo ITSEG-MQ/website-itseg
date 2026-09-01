@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<article class="detail-page">
+  <header class="page-intro container narrow">
+    <p class="eyebrow"><a href="{{ '/projects/' | relative_url }}">Projects</a> · {% if page.category == 'grants' %}National competitive grant{% else %}Other project{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+  </header>
+  <div class="container narrow">
+    <img class="project-image" src="{{ page.image | relative_url }}" alt="Project image for {{ page.title }}" width="800" height="500" loading="lazy">
+  </div>
+  <div class="container narrow prose">
+    {{ content }}
+  </div>
+  <nav class="container narrow back-link" aria-label="Projects return"><a href="{{ '/projects/' | relative_url }}">← All projects</a></nav>
+</article>
