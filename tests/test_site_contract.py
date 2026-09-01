@@ -335,10 +335,10 @@ class SiteContractTests(unittest.TestCase):
         release = (ROOT / ".github/workflows/release-zip.yml").read_text(encoding="utf-8")
         validate = (ROOT / ".github/workflows/validate.yml").read_text(encoding="utf-8")
         expected = {
-            "actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4": [release, validate],
-            "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5": [release, validate],
+            "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1": [release, validate],
+            "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0": [release, validate],
             "actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1": [release, validate],
-            "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4": [validate],
+            "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1": [validate],
             "softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3": [release],
         }
         for action, workflows in expected.items():
